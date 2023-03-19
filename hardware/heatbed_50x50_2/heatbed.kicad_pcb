@@ -83,7 +83,7 @@
     (property "ki_keywords" "screw terminal")
     (path "/cddf41cd-a11f-46f8-b5ce-b49fc5fcd68f")
     (attr through_hole)
-    (fp_text reference "J1" (at 2.15 1.22) (layer "F.SilkS")
+    (fp_text reference "J1" (at 2.15 1.22) (layer "F.SilkS") hide
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp f3b12998-a947-4e56-a9b7-3ade972d4f44)
     )
