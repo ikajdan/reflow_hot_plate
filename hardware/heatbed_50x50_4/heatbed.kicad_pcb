@@ -6,9 +6,9 @@
 
   (paper "A4")
   (title_block
-    (title "Reflow Plate Heatbed 50x50 mm")
+    (title "Reflow Hot-Plate Heatbed 50x50 mm")
     (date "2023-03-19")
-    (rev "v1.0.0")
+    (rev "1.0.0")
     (company "I. Kajdan")
   )
 
