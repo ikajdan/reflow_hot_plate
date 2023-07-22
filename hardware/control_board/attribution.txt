@@ -1,0 +1,12 @@
+CAD Symbols/Footprints Attribution
+
+Symbol/Footprint Name: USB4105-GF-A
+Original Author: SnapEDA Engineers
+Source: https://www.snapeda.com/parts/USB4105-GF-A/GCT/view-part/
+License: Licensed under CC BY-SA 4.0 with Design Exception 1.0
+
+Symbol/Footprint Name: PKM13EPYH4000-A0
+Original Author: SnapEDA Engineers
+Source: https://www.snapeda.com/parts/PKM13EPYH4000-A0/Murata/view-part/
+License: Licensed under CC BY-SA 4.0 with Design Exception 1.0
+

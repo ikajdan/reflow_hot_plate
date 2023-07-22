@@ -1,4 +1,7 @@
 (sym_lib_table
   (version 7)
   (lib (name "MAX6675")(type "KiCad")(uri "${KIPRJMOD}/symbols/MAX6675.kicad_sym")(options "")(descr ""))
+  (lib (name "MCP6N11")(type "KiCad")(uri "${KIPRJMOD}/symbols/MCP6N11.kicad_sym")(options "")(descr ""))
+  (lib (name "PKM13EPYH4000-A0")(type "KiCad")(uri "${KIPRJMOD}/symbols/PKM13EPYH4000-A0.kicad_sym")(options "")(descr ""))
+  (lib (name "LMR38010SDDAR")(type "KiCad")(uri "${KIPRJMOD}/symbols/LMR38010SDDAR.kicad_sym")(options "")(descr ""))
 )

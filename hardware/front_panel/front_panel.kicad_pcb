@@ -6,8 +6,8 @@
 
   (paper "A4")
   (title_block
-    (title "Reflow Hot Plate Control Board")
-    (date "2023-07-15")
+    (title "Reflow Hot Plate Front Panel")
+    (date "2023-07-16")
     (rev "${REVISION}")
     (company "Author: I. Kajdan")
     (comment 1 "Promoter: A. Bondyra, Ph.D.")
