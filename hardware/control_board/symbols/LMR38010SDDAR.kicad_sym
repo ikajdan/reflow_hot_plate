@@ -1,6 +1,6 @@
 (kicad_symbol_lib (version 20220914) (generator kicad_symbol_editor)
   (symbol "LMR38010SDDAR" (in_bom yes) (on_board yes)
-    (property "Reference" "U2" (at 0 15.24 0)
+    (property "Reference" "U" (at 0 15.24 0)
       (effects (font (size 1.27 1.27)) (justify top))
     )
     (property "Value" "LMR38010SDDAR" (at 0 12.7 0)

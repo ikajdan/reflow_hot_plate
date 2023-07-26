@@ -10,3 +10,10 @@ Original Author: SnapEDA Engineers
 Source: https://www.snapeda.com/parts/PKM13EPYH4000-A0/Murata/view-part/
 License: Licensed under CC BY-SA 4.0 with Design Exception 1.0
 
+Symbol/Footprint Name: 0914-3-15-20-77-14-11-0
+Original Author: SamacSys
+Source: https://octopart.componentsearchengine.com/part.php?partID=695420
+License:
+1. There are no restrictions on the circuit board designs you make with our library components.
+2. You do not need to credit SamacSys in any way after using our Libraries.
+3. You will not distribute our models in any form useable as a PCB Library Component - except within your own company.
