@@ -911,7 +911,7 @@
     (property "Datasheet" "" (at 162.56 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 31b5077b-a8a3-42e0-a107-049064211b26))
+    (pin "1" (uuid c3483a3a-7bc9-4ea3-8a1e-92850b1bdd97))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
@@ -1137,7 +1137,7 @@
     (property "Datasheet" "" (at 151.13 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 494b09cc-8fae-415b-adde-d03f6913ea0b))
+    (pin "1" (uuid 3e728bee-25fc-40e4-b65a-06f56a41cc0b))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
@@ -1199,7 +1199,7 @@
     (property "Datasheet" "" (at 173.99 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid f77f9a41-b252-4e1d-be61-ab546abb1636))
+    (pin "1" (uuid df32cefc-07f7-400e-a3e1-4e7256a42ced))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
