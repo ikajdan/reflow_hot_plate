@@ -148,7 +148,7 @@
           "td_height_ratio": 0.8,
           "td_length_ratio": 0.5,
           "td_maxheight": 4.0,
-          "td_maxlen": 2.0,
+          "td_maxlen": 1.5,
           "td_target_name": "td_round_shape",
           "td_width_to_size_filter_ratio": 0.9
         },
