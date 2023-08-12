@@ -683,7 +683,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR057") (unit 1)
+          (reference "#PWR055") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -716,7 +716,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR058") (unit 1)
+          (reference "#PWR056") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -782,7 +782,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R13") (unit 1)
+          (reference "R18") (unit 1)
         )
       )
     )
@@ -810,7 +810,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR056") (unit 1)
+          (reference "#PWR054") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -843,7 +843,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR050") (unit 1)
+          (reference "#PWR048") (unit 1)
         )
       )
     )
@@ -871,7 +871,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR055") (unit 1)
+          (reference "#PWR053") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -905,7 +905,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R16") (unit 1)
+          (reference "R21") (unit 1)
         )
       )
       (project "Traction_Control_System"
@@ -942,7 +942,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R19") (unit 1)
+          (reference "R24") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -976,7 +976,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R12") (unit 1)
+          (reference "R17") (unit 1)
         )
       )
     )
@@ -1033,7 +1033,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR049") (unit 1)
+          (reference "#PWR047") (unit 1)
         )
       )
     )
@@ -1062,7 +1062,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R20") (unit 1)
+          (reference "R25") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -1095,7 +1095,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR051") (unit 1)
+          (reference "#PWR049") (unit 1)
         )
       )
     )
@@ -1123,7 +1123,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR053") (unit 1)
+          (reference "#PWR051") (unit 1)
         )
       )
     )
@@ -1152,7 +1152,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R14") (unit 1)
+          (reference "R19") (unit 1)
         )
       )
       (project "Traction_Control_System"
@@ -1189,7 +1189,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R18") (unit 1)
+          (reference "R23") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -1310,7 +1310,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R17") (unit 1)
+          (reference "R22") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -1344,7 +1344,7 @@
           (reference "R?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "R15") (unit 1)
+          (reference "R20") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -1406,7 +1406,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR052") (unit 1)
+          (reference "#PWR050") (unit 1)
         )
       )
       (project "suspension_tension_meter"
@@ -1476,7 +1476,7 @@
           (reference "#PWR023") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR048") (unit 1)
+          (reference "#PWR046") (unit 1)
         )
       )
     )
@@ -1533,7 +1533,7 @@
           (reference "#PWR?") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/1df5b500-a950-4c3c-8279-0c408859e423"
-          (reference "#PWR054") (unit 1)
+          (reference "#PWR052") (unit 1)
         )
       )
       (project "Traction_Control_System"

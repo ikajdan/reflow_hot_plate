@@ -961,7 +961,7 @@
           (reference "#PWR023") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "#PWR063") (unit 1)
+          (reference "#PWR061") (unit 1)
         )
       )
     )
@@ -992,7 +992,7 @@
           (reference "#PWR023") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "#PWR065") (unit 1)
+          (reference "#PWR063") (unit 1)
         )
       )
     )
@@ -1023,7 +1023,7 @@
           (reference "#PWR022") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "#PWR064") (unit 1)
+          (reference "#PWR062") (unit 1)
         )
       )
     )
@@ -1054,7 +1054,7 @@
           (reference "#PWR018") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "#PWR060") (unit 1)
+          (reference "#PWR058") (unit 1)
         )
       )
     )
@@ -1063,7 +1063,7 @@
   (symbol (lib_id "Device:R_Small") (at 171.45 92.71 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 55c3185d-b718-4fb9-8a96-4aa53265d529)
-    (property "Reference" "R22" (at 167.64 91.44 90)
+    (property "Reference" "R27" (at 167.64 91.44 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "5k1" (at 175.26 91.44 90)
@@ -1080,7 +1080,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "R22") (unit 1)
+          (reference "R27") (unit 1)
         )
       )
     )
@@ -1089,7 +1089,7 @@
   (symbol (lib_id "Device:R_Small") (at 171.45 90.17 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 61bfc22a-5fda-45e9-8dff-ef58ef9114a6)
-    (property "Reference" "R21" (at 167.64 88.9 90)
+    (property "Reference" "R26" (at 167.64 88.9 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "5k1" (at 175.26 88.9 90)
@@ -1106,7 +1106,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "R21") (unit 1)
+          (reference "R26") (unit 1)
         )
       )
     )
@@ -1135,7 +1135,7 @@
           (reference "C2") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "C20") (unit 1)
+          (reference "C18") (unit 1)
         )
       )
     )
@@ -1166,7 +1166,7 @@
           (reference "#PWR019") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "#PWR061") (unit 1)
+          (reference "#PWR059") (unit 1)
         )
       )
     )
@@ -1197,7 +1197,7 @@
           (reference "#PWR016") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "#PWR059") (unit 1)
+          (reference "#PWR057") (unit 1)
         )
       )
     )
@@ -1265,13 +1265,13 @@
   (symbol (lib_id "Connector:USB_C_Receptacle_USB2.0") (at 193.04 100.33 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b15fb14a-6fb6-4df7-b739-51e86689d7e0)
-    (property "Reference" "J6" (at 182.88 81.28 0)
+    (property "Reference" "J5" (at 182.88 81.28 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "USB_C" (at 203.2 81.28 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Local_Library:USB4105-GF-A" (at 189.23 100.33 0)
+    (property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal" (at 189.23 100.33 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://gct.co/files/drawings/usb4105.pdf" (at 189.23 100.33 0)
@@ -1300,7 +1300,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "J6") (unit 1)
+          (reference "J5") (unit 1)
         )
       )
     )
@@ -1331,7 +1331,7 @@
           (reference "#PWR021") (unit 1)
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "#PWR062") (unit 1)
+          (reference "#PWR060") (unit 1)
         )
       )
     )
