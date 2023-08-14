@@ -3,6 +3,7 @@
 /firmware/Release/
 /firmware/Debug/
 /firmware/Drivers/
+/firmware/Middlewares/
 /firmware/*.launch
 
 # KiCad

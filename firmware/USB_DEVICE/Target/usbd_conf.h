@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file           : usbd_conf.h
-  * @version        : v2.0_Cube
-  * @brief          : Header for usbd_conf.c file.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file           : usbd_conf.h
+ * @version        : v2.0_Cube
+ * @brief          : Header for usbd_conf.c file.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2023 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -39,27 +39,27 @@
 /* USER CODE END INCLUDE */
 
 /** @addtogroup USBD_OTG_DRIVER
-  * @{
-  */
+ * @{
+ */
 
 /** @defgroup USBD_CONF USBD_CONF
-  * @brief Configuration file for Usb otg low level driver.
-  * @{
-  */
+ * @brief Configuration file for Usb otg low level driver.
+ * @{
+ */
 
 /** @defgroup USBD_CONF_Exported_Variables USBD_CONF_Exported_Variables
-  * @brief Public variables.
-  * @{
-  */
+ * @brief Public variables.
+ * @{
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup USBD_CONF_Exported_Defines USBD_CONF_Exported_Defines
-  * @brief Defines for configuration of the Usb device.
-  * @{
-  */
+ * @brief Defines for configuration of the Usb device.
+ * @{
+ */
 
 /*---------- -----------*/
 #define USBD_MAX_NUM_INTERFACES     1
@@ -79,13 +79,13 @@
 #define DEVICE_FS 		0
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup USBD_CONF_Exported_Macros USBD_CONF_Exported_Macros
-  * @brief Aliases.
-  * @{
-  */
+ * @brief Aliases.
+ * @{
+ */
 
 /* Memory management macros */
 
@@ -105,8 +105,8 @@
 #define USBD_Delay          HAL_Delay
 
 /* For footprint reasons and since only one allocation is handled in the HID class
-   driver, the malloc/free is changed into a static allocation method */
-void *USBD_static_malloc(uint32_t size);
+ driver, the malloc/free is changed into a static allocation method */
+void* USBD_static_malloc(uint32_t size);
 void USBD_static_free(void *p);
 
 /* DEBUG macros */
@@ -136,36 +136,36 @@ void USBD_static_free(void *p);
 #endif
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup USBD_CONF_Exported_Types USBD_CONF_Exported_Types
-  * @brief Types.
-  * @{
-  */
+ * @brief Types.
+ * @{
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /** @defgroup USBD_CONF_Exported_FunctionsPrototype USBD_CONF_Exported_FunctionsPrototype
-  * @brief Declaration of public functions for Usb device.
-  * @{
-  */
+ * @brief Declaration of public functions for Usb device.
+ * @{
+ */
 
 /* Exported functions -------------------------------------------------------*/
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 /**
-  * @}
-  */
+ * @}
+ */
 
 #ifdef __cplusplus
 }
