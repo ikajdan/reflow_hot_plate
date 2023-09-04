@@ -1414,7 +1414,7 @@
   (segment (start 165 133.5) (end 167 133.5) (width 0.449) (layer "F.Cu") (net 1) (tstamp fdd2be4a-9b24-410f-90d7-757056bb3ea0))
   (segment (start 155 66.5) (end 152 63.5) (width 0.449) (layer "F.Cu") (net 1) (tstamp fe339dc7-5cb6-4956-959d-b3c9c2d930df))
 
-  (zone (net 0) (net_name "") (layer "F.Cu") (tstamp 03d57b61-b584-45e6-96e9-7d220089165c) (hatch edge 0.5)
+  (zone locked (net 0) (net_name "") (layer "F.Cu") (tstamp 03d57b61-b584-45e6-96e9-7d220089165c) (hatch edge 0.5)
     (connect_pads (clearance 0.5))
     (min_thickness 0.25) (filled_areas_thickness no)
     (fill yes (thermal_gap 0.5) (thermal_bridge_width 0.5) (island_removal_mode 1) (island_area_min 10))

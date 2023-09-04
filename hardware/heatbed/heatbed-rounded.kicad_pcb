@@ -1453,7 +1453,7 @@
   (arc (start 167 69.5) (mid 167.292893 68.792893) (end 168 68.5) (width 0.449) (layer "F.Cu") (net 1) (tstamp f9bdf99e-5e9e-406b-b902-25c7e77b720d))
   (arc (start 161 132.5) (mid 161.292893 133.207106) (end 162 133.5) (width 0.449) (layer "F.Cu") (net 1) (tstamp fe40e8f6-10a2-4ea9-b542-afaa3208244c))
 
-  (zone (net 0) (net_name "") (layer "F.Cu") (tstamp 03d57b61-b584-45e6-96e9-7d220089165c) (hatch edge 0.5)
+  (zone locked (net 0) (net_name "") (layer "F.Cu") (tstamp 03d57b61-b584-45e6-96e9-7d220089165c) (hatch edge 0.5)
     (connect_pads (clearance 0.5))
     (min_thickness 0.25) (filled_areas_thickness no)
     (fill yes (thermal_gap 0.5) (thermal_bridge_width 0.5) (island_removal_mode 1) (island_area_min 10))
