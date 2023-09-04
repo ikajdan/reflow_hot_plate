@@ -1124,11 +1124,11 @@
     (uuid 935dc71a-8276-4ba7-ba8e-ed3f0b574ca9)
   )
   (text "TC" (at 15.24 110.49 0)
-    (effects (font (size 3.81 3.81)) (justify left bottom))
+    (effects (font (size 3.81 3.81) (thickness 0.762) bold) (justify left bottom))
     (uuid 95f725d1-e7da-46dd-9432-b81da118ee1f)
   )
   (text "RTD" (at 15.24 20.32 0)
-    (effects (font (size 3.81 3.81)) (justify left bottom))
+    (effects (font (size 3.81 3.81) (thickness 0.762) bold) (justify left bottom))
     (uuid b7fa9c23-6052-4158-8d8a-7f4db03143f0)
   )
   (text "Sallen-Key Low-pass Filter" (at 157.48 36.83 0)
@@ -1215,9 +1215,9 @@
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 210.82 60.96 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 13ec5bfc-2048-42d5-a1fb-e45e5b52a766)
-    (property "Reference" "TP18" (at 212.09 59.69 0)
+    (property "Reference" "TP17" (at 212.09 59.69 0)
       (effects (font (size 1 1)) (justify left))
     )
     (property "Value" "TestPoint_Small" (at 212.09 62.865 0)
@@ -1233,7 +1233,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "TP18") (unit 1)
+          (reference "TP17") (unit 1)
         )
       )
     )
@@ -1616,9 +1616,9 @@
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 146.05 58.42 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 6729e32a-0598-4e09-8fb5-4d6a200df802)
-    (property "Reference" "TP16" (at 147.32 57.15 0)
+    (property "Reference" "TP15" (at 147.32 57.15 0)
       (effects (font (size 1 1)) (justify left))
     )
     (property "Value" "TestPoint_Small" (at 147.32 60.325 0)
@@ -1634,7 +1634,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "TP16") (unit 1)
+          (reference "TP15") (unit 1)
         )
       )
     )
@@ -1958,9 +1958,9 @@
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 146.05 66.04 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid b0b194af-fc76-4e1f-b1ff-91aeb396a838)
-    (property "Reference" "TP17" (at 140.97 64.77 0)
+    (property "Reference" "TP16" (at 140.97 64.77 0)
       (effects (font (size 1 1)) (justify left))
     )
     (property "Value" "TestPoint_Small" (at 147.32 67.945 0)
@@ -1976,7 +1976,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "TP17") (unit 1)
+          (reference "TP16") (unit 1)
         )
       )
     )
@@ -2085,9 +2085,9 @@
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 73.66 58.42 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid d0b59f52-899f-4120-8869-76b21e8f6e51)
-    (property "Reference" "TP13" (at 74.93 59.69 0)
+    (property "Reference" "TP12" (at 74.93 59.69 0)
       (effects (font (size 1 1)) (justify left))
     )
     (property "Value" "TestPoint_Small" (at 74.93 60.325 0)
@@ -2103,7 +2103,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "TP13") (unit 1)
+          (reference "TP12") (unit 1)
         )
       )
     )
@@ -2138,9 +2138,9 @@
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 121.92 151.13 180) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid d9a7ddfb-b5da-4833-818a-b169c3b5d95b)
-    (property "Reference" "TP15" (at 120.65 149.86 0)
+    (property "Reference" "TP14" (at 120.65 149.86 0)
       (effects (font (size 1 1)) (justify right))
     )
     (property "Value" "TestPoint_Small" (at 120.65 149.225 0)
@@ -2156,7 +2156,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "TP15") (unit 1)
+          (reference "TP14") (unit 1)
         )
       )
     )
@@ -2261,9 +2261,9 @@
   )
 
   (symbol (lib_id "Connector:TestPoint_Small") (at 88.9 58.42 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid df6d2971-4636-4095-bfad-29da7991bf8b)
-    (property "Reference" "TP14" (at 87.63 59.69 0)
+    (property "Reference" "TP13" (at 87.63 59.69 0)
       (effects (font (size 1 1)) (justify right))
     )
     (property "Value" "TestPoint_Small" (at 90.17 60.325 0)
@@ -2279,7 +2279,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "TP14") (unit 1)
+          (reference "TP13") (unit 1)
         )
       )
     )
