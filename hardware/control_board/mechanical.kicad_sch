@@ -265,8 +265,8 @@
     (property "Datasheet" "https://www.mouser.pl/datasheet/2/433/217-844229.pdf" (at 176.53 100.6348 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 1f8d2151-6be8-4994-a2e5-bd23105177d2))
-    (pin "2" (uuid 27bec362-53fc-4905-80de-91495f912552))
+    (pin "1" (uuid a4e96966-33ff-4ebd-972c-53896b59346f))
+    (pin "2" (uuid a9974057-9609-4c39-bb79-a686a65581b3))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"

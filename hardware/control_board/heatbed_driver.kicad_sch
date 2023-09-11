@@ -823,7 +823,7 @@
     (property "Datasheet" "~" (at 128.27 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d9ed2039-c299-49de-9607-2ed4979b6cc6))
+    (pin "1" (uuid 36d2f8dd-350e-4b2c-9d31-e4fc2e34cf29))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
@@ -851,9 +851,9 @@
     (property "Datasheet" "https://www.infineon.com/dgdl/irf1018epbf.pdf?fileId=5546d462533600a4015355da854e1891" (at 163.83 106.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 76ef4ac6-d04e-4466-ad48-498c7fe6f7e6))
-    (pin "2" (uuid a754724f-50a2-40b1-9a5b-b34f4f3b1c7f))
-    (pin "3" (uuid 156cab4e-1077-49ad-b3df-875ecdd9b50d))
+    (pin "1" (uuid e927a105-3239-45b9-b687-a8fcb1e48b60))
+    (pin "2" (uuid 36247135-2e4b-4f3a-ad28-32b4177af56d))
+    (pin "3" (uuid 78081009-6a65-415d-be4b-30ed7939db50))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"
@@ -872,13 +872,13 @@
     (property "Value" "Conn_01x01" (at 171.45 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Footprint" "Local_Library:Pad_D5mm_H2.2mm" (at 171.45 92.71 0)
+    (property "Footprint" "Local_Library:Pad_D5mm_H2.2mm_Via" (at 171.45 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 171.45 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 6c7381a9-9204-4a5c-bde3-5551b55d9628))
+    (pin "1" (uuid 8561f539-159a-4220-b085-b6b44b49fca1))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -911,8 +911,8 @@
     (property "Datasheet" "~" (at 143.51 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d6e2daae-0c65-403d-b6d0-ea5d8036d67b))
-    (pin "2" (uuid 030ec964-5e3f-49cb-8f49-3b773b2b779a))
+    (pin "1" (uuid 13a9a838-3782-4152-a0db-6e94c9093387))
+    (pin "2" (uuid 8fddd51c-e175-4b44-ad06-02e4e0f1bcbb))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"
@@ -937,7 +937,7 @@
     (property "Datasheet" "" (at 121.92 107.95 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 0a083264-26a5-439d-95d1-071c1306d141))
+    (pin "1" (uuid feb2a725-865e-4752-a8b2-2de473d39187))
     (instances
       (project "control_board"
         (path "/82fde900-07e6-41de-9b57-509c777c8289"
@@ -970,7 +970,7 @@
     (property "Datasheet" "" (at 154.94 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid c56f0842-fa16-4c79-b537-23b1c7b420d9))
+    (pin "1" (uuid b3d4117f-4042-41ff-878a-aa59995d404b))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
@@ -998,8 +998,8 @@
     (property "Datasheet" "https://www.smc-diodes.com/propdf/SK36A%20N0104%20REV.A.pdf" (at 162.56 93.98 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 437665d2-138b-486c-b57a-eb0e724287b9))
-    (pin "2" (uuid a3364f50-91ef-41b3-9b9d-1f1b3cdd9805))
+    (pin "1" (uuid 5b6e4f5d-b904-4c05-a9e8-80c3bc2337ab))
+    (pin "2" (uuid 78313cdd-13d2-447c-bfab-eed86e572379))
     (instances
       (project "control_board"
         (path "/82fde900-07e6-41de-9b57-509c777c8289"
@@ -1032,7 +1032,7 @@
     (property "Datasheet" "" (at 166.37 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid edbb5880-6135-4613-8d86-254566d9e938))
+    (pin "1" (uuid 4232abe3-4fa9-4d46-870e-378dc650d708))
     (instances
       (project "control_board"
         (path "/82fde900-07e6-41de-9b57-509c777c8289"
@@ -1065,8 +1065,8 @@
     (property "Datasheet" "~" (at 115.57 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ca3847a7-e7b7-4d90-9338-22977639babf))
-    (pin "2" (uuid 0fe0c1c1-2ef4-49a7-8894-a75b4d6f83c6))
+    (pin "1" (uuid c8157c51-656b-48a4-99f0-ed15ec88432b))
+    (pin "2" (uuid 26227872-3214-40d3-af54-12f3d7343068))
     (instances
       (project "control_board"
         (path "/82fde900-07e6-41de-9b57-509c777c8289"
@@ -1099,8 +1099,8 @@
     (property "Datasheet" "~" (at 143.51 96.52 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 607b7565-adda-4bd7-94d7-53889a8d25c7))
-    (pin "2" (uuid 46b150df-0f8b-4928-9ee2-e0c5ac3e55dc))
+    (pin "1" (uuid d1c0d142-e3cb-4fa3-ad1c-b26d2e3a9eb3))
+    (pin "2" (uuid fba26227-d1c0-42dc-b2ee-f887c0fc355e))
     (instances
       (project "control_board"
         (path "/82fde900-07e6-41de-9b57-509c777c8289"
@@ -1136,8 +1136,8 @@
     (property "Component" "BZT52H-C15,115" (at 154.94 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid ecf96641-1b24-4a1c-9f75-339d011d15eb))
-    (pin "2" (uuid cdadcdd3-154a-4073-95f9-18abdbfebe99))
+    (pin "1" (uuid d252ffe0-d0b5-4f53-91aa-916ca3eb9d8d))
+    (pin "2" (uuid ab94d6f5-f747-4f9b-b31c-df062efa4e96))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
@@ -1165,7 +1165,7 @@
     (property "Datasheet" "" (at 143.51 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid abd374f1-d039-4f7c-9a74-4c93eb00d76f))
+    (pin "1" (uuid 1b460cfd-9cb0-47f0-9bf0-9c7362176428))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
@@ -1193,8 +1193,8 @@
     (property "Datasheet" "~" (at 143.51 111.76 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid a3496584-e876-42f9-98d6-a7fa3c2e33b9))
-    (pin "2" (uuid ada0acff-147a-4d11-a2c7-1cee1739557d))
+    (pin "1" (uuid 209d7fc6-8e08-4e66-bb0b-c9cfe8c80b13))
+    (pin "2" (uuid c93b428c-872d-4f7f-aa02-8e0f72371bac))
     (instances
       (project "control_board"
         (path "/82fde900-07e6-41de-9b57-509c777c8289"
@@ -1227,7 +1227,7 @@
     (property "Datasheet" "" (at 166.37 115.57 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 7e52e69e-47e1-48d1-be7c-80c66bf66be9))
+    (pin "1" (uuid 941db384-d729-4db2-bc26-6d155ca74d5c))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
@@ -1249,13 +1249,13 @@
     (property "Value" "Conn_01x01" (at 171.45 97.79 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Footprint" "Local_Library:Pad_D5mm_H2.2mm" (at 171.45 95.25 0)
+    (property "Footprint" "Local_Library:Pad_D5mm_H2.2mm_Via" (at 171.45 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 171.45 95.25 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid d4a430c6-b7b7-451e-9b05-2b3bbd0a5896))
+    (pin "1" (uuid c211b775-3541-4742-a7e8-b3817a25f5ee))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -1288,7 +1288,7 @@
     (property "Datasheet" "~" (at 160.02 106.68 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 9d311532-5ca0-4075-89b0-1e597a03e3ac))
+    (pin "1" (uuid 49cdab86-9783-4df7-975b-5314901662f3))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
@@ -1316,7 +1316,7 @@
     (property "Datasheet" "" (at 143.51 86.36 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 7fe9fd2e-eb30-4f92-bc43-07d6844cd2fe))
+    (pin "1" (uuid 9ff4c02e-79b0-420e-b746-951cc1be0e21))
     (instances
       (project "control_board"
         (path "/82fde900-07e6-41de-9b57-509c777c8289"
@@ -1343,16 +1343,16 @@
     (property "Value" "TLP183" (at 130.81 97.79 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Package_SO:SOIC-4_4.55x3.7mm_P2.54mm" (at 130.81 111.76 0)
+    (property "Footprint" "Local_Library:SOIC-4_4.55x3.7mm_P2.54mm" (at 130.81 111.76 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
     (property "Datasheet" "https://toshiba.semicon-storage.com/info/TLP183_datasheet_en_20201118.pdf?did=14417&prodName=TLP183" (at 130.81 104.14 0)
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
-    (pin "1" (uuid b61d30f2-e4eb-4162-9a2a-0d119abf2680))
-    (pin "3" (uuid 9ab63009-d8d8-4dab-8bc2-71647e24fe6f))
-    (pin "4" (uuid f629e843-269c-493c-b775-149c9cadcc5d))
-    (pin "6" (uuid 9e3d2d48-d700-4c40-b5a6-15fcfc534fce))
+    (pin "1" (uuid e6baaa8e-9ca1-4cd3-8a08-3095ea57e235))
+    (pin "3" (uuid aeef5223-a53c-454c-9c37-7e46c10751b7))
+    (pin "4" (uuid 0e8baf09-cd0b-40c8-983b-59afdc80bf66))
+    (pin "6" (uuid d81fa8f8-09cd-43e4-85c9-2bb7a669d79d))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"
