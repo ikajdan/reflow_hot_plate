@@ -1,0 +1,31 @@
+(footprint "NetTie-2_SMD_Pad0.2mm" (version 20221018) (generator pcbnew)
+  (layer "F.Cu")
+  (descr "Net tie, 2 pin, 0.2mm square SMD pads")
+  (tags "net tie")
+  (property "Sheetfile" "heatbed_driver.kicad_sch")
+  (property "Sheetname" "Heatbed Driver")
+  (property "exclude_from_bom" "")
+  (property "ki_description" "Net tie, 2 pins")
+  (property "ki_keywords" "net tie short")
+  (attr exclude_from_pos_files exclude_from_bom allow_missing_courtyard)
+  (net_tie_pad_groups "1, 2")
+  (fp_text reference "REF**" (at 0 -1.2) (layer "F.SilkS") hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp 427401fa-dbaf-4cd4-8d13-301c5959272f)
+  )
+  (fp_text value "NetTie_2" (at 0 1.2) (layer "F.Fab") hide
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp ce55619e-156c-476f-b84d-76461be5b404)
+  )
+  (fp_poly
+    (pts
+      (xy -0.35 -0.1)
+      (xy 0.35 -0.1)
+      (xy 0.35 0.1)
+      (xy -0.35 0.1)
+    )
+
+    (stroke (width 0) (type solid)) (fill solid) (layer "F.Cu") (tstamp e0b08d12-c41f-4b76-a7a5-b49c047194f0))
+  (pad "1" smd circle (at -0.35 0) (size 0.2 0.2) (layers "F.Cu") (tstamp 791ca89a-c755-4889-a47c-514e78b1b093))
+  (pad "2" smd circle (at 0.35 0) (size 0.2 0.2) (layers "F.Cu") (tstamp 0118fe2a-c782-43fc-92b5-9d69ea5d614b))
+)
