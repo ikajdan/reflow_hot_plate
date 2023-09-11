@@ -1321,7 +1321,7 @@
     (property "Value" "Display" (at 198.12 69.85 0)
       (effects (font (size 1.27 1.27)) (justify top))
     )
-    (property "Footprint" "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical" (at 198.12 76.2 0)
+    (property "Footprint" "Local_Library:0.96_OLED" (at 198.12 76.2 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 198.12 76.2 0)
