@@ -6045,8 +6045,8 @@
     (property "Datasheet" "~" (at 148.59 173.99 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 12bdcf93-31e8-4a18-ad1b-6bb239632b00))
-    (pin "2" (uuid b42513e9-acab-49ff-8c97-2e96cb3f6551))
+    (pin "1" (uuid 41e7847d-9f83-4974-825f-89f8da39278f))
+    (pin "2" (uuid 4256e2b3-45a3-47da-903e-fc9c005f7ebc))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -6132,8 +6132,8 @@
     (property "Datasheet" "~" (at 134.62 167.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 8e577b6e-ef5a-47d6-846a-32991db9b8a9))
-    (pin "2" (uuid 99389d80-2d0a-4e2b-a737-e6020f177c32))
+    (pin "1" (uuid 6e299d9e-fbe9-4643-a6b4-2be8d50576f4))
+    (pin "2" (uuid bf4561ad-3ca6-4f5c-8c0e-40351be9c58c))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -6326,7 +6326,7 @@
     (property "Datasheet" "~" (at 153.67 167.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3eac11f3-045a-430e-ab62-b5d39089620c))
+    (pin "1" (uuid 2994537d-aecd-489a-89c7-2ea077164079))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -6376,7 +6376,7 @@
     (property "Datasheet" "" (at 129.54 166.37 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 03cc54a3-22b4-493e-ac31-4b7192e53631))
+    (pin "1" (uuid 3f457f2c-f30e-4fe4-a6c6-8dffcb8f5a50))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -6877,7 +6877,7 @@
     (property "Datasheet" "" (at 139.7 179.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid a1866f0c-8696-4d4c-a7a3-48d4c5d6cbe8))
+    (pin "1" (uuid ca2c270b-d52f-4506-9a5a-a6a7743129c4))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -7367,7 +7367,7 @@
     (property "Reference" "FB1" (at 68.58 163.83 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "600R@100MHz" (at 69.85 171.45 90)
+    (property "Value" "470R@100MHz" (at 69.85 171.45 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "Inductor_SMD:L_0603_1608Metric" (at 68.58 165.862 90)
@@ -7433,7 +7433,7 @@
     (property "Datasheet" "~" (at 149.86 167.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 6c297379-152e-495d-8d61-e7c697b3ee73))
+    (pin "1" (uuid b998e2a6-bfe2-4d26-bf35-91fc3e68fea1))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -7493,7 +7493,7 @@
     (property "Datasheet" "" (at 148.59 166.37 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 3cfdf926-de6f-454f-8106-4eb9e3b94d38))
+    (pin "1" (uuid 72ddd8c9-f9bd-43aa-bacd-e2c73ae86adc))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -7557,7 +7557,7 @@
     (property "Datasheet" "" (at 148.59 179.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 774eafef-b838-4a1e-9df0-94bfdef0d136))
+    (pin "1" (uuid 31f876a0-55ff-4626-af9a-a1feeb2b085a))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
@@ -7688,8 +7688,8 @@
     (property "Datasheet" "~" (at 139.7 173.99 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid dabceb0b-40a4-4270-b0f6-88b4ae2c8bce))
-    (pin "2" (uuid 88aa4e93-f522-4065-8ec9-ef30542b4a74))
+    (pin "1" (uuid b6ad1bc5-7786-42c0-a296-e1acaa7b2ab7))
+    (pin "2" (uuid 396dc001-97dc-40ec-a823-059ec8513bb6))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"

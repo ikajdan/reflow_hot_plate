@@ -1204,8 +1204,8 @@
     (property "Datasheet" "~" (at 76.2 101.6 90)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (pin "1" (uuid 9f28f8f8-72a7-408c-a1ad-4cbb13b0d7ed))
-    (pin "2" (uuid 511829de-e864-4b0b-9213-09cfae23ade8))
+    (pin "1" (uuid 8cc6da79-554d-487f-bbdd-77d5163f4bf4))
+    (pin "2" (uuid 5ccfc679-31c1-4dd1-915e-1f092c3dcc9b))
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
