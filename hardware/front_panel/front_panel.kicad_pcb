@@ -2764,7 +2764,7 @@
   (gr_text "Front Panel" (at 148 108) (layer "B.SilkS") (tstamp 07216444-520b-46dd-944a-86880933cac5)
     (effects (font (size 1.7 1.7) (thickness 0.3) bold) (justify bottom mirror))
   )
-  (gr_text "20230911" (at 148 91.75) (layer "B.SilkS") (tstamp 42f962c7-7910-414b-aef0-1db53cfa0b46)
+  (gr_text "20230911" (at 147.9 91.75) (layer "B.SilkS") (tstamp 42f962c7-7910-414b-aef0-1db53cfa0b46)
     (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
   )
   (gr_text "JLCJLCJLCJLC" (at 110.25 100.1 90) (layer "B.SilkS") (tstamp 57daf352-fc55-43de-b26c-ed1755de63cf)

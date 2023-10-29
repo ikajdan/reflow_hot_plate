@@ -7367,7 +7367,7 @@
     (property "Reference" "FB1" (at 68.58 163.83 90)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "470R@100MHz" (at 69.85 171.45 90)
+    (property "Value" "470R" (at 69.85 171.45 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Footprint" "Inductor_SMD:L_0603_1608Metric" (at 68.58 165.862 90)

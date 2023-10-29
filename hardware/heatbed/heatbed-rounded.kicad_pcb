@@ -43,7 +43,7 @@
       (layer "B.Mask" (type "Bottom Solder Mask") (color "Black") (thickness 0.01) (material "Liquid Ink") (epsilon_r 3.3) (loss_tangent 0))
       (layer "B.Paste" (type "Bottom Solder Paste"))
       (layer "B.SilkS" (type "Bottom Silk Screen") (color "White"))
-      (copper_finish "None")
+      (copper_finish "HAL lead-free")
       (dielectric_constraints no)
     )
     (pad_to_mask_clearance 0.05)

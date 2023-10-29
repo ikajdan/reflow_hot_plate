@@ -1201,7 +1201,7 @@
     (property "Reference" "FB4" (at 177.8 76.2 0)
       (effects (font (size 1.27 1.27)) (justify right top))
     )
-    (property "Value" "470R@100MHz" (at 177.8 78.74 0)
+    (property "Value" "470R" (at 177.8 78.74 0)
       (effects (font (size 1.27 1.27)) (justify right top))
     )
     (property "Footprint" "Inductor_SMD:L_0603_1608Metric" (at 178.562 78.74 90)
