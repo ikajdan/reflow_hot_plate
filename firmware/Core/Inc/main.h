@@ -57,18 +57,20 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BUTTON_LEFT_Pin GPIO_PIN_13
-#define BUTTON_LEFT_GPIO_Port GPIOC
-#define BUTTON_RIGHT_Pin GPIO_PIN_14
-#define BUTTON_RIGHT_GPIO_Port GPIOC
+#define BUTTON_UP_Pin GPIO_PIN_13
+#define BUTTON_UP_GPIO_Port GPIOC
+#define BUTTON_UP_EXTI_IRQn EXTI15_10_IRQn
+#define BUTTON_DOWN_Pin GPIO_PIN_14
+#define BUTTON_DOWN_GPIO_Port GPIOC
+#define BUTTON_DOWN_EXTI_IRQn EXTI15_10_IRQn
+#define BUZZER_Pin GPIO_PIN_15
+#define BUZZER_GPIO_Port GPIOC
 #define HSE_IN_Pin GPIO_PIN_0
 #define HSE_IN_GPIO_Port GPIOD
 #define HSE_OUT_Pin GPIO_PIN_1
 #define HSE_OUT_GPIO_Port GPIOD
 #define PT_Pin GPIO_PIN_1
 #define PT_GPIO_Port GPIOA
-#define BUZZER_Pin GPIO_PIN_3
-#define BUZZER_GPIO_Port GPIOA
 #define TC_CS_Pin GPIO_PIN_4
 #define TC_CS_GPIO_Port GPIOA
 #define TC_SCK_Pin GPIO_PIN_5
@@ -103,10 +105,12 @@ void Error_Handler(void);
 #define LCD_SCL_GPIO_Port GPIOB
 #define LCD_SDA_Pin GPIO_PIN_7
 #define LCD_SDA_GPIO_Port GPIOB
-#define BUTTON_UP_Pin GPIO_PIN_8
-#define BUTTON_UP_GPIO_Port GPIOB
-#define BUTTON_DOWN_Pin GPIO_PIN_9
-#define BUTTON_DOWN_GPIO_Port GPIOB
+#define BUTTON_RIGHT_Pin GPIO_PIN_8
+#define BUTTON_RIGHT_GPIO_Port GPIOB
+#define BUTTON_RIGHT_EXTI_IRQn EXTI9_5_IRQn
+#define BUTTON_LEFT_Pin GPIO_PIN_9
+#define BUTTON_LEFT_GPIO_Port GPIOB
+#define BUTTON_LEFT_EXTI_IRQn EXTI9_5_IRQn
 
 /* USER CODE BEGIN Private defines */
 
