@@ -28,6 +28,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "ssd1306.h"
+#include "max6675.h"
 #include "rtd.h"
 /* USER CODE END Includes */
 
