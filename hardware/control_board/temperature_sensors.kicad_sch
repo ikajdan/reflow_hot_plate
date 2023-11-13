@@ -6,7 +6,7 @@
 
   (title_block
     (title "Temperature Sensors")
-    (date "2023-07-29")
+    (date "2023-11-13")
     (rev "${REVISION}")
     (company "Author: I. Kajdan")
     (comment 1 "Promoter: A. Bondyra, Ph.D.")
