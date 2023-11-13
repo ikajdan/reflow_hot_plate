@@ -1425,7 +1425,7 @@
   (symbol (lib_id "Device:R_Small") (at 99.06 115.57 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5704ceb7-3629-46e5-b3a6-d2b2f5c27683)
-    (property "Reference" "R13" (at 100.33 113.03 0)
+    (property "Reference" "R12" (at 100.33 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "25k5" (at 100.33 115.57 0)
@@ -1445,7 +1445,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
-          (reference "R13") (unit 1)
+          (reference "R12") (unit 1)
         )
       )
     )
@@ -1764,7 +1764,7 @@
   (symbol (lib_id "Device:R_Small") (at 143.51 105.41 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b3964030-185a-4df8-8082-01a5cbbd781a)
-    (property "Reference" "R14" (at 144.78 102.87 0)
+    (property "Reference" "R13" (at 144.78 102.87 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100k" (at 144.78 105.41 0)
@@ -1784,7 +1784,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
-          (reference "R14") (unit 1)
+          (reference "R13") (unit 1)
         )
       )
     )
@@ -2469,7 +2469,7 @@
   (symbol (lib_id "Device:R_Small") (at 143.51 115.57 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f2ac5c96-6a4b-4069-9113-b48d79a50ff2)
-    (property "Reference" "R15" (at 144.78 113.03 0)
+    (property "Reference" "R14" (at 144.78 113.03 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "24k9" (at 144.78 115.57 0)
@@ -2489,7 +2489,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
-          (reference "R15") (unit 1)
+          (reference "R14") (unit 1)
         )
       )
     )

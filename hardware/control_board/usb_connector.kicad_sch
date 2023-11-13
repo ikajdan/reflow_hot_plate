@@ -1117,7 +1117,7 @@
   (symbol (lib_id "Device:R_Small") (at 175.26 91.44 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 55c3185d-b718-4fb9-8a96-4aa53265d529)
-    (property "Reference" "R25" (at 171.45 90.17 90)
+    (property "Reference" "R24" (at 171.45 90.17 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "5k1" (at 179.07 90.17 90)
@@ -1134,7 +1134,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "R25") (unit 1)
+          (reference "R24") (unit 1)
         )
       )
     )
@@ -1143,7 +1143,7 @@
   (symbol (lib_id "Device:R_Small") (at 175.26 88.9 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 61bfc22a-5fda-45e9-8dff-ef58ef9114a6)
-    (property "Reference" "R24" (at 171.45 87.63 90)
+    (property "Reference" "R23" (at 171.45 87.63 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "5k1" (at 179.07 87.63 90)
@@ -1160,7 +1160,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
-          (reference "R24") (unit 1)
+          (reference "R23") (unit 1)
         )
       )
     )
@@ -1263,7 +1263,7 @@
     (property "Value" "USB_C" (at 207.01 80.01 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Footprint" "Connector_USB:USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal" (at 193.04 99.06 0)
+    (property "Footprint" "Local_Library:USB4105-GF-A" (at 193.04 99.06 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://gct.co/files/drawings/usb4105.pdf" (at 193.04 99.06 0)

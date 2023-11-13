@@ -1142,7 +1142,7 @@
       )
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "R28") (unit 1)
+          (reference "R27") (unit 1)
         )
       )
     )
@@ -1222,7 +1222,7 @@
       )
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "R26") (unit 1)
+          (reference "R25") (unit 1)
         )
       )
     )
@@ -1548,7 +1548,7 @@
       )
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "R27") (unit 1)
+          (reference "R26") (unit 1)
         )
       )
     )
@@ -1754,7 +1754,7 @@
   (symbol (lib_id "Device:R_Small") (at 146.05 62.23 0) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b860cb0c-7a0e-40b5-8ae2-d58c9cff6f98)
-    (property "Reference" "R29" (at 147.32 59.69 0)
+    (property "Reference" "R28" (at 147.32 59.69 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4k99" (at 147.32 62.23 0)
@@ -1774,7 +1774,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "R29") (unit 1)
+          (reference "R28") (unit 1)
         )
       )
       (project "apps"
@@ -1788,7 +1788,7 @@
   (symbol (lib_id "Device:R_Small") (at 173.99 58.42 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b9b5c8c9-1229-42c1-810d-06f2ec2330aa)
-    (property "Reference" "R32" (at 173.99 55.88 90)
+    (property "Reference" "R31" (at 173.99 55.88 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3k3" (at 173.99 60.96 90)
@@ -1805,7 +1805,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "R32") (unit 1)
+          (reference "R31") (unit 1)
         )
       )
       (project "apps"
@@ -1934,7 +1934,7 @@
   (symbol (lib_id "Device:R_Small") (at 146.05 69.85 0) (mirror x) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid da2f29c4-6f72-42ce-9db4-d096f6b5eb6a)
-    (property "Reference" "R30" (at 147.32 67.31 0)
+    (property "Reference" "R29" (at 147.32 67.31 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1k" (at 147.32 69.85 0)
@@ -1954,7 +1954,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "R30") (unit 1)
+          (reference "R29") (unit 1)
         )
       )
       (project "apps"
@@ -1968,7 +1968,7 @@
   (symbol (lib_id "Device:R_Small") (at 163.83 58.42 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid db3e34e5-487f-4875-90b3-3b63ddb3fadf)
-    (property "Reference" "R31" (at 163.83 55.88 90)
+    (property "Reference" "R30" (at 163.83 55.88 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "3k3" (at 163.83 60.96 90)
@@ -1985,7 +1985,7 @@
     (instances
       (project "control_board"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "R31") (unit 1)
+          (reference "R30") (unit 1)
         )
       )
       (project "apps"

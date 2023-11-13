@@ -518,7 +518,7 @@
       "/USB Connector/DATA-": "USB_D",
       "/USB_D+": "USB_D",
       "/USB_D-": "USB_D",
-      "Net-(D9-A)": "H_PWR",
+      "Net-(D10-A)": "H_PWR",
       "Net-(F2-Pad1)": "H_PWR",
       "Net-(SW2-A)": "H_PWR"
     },
