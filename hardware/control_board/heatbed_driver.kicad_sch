@@ -6,7 +6,7 @@
 
   (title_block
     (title "Heatbed Driver")
-    (date "2023-11-13")
+    (date "2023-11-14")
     (rev "${REVISION}")
     (company "Author: I. Kajdan")
     (comment 1 "Promoter: A. Bondyra, Ph.D.")
@@ -85,11 +85,11 @@
         )
       )
     )
-    (symbol "Device:D_Small" (pin_numbers hide) (pin_names (offset 0.254) hide) (in_bom yes) (on_board yes)
+    (symbol "Device:D_Schottky_Small" (pin_numbers hide) (pin_names (offset 0.254) hide) (in_bom yes) (on_board yes)
       (property "Reference" "D" (at -1.27 2.032 0)
         (effects (font (size 1.27 1.27)) (justify left))
       )
-      (property "Value" "D_Small" (at -3.81 -2.032 0)
+      (property "Value" "D_Schottky_Small" (at -7.112 -2.032 0)
         (effects (font (size 1.27 1.27)) (justify left))
       )
       (property "Footprint" "" (at 0 0 90)
@@ -98,30 +98,16 @@
       (property "Datasheet" "~" (at 0 0 90)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Sim.Device" "D" (at 0 0 0)
+      (property "ki_keywords" "diode Schottky" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "Sim.Pins" "1=K 2=A" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_keywords" "diode" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_description" "Diode, small symbol" (at 0 0 0)
+      (property "ki_description" "Schottky diode, small symbol" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "ki_fp_filters" "TO-???* *_Diode_* *SingleDiode* D_*" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "D_Small_0_1"
-        (polyline
-          (pts
-            (xy -0.762 -1.016)
-            (xy -0.762 1.016)
-          )
-          (stroke (width 0.254) (type default))
-          (fill (type none))
-        )
+      (symbol "D_Schottky_Small_0_1"
         (polyline
           (pts
             (xy -0.762 0)
@@ -140,8 +126,20 @@
           (stroke (width 0.254) (type default))
           (fill (type none))
         )
+        (polyline
+          (pts
+            (xy -1.27 0.762)
+            (xy -1.27 1.016)
+            (xy -0.762 1.016)
+            (xy -0.762 -1.016)
+            (xy -0.254 -1.016)
+            (xy -0.254 -0.762)
+          )
+          (stroke (width 0.254) (type default))
+          (fill (type none))
+        )
       )
-      (symbol "D_Small_1_1"
+      (symbol "D_Schottky_Small_1_1"
         (pin passive line (at -2.54 0 0) (length 1.778)
           (name "K" (effects (font (size 1.27 1.27))))
           (number "1" (effects (font (size 1.27 1.27))))
@@ -863,6 +861,32 @@
     )
   )
 
+  (symbol (lib_id "Device:D_Schottky_Small") (at 166.37 92.71 270) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 3cb6be2f-e1ee-42f6-9e8f-3fe65bde9861)
+    (property "Reference" "D10" (at 165.1 91.44 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Value" "SKL310" (at 165.1 93.98 90)
+      (effects (font (size 1.27 1.27)) (justify right))
+    )
+    (property "Footprint" "Diode_SMD:D_SOD-123F" (at 166.37 92.71 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "https://www.mouser.pl/datasheet/2/849/skl32-3324186.pdf" (at 166.37 92.71 90)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid ae06b067-49f4-441b-aec9-5e28b59df633))
+    (pin "2" (uuid 51ab78de-0db8-43cf-9392-20a3f51c44f8))
+    (instances
+      (project "control_board"
+        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"
+          (reference "D10") (unit 1)
+        )
+      )
+    )
+  )
+
   (symbol (lib_id "Connector_Generic:Conn_01x01") (at 175.26 91.44 0) (mirror x) (unit 1)
     (in_bom no) (on_board yes) (dnp no)
     (uuid 59818d6b-1382-49ed-b068-f6eb28cb4bd7)
@@ -978,40 +1002,6 @@
         )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"
           (reference "#PWR080") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Device:D_Small") (at 166.37 92.71 90) (mirror x) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
-    (uuid 85b72b84-d662-48c4-98cb-654e608fcf9a)
-    (property "Reference" "D1" (at 165.1 91.44 90)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Value" "SK310A" (at 165.1 93.98 90)
-      (effects (font (size 1.27 1.27)) (justify left))
-    )
-    (property "Footprint" "Diode_SMD:D_SMA" (at 166.37 92.71 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (property "Datasheet" "https://www.smc-diodes.com/propdf/SK310A%20N0945%20REV.A.pdf" (at 166.37 92.71 90)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid 5b6e4f5d-b904-4c05-a9e8-80c3bc2337ab))
-    (pin "2" (uuid 78313cdd-13d2-447c-bfab-eed86e572379))
-    (instances
-      (project "control_board"
-        (path "/82fde900-07e6-41de-9b57-509c777c8289"
-          (reference "D1") (unit 1)
-        )
-      )
-      (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "D1") (unit 1)
-        )
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"
-          (reference "D10") (unit 1)
         )
       )
     )

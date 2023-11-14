@@ -6,7 +6,7 @@
 
   (title_block
     (title "Reflow Hot Plate Control Board")
-    (date "2023-11-13")
+    (date "2023-11-14")
     (rev "${REVISION}")
     (company "Author: I. Kajdan")
     (comment 1 "Promoter: A. Bondyra, Ph.D.")
