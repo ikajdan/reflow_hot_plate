@@ -810,7 +810,7 @@
       (net 73 "Net-(J3-Pin_9)") (pinfunction "Pin_9") (pintype "passive") (tstamp ab5c9190-7be0-48f2-8f32-b86cc15e89c8))
     (pad "10" smd rect (at 4.5 -1.775 180) (size 0.6 1.65) (layers "F.Cu" "F.Paste" "F.Mask")
       (net 12 "+3.3V") (pinfunction "Pin_10") (pintype "passive") (tstamp c6882a7f-035c-443e-941e-8131d0540f47))
-    (model "${KIPRJMOD}/models/52808-1070.stp"
+    (model "${KIPRJMOD}/models/52808-1070.step"
       (offset (xyz 0 0.01999999925 0.04999999999))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 0))
@@ -6379,7 +6379,7 @@
       (net 12 "+3.3V") (pintype "passive") (solder_mask_margin 0.102) (tstamp 1e81143b-a6d2-4b2e-be35-eb0ed6ee3897))
     (pad "2" thru_hole circle (at 0 2.5 270) (size 2 2) (drill 0.8) (layers "*.Cu" "*.Mask")
       (net 17 "Net-(D4-A)") (pintype "passive") (solder_mask_margin 0.102) (tstamp e6099da5-4f9b-4320-a65e-5b0fe972b511))
-    (model "${KIPRJMOD}/models/CMI-9605IC-0380T.stp"
+    (model "${KIPRJMOD}/models/CMI-9605IC-0380T.step"
       (offset (xyz 0 0 5))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 -90))

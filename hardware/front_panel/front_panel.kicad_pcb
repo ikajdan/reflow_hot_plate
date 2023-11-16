@@ -843,7 +843,7 @@
       (net 8 "/SDA") (pinfunction "Pin_9") (pintype "passive") (tstamp ba2837bd-dde5-45ac-add5-2bb87efa72d2))
     (pad "10" smd rect (at 4.5 1.775) (size 0.6 1.65) (layers "B.Cu" "B.Paste" "B.Mask")
       (net 1 "GND") (pinfunction "Pin_10") (pintype "passive") (tstamp 11c6deb7-e2be-4850-8e18-6a3a32c8ab0e))
-    (model "${KIPRJMOD}/models/52808-1070.stp"
+    (model "${KIPRJMOD}/models/52808-1070.step"
       (offset (xyz 0 0.01999999925 0.04999999999))
       (scale (xyz 1 1 1))
       (rotate (xyz -90 0 0))
