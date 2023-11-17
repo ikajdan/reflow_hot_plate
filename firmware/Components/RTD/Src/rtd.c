@@ -37,10 +37,12 @@ float RTD_CalculateResistance(void) {
     float adc_value = sum / RTD_SAMPLES;
 
     // Convert to volts
-    float Vout = adc_value * (3.3f / 4095) / RTD_GAIN;
+    float v_out = adc_value * (3.3f / 4095) / RTD_GAIN;
 
-    float Rx = (RTD_R2 * RTD_R3 + RTD_R3 * (RTD_R1 + RTD_R2) * Vout / RTD_VIN) / (RTD_R1 - (RTD_R1 + RTD_R2) * (Vout / RTD_VIN));
-    return Rx;
+    float resistance =
+            (RTD_R2 * RTD_R3 + RTD_R3 * (RTD_R1 + RTD_R2) * v_out / RTD_VIN)
+                    / (RTD_R1 - (RTD_R1 + RTD_R2) * (v_out / RTD_VIN));
+    return resistance;
 }
 
 /* Public functions ----------------------------------------------------------*/

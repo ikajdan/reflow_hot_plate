@@ -23,16 +23,16 @@
  * Wheatstone bridge resistor values
  *
  *
- *       ┌───[ R2 ]──(Vout+)──[ Rx ]───┐
+ *       ┌───[ R3 ]──(Vout+)──[ Rx ]───┐
  *       │                             │
  * VIN ──┤                             ├── GND
  *       │                             │
- *       └───[ R1 ]──(Vout-)──[ R3 ]───┘
+ *       └───[ R1 ]──(Vout-)──[ R2 ]───┘
  *
  */
 #define RTD_R1 1000
-#define RTD_R2 1000
-#define RTD_R3 100
+#define RTD_R2 100
+#define RTD_R3 1000
 
 /**
  * Wheatstone bridge reference voltage
