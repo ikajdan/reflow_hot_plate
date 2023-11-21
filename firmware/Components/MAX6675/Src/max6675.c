@@ -35,7 +35,7 @@ float MAX6675_GetTemperature(void) {
     HAL_GPIO_WritePin(MAX6675_CS_PORT, MAX6675_CS_PIN, GPIO_PIN_SET);
 
     // Check if the input is open
-    if(((data >> 2) & 0x01)) {
+    if((data >> 2) & 0x01) {
         return MAX6675_TC_OPEN;
     }
 
