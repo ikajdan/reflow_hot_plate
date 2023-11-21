@@ -21,10 +21,10 @@
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief Set the duty cycle for a PWM signal on a specific Channel of a Timer.
- * @param htim Pointer to the Timer handle structure.
- * @param channel The PWM channel on which to set the duty cycle.
- * @param duty_cycle The desired duty cycle in the range [0.0, 100.0].
+ * @brief  Sets the duty cycle for a PWM signal on a specific channel of a timer
+ * @param  htim: TIM handle
+ * @param  channel: Channel of the timer
+ * @param  duty_cycle: The desired duty cycle
  * @retval None
  */
 void PWM_SetDutyCycle(TIM_HandleTypeDef *const htim, const uint32_t channel, float duty_cycle);
