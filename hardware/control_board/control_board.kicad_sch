@@ -6338,7 +6338,7 @@
     (property "Reference" "U1" (at 100.33 39.37 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "STM32F103C8T6" (at 114.3 78.74 0)
+    (property "Value" "STM32F103CBT6" (at 114.3 78.74 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Package_QFP:LQFP-48_7x7mm_P0.5mm" (at 100.33 114.3 0)

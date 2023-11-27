@@ -5069,7 +5069,7 @@
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp d3aaf96c-9987-4643-a1a3-d784ea0cbe88)
     )
-    (fp_text value "STM32F103C8T6" (at 2.8 4.65) (layer "F.Fab")
+    (fp_text value "STM32F103CBT6" (at 2.8 4.65) (layer "F.Fab")
         (effects (font (size 1 1) (thickness 0.15)))
       (tstamp eb38ea0f-4a37-418b-a674-da827bb8aea1)
     )
