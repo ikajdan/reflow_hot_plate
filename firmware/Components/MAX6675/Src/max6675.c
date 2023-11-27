@@ -39,6 +39,6 @@ float MAX6675_GetTemperature(void) {
         return MAX6675_TC_OPEN;
     }
 
-    float temperature = (data >> 3) * 0.25;
+    float temperature = (data >> 3) * 0.25f;
     return temperature;
 }
