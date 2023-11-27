@@ -15,17 +15,17 @@
 
 /* Public defines ------------------------------------------------------------*/
 /**
- * SPI Port
+ * @brief SPI Port
  */
 #define MAX6675_SPI_PORT hspi1
 
 /**
- * CS GPIO Port
+ * @brief CS GPIO Port
  */
 #define MAX6675_CS_PORT GPIOA
 
 /**
- * CS GPIO Port
+ * @brief CS GPIO Port
  */
 #define MAX6675_CS_PIN GPIO_PIN_4
 

@@ -15,12 +15,12 @@
 
 /* Public defines ------------------------------------------------------------*/
 /**
- * RTD's nominal resistance
+ * @brief RTD's nominal resistance
  */
 #define RTD_R0 100
 
 /**
- * Wheatstone bridge resistor values
+ * @brief Wheatstone bridge resistor values
  *
  *
  *       ┌───[ R3 ]──(Vout+)──[ Rx ]───┐
@@ -35,17 +35,17 @@
 #define RTD_R3 1000
 
 /**
- * Wheatstone bridge reference voltage
+ * @brief Wheatstone bridge reference voltage
  */
 #define RTD_VIN 3.3f
 
 /**
- * Instrumentation amplifier gain
+ * @brief Instrumentation amplifier gain
  */
 #define RTD_GAIN 6
 
 /**
- * The number of samples to be averaged when measuring the temperature
+ * @brief The number of samples to be averaged when measuring the temperature
  */
 #define RTD_SAMPLES 100
 
