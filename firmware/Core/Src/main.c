@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
+#include "pwm.h"
 #include "max6675.h"
 #include "rtd.h"
 /* USER CODE END Includes */
@@ -51,7 +52,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int DEBOUNCING_STATE = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,7 +63,14 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-bool LED_TEST = true;
+static bool LED_TEST = true;
+static bool DEBOUNCING = false;
+
+static const float Kp = 0.01;
+static const float Ki = 0.1;
+static const float Kd = 0.01;
+static const float Ts = 100;
+static const float targret_temperature = 21;
 /* USER CODE END 0 */
 
 /**
@@ -184,7 +192,20 @@ void SystemClock_Config(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
-        // Stub
+        float temperature = RTD_GetTemperature();
+
+        static float integral = 0.0f; // Integral term accumulator
+        static float previous_error = 0.0f; // Previous error for derivative term
+
+        // PID controller
+        float error = targret_temperature - temperature;
+        float proportional = Kp * error;
+        integral += Ki * error * Ts;
+        float derivative = Kd * (error - previous_error) / Ts;
+        previous_error = error;
+        float output = proportional + integral + derivative;
+
+        PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, output);
     } else if(htim == &htim2) {
         // Turn off LEDs after the startup
         if(LED_TEST == true && HAL_GetTick() > 2000) {
@@ -196,7 +217,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             LED_TEST = false;
         }
     } else if(htim == &htim4) {
-        DEBOUNCING_STATE = 0;
+        DEBOUNCING = false;
         HAL_TIM_Base_Stop_IT(&htim4);
     }
 }
@@ -208,7 +229,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     // Check if buttons are being debounced
-    if(DEBOUNCING_STATE) {
+    if(DEBOUNCING) {
         return;
     }
 
@@ -229,7 +250,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
             break;
     }
 
-    DEBOUNCING_STATE = 1;
+    DEBOUNCING = true;
     HAL_TIM_Base_Start_IT(&htim4); // (40 Hz) SW debouncing
 }
 
