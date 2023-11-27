@@ -6,10 +6,10 @@
 
   (title_block
     (title "Heatbed Driver")
-    (date "2023-11-14")
+    (date "2023-11-27")
     (rev "${REVISION}")
     (company "Author: I. Kajdan")
-    (comment 1 "Promoter: A. Bondyra, Ph.D.")
+    (comment 1 "Supervisor: A. Bondyra, Ph.D.")
   )
 
   (lib_symbols

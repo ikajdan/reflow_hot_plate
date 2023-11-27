@@ -10,7 +10,7 @@
     (date "2023-09-11")
     (rev "${REVISION}")
     (company "Author: I. Kajdan")
-    (comment 1 "Promoter: A. Bondyra, Ph.D.")
+    (comment 1 "Supervisor: A. Bondyra, Ph.D.")
   )
 
   (layers
