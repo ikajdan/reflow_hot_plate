@@ -28,7 +28,7 @@ volatile uint16_t RTD_ADC_REGISTER[RTD_SAMPLES];
 /* Public function prototypes ------------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
-float RTD_CalculateResistance(void) {
+static float RTD_CalculateResistance(void) {
     // Average the readings
     float sum = 0;
     for(unsigned int i = 0; i < RTD_SAMPLES; i++) {
