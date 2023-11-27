@@ -28,7 +28,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "ssd1306.h"
 #include "max6675.h"
 #include "rtd.h"
 /* USER CODE END Includes */
@@ -51,7 +50,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+int DEBOUNCING_STATE = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,9 +100,16 @@ int main(void)
   MX_SPI2_Init();
   MX_TIM3_Init();
   MX_I2C1_Init();
+  MX_TIM1_Init();
+  MX_TIM2_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
     HAL_ADCEx_Calibration_Start(&hadc1);
     HAL_ADC_Start_DMA(&hadc1, (uint32_t*)RTD_ADC_REGISTER, RTD_SAMPLES);
+
+    HAL_TIM_Base_Start_IT(&htim1); // (10 Hz) Control loop
+    HAL_TIM_Base_Start_IT(&htim2); // (10 Hz) GUI update
+    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (1 kHz) Heatbed driver
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -164,6 +170,53 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+/**
+ * @brief  Period elapsed callback in non-blocking mode
+ * @param  htim: TIM handle
+ * @retval None
+ */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+    if(htim == &htim1) {
+        // Stub
+    } else if(htim == &htim2) {
+        // Stub
+    } else if(htim == &htim4) {
+        DEBOUNCING_STATE = 0;
+        HAL_TIM_Base_Stop_IT(&htim4);
+    }
+}
+
+/**
+ * @brief  EXTI line detection callbacks
+ * @param  GPIO_Pin: Specifies the pins connected EXTI line
+ * @retval None
+ */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+    // Check if buttons are being debounced
+    if(DEBOUNCING_STATE) {
+        return;
+    }
+
+    switch(GPIO_Pin) {
+        case BUTTON_UP_Pin:
+            // Stub
+            break;
+        case BUTTON_DOWN_Pin:
+            // Stub
+            break;
+        case BUTTON_LEFT_Pin:
+            // Stub
+            break;
+        case BUTTON_RIGHT_Pin:
+            // Stub
+            break;
+        default:
+            break;
+    }
+
+    DEBOUNCING_STATE = 1;
+    HAL_TIM_Base_Start_IT(&htim4); // (40 Hz) HW debouncing
+}
 
 /* USER CODE END 4 */
 
@@ -174,7 +227,6 @@ void SystemClock_Config(void)
 void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
     __disable_irq();
     while(1) {
     }
@@ -192,8 +244,7 @@ void Error_Handler(void)
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line number,
-     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+    // printf("Wrong parameters value: file %s on line %lu\r\n", file, line);
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
