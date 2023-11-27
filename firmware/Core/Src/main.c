@@ -30,6 +30,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
 #include "pwm.h"
+#include "pid.h"
 #include "max6675.h"
 #include "rtd.h"
 /* USER CODE END Includes */
@@ -65,12 +66,6 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 static bool LED_TEST = true;
 static bool DEBOUNCING = false;
-
-static const float Kp = 0.01;
-static const float Ki = 0.1;
-static const float Kd = 0.01;
-static const float Ts = 100;
-static const float targret_temperature = 21;
 /* USER CODE END 0 */
 
 /**
@@ -193,18 +188,8 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
         float temperature = RTD_GetTemperature();
-
-        static float integral = 0.0f; // Integral term accumulator
-        static float previous_error = 0.0f; // Previous error for derivative term
-
-        // PID controller
-        float error = targret_temperature - temperature;
-        float proportional = Kp * error;
-        integral += Ki * error * Ts;
-        float derivative = Kd * (error - previous_error) / Ts;
-        previous_error = error;
-        float output = proportional + integral + derivative;
-
+        static float targret_temperature = 21.0f;
+        float output = PID_GetOutput(temperature, targret_temperature);
         PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, output);
     } else if(htim == &htim2) {
         // Turn off LEDs after the startup
@@ -251,7 +236,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     }
 
     DEBOUNCING = true;
-    HAL_TIM_Base_Start_IT(&htim4); // (40 Hz) SW debouncing
+    HAL_TIM_Base_Start_IT(&htim4); // (25 ms) SW debouncing
 }
 
 /* USER CODE END 4 */
