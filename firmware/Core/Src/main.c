@@ -28,6 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdbool.h>
 #include "max6675.h"
 #include "rtd.h"
 /* USER CODE END Includes */
@@ -61,7 +62,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+bool LED_TEST = true;
 /* USER CODE END 0 */
 
 /**
@@ -110,6 +111,12 @@ int main(void)
     HAL_TIM_Base_Start_IT(&htim1); // (10 Hz) Control loop
     HAL_TIM_Base_Start_IT(&htim2); // (10 Hz) GUI update
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (1 kHz) Heatbed driver
+
+    // Turn all LEDs on
+    HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -179,7 +186,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
         // Stub
     } else if(htim == &htim2) {
-        // Stub
+        // Turn off LEDs after the startup
+        if(LED_TEST == true && HAL_GetTick() > 2000) {
+            HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
+
+            LED_TEST = false;
+        }
     } else if(htim == &htim4) {
         DEBOUNCING_STATE = 0;
         HAL_TIM_Base_Stop_IT(&htim4);
@@ -215,7 +230,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     }
 
     DEBOUNCING_STATE = 1;
-    HAL_TIM_Base_Start_IT(&htim4); // (40 Hz) HW debouncing
+    HAL_TIM_Base_Start_IT(&htim4); // (40 Hz) SW debouncing
 }
 
 /* USER CODE END 4 */
