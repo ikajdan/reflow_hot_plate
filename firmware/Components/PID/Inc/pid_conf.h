@@ -34,6 +34,16 @@
  */
 #define PID_TS 100.0f
 
+/**
+ * @brief Minimum allowable value for the PID controller output
+ */
+#define PID_MIN 0.0f
+
+/**
+ * @brief Maximum allowable value for the PID controller output
+ */
+#define PID_MAX 100.0f
+
 /* Public macros -------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
