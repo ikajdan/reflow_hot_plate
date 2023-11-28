@@ -33,6 +33,7 @@
 #include "pid.h"
 #include "max6675.h"
 #include "rtd.h"
+#include "dsp_863.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -187,10 +188,63 @@ void SystemClock_Config(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
-        float temperature = RTD_GetTemperature();
-        static float targret_temperature = 21.0f;
-        float output = PID_GetOutput(temperature, targret_temperature);
+        static uint32_t process_time = 0; // Process time in ms
+        uint32_t process_time_seconds = process_time / 1000;
+        int process_stage = 0;
+        float output = 0;
+
+        // Get the output from the PID controller
+        if(process_time_seconds < DSP_863_SIZE) {
+            float temperature = RTD_GetTemperature();
+            float targret_temperature = dsp_863[process_time_seconds];
+            output = PID_GetOutput(temperature, targret_temperature);
+        }
+
         PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, output);
+
+        // Determine the process stage based on the current time
+        for(int i = 0; i < 4; i++) {
+            if(process_time_seconds >= dsp_863_stages[i]) {
+                process_stage = i + 1;
+            } else {
+                break;
+            }
+        }
+
+        switch(process_stage) {
+            case 1:
+                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
+                break;
+            case 2:
+                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
+                break;
+            case 3:
+                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_SET);
+                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
+                break;
+            case 4:
+                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_SET);
+                break;
+            default:
+                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
+                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
+                break;
+        }
+
+        process_time += 100;
     } else if(htim == &htim2) {
         // Turn off LEDs after the startup
         if(LED_TEST == true && HAL_GetTick() > 2000) {
