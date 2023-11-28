@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdbool.h>
+#include "led.h"
 #include "pwm.h"
 #include "pid.h"
 #include "max6675.h"
@@ -65,7 +66,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static bool LED_TEST = true;
+static bool STARTUP = true;
 static bool DEBOUNCING = false;
 /* USER CODE END 0 */
 
@@ -116,11 +117,7 @@ int main(void)
     HAL_TIM_Base_Start_IT(&htim2); // (10 Hz) GUI update
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (1 kHz) Heatbed driver
 
-    // Turn all LEDs on
-    HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_SET);
-    HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_SET);
+    LED_SetState(LED_ON);
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -211,49 +208,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             }
         }
 
-        switch(process_stage) {
-            case 1:
-                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_SET);
-                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
-                break;
-            case 2:
-                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_SET);
-                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
-                break;
-            case 3:
-                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_SET);
-                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
-                break;
-            case 4:
-                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_SET);
-                break;
-            default:
-                HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
-                HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
-                break;
-        }
+        LED_SetState(process_stage);
 
         process_time += 100;
     } else if(htim == &htim2) {
         // Turn off LEDs after the startup
-        if(LED_TEST == true && HAL_GetTick() > 2000) {
-            HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_RESET);
-            HAL_GPIO_WritePin(LED_SOAK_GPIO_Port, LED_SOAK_Pin, GPIO_PIN_RESET);
-            HAL_GPIO_WritePin(LED_REFLOW_GPIO_Port, LED_REFLOW_Pin, GPIO_PIN_RESET);
-            HAL_GPIO_WritePin(LED_COOLING_GPIO_Port, LED_COOLING_Pin, GPIO_PIN_RESET);
-
-            LED_TEST = false;
+        if(STARTUP == true && HAL_GetTick() > 2000) {
+            LED_SetState(LED_OFF);
+            STARTUP = false;
         }
     } else if(htim == &htim4) {
         DEBOUNCING = false;
