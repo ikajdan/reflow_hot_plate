@@ -49,6 +49,11 @@
  */
 #define RTD_SAMPLES 100
 
+/**
+ * @brief Temperature drift calibration offset
+ */
+#define RTD_OFFSET 0.0f
+
 /* Public macros -------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/

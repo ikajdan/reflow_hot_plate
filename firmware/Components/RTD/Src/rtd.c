@@ -56,5 +56,5 @@ float RTD_GetTemperature(void) {
     }
 
     float temperature = (-A + sqrt(discriminant)) / (2 * B);
-    return temperature;
+    return temperature + RTD_OFFSET;
 }

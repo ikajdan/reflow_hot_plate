@@ -29,6 +29,11 @@
  */
 #define MAX6675_CS_PIN GPIO_PIN_4
 
+/**
+ * @brief Temperature drift calibration offset
+ */
+#define MAX6675_OFFSET 0.0f
+
 /* Public macros -------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/

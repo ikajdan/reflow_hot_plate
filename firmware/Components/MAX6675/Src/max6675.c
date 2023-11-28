@@ -40,5 +40,5 @@ float MAX6675_GetTemperature(void) {
     }
 
     float temperature = (data >> 3) * 0.25f;
-    return temperature;
+    return temperature + MAX6675_OFFSET;
 }
