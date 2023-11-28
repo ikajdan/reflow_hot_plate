@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from numpy.polynomial.polynomial import Polynomial
 
 if len(sys.argv) < 2:
-    print("Usage: generate_header.py <profile>")
+    print("Usage: generate_profile_header.py <profile>")
     sys.exit(1)
 
 # Profile name
