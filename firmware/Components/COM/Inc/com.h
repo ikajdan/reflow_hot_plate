@@ -1,13 +1,13 @@
 /**
  ******************************************************************************
- * @file           : usb.h
- * @brief          : USB communication library
+ * @file           : com.h
+ * @brief          : COM communication library
  *
  ******************************************************************************
  */
 
-#ifndef __USB_H__
-#define __USB_H__
+#ifndef __COM_H__
+#define __COM_H__
 
 /* Public includes -----------------------------------------------------------*/
 
@@ -27,4 +27,4 @@
  */
 int __io_putchar(int ch);
 
-#endif /* __USB_H__ */
+#endif /* __COM_H__ */
