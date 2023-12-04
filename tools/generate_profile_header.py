@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
+"""
+Reflow profile header generator.
+"""
+
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
 from numpy.polynomial.polynomial import Polynomial
 
 if len(sys.argv) < 2:
-    print("Usage: generate_profile_header.py <profile>")
+    print("Usage: python generate_profile_header.py <profile_name>")
     sys.exit(1)
 
 # Profile name
