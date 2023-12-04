@@ -52,7 +52,7 @@ try:
                 break
         message = f'{{"Time":{i}, "Temperature":{temperature},"TargetTemperature":{target_temperature[i]},"State":{stage}}}'
         serial_port.write(message.encode("utf-8"))
-        print(message)
+        print("Sent:", message)
         time.sleep(1)
 
 except KeyboardInterrupt:

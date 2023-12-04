@@ -14,6 +14,7 @@ import serial
 import json
 import matplotlib.pyplot as plt
 import matplotlib.style as mpl_style
+from matplotlib.ticker import MaxNLocator
 from matplotlib.backends.backend_gtk3agg import FigureCanvasGTK3Agg as FigureCanvas
 
 if len(sys.argv) < 2:
@@ -73,7 +74,7 @@ class ReflowHotPlot(Gtk.Window):
     def read_data(self):
         received_data = self.read_serial_data()
         if received_data:
-            print("Received data:", received_data)
+            print("Received:", received_data)
             try:
                 payload = json.loads(received_data)
                 self.update_plot(payload)
@@ -96,7 +97,8 @@ class ReflowHotPlot(Gtk.Window):
         self.ax.set_xlabel("Time [s]", labelpad=16)
         self.ax.set_ylabel("Temperature [°C]", labelpad=16)
         self.ax.set_ylim(-1, 251)
-
+        # Show only integer values
+        self.ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         self.ax.plot(
             self.data["Time"],
             self.data["Temperature"],
@@ -109,10 +111,8 @@ class ReflowHotPlot(Gtk.Window):
             label="TargetTemperature",
             color="#F8E45C",
         )
-        self.canvas.draw()
 
-    def _on_theme_name_changed(settings, gparam):
-        print("Theme name:", settings.get_property("gtk-theme-name"))
+        self.canvas.draw()
 
 
 if __name__ == "__main__":
