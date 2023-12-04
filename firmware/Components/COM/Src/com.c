@@ -1,7 +1,7 @@
 /**
  ******************************************************************************
  * @file           : com.c
- * @brief          : COM communication library
+ * @brief          : Communication library
  *
  ******************************************************************************
  */
@@ -29,6 +29,13 @@
 /* Public functions ----------------------------------------------------------*/
 int __io_putchar(int ch)
 {
+    ITM_SendChar(ch);
+    return ch;
+}
+
+int COM_Send(int ch)
+{
+    ITM_SendChar(ch);
     CDC_Transmit_FS((uint8_t*)&ch, 1);
     return ch;
 }

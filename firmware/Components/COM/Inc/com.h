@@ -1,7 +1,7 @@
 /**
  ******************************************************************************
  * @file           : com.h
- * @brief          : COM communication library
+ * @brief          : Communication library
  *
  ******************************************************************************
  */
@@ -21,10 +21,17 @@
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief  Sends a character to the USB CDC interface
+ * @brief  Transmit a character via the ITM channel
  * @param  ch: The character to be transmitted
  * @return The transmitted character
  */
 int __io_putchar(int ch);
+
+/**
+ * @brief  Transmit a character over the CDC interface
+ * @param  ch: The character to be transmitted
+ * @return The transmitted character
+ */
+int COM_Send(int ch);
 
 #endif /* __COM_H__ */

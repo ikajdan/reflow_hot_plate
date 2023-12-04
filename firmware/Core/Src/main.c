@@ -28,10 +28,13 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #include <stdbool.h>
+#include "com.h"
 #include "led.h"
 #include "pwm.h"
 #include "pid.h"
+#include "ssd1306.h"
 #include "max6675.h"
 #include "rtd.h"
 #include "dsp_863.h"
