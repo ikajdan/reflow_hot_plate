@@ -17,7 +17,7 @@ import matplotlib.style as mpl_style
 from matplotlib.backends.backend_gtk3agg import FigureCanvasGTK3Agg as FigureCanvas
 
 if len(sys.argv) < 2:
-    print("Usage: generate_profile_header.py <profile>")
+    print("Usage: python reflow_hot_plot.py <serial_port>")
     sys.exit(1)
 
 serial_path = sys.argv[1]
@@ -63,7 +63,7 @@ class ReflowHotPlot(Gtk.Window):
 
         mpl_style.use(native_theme_dark)
 
-        self.data = {"Temperature": [], "TargetTemperature": []}
+        self.data = {"Time": [], "Temperature": [], "TargetTemperature": []}
         self.fig, self.ax = plt.subplots()
         self.canvas = FigureCanvas(self.fig)
         self.add(self.canvas)
@@ -96,14 +96,15 @@ class ReflowHotPlot(Gtk.Window):
         self.ax.set_xlabel("Time [s]", labelpad=16)
         self.ax.set_ylabel("Temperature [°C]", labelpad=16)
         self.ax.set_ylim(-1, 251)
+
         self.ax.plot(
-            range(len(self.data["Temperature"])),
+            self.data["Time"],
             self.data["Temperature"],
             label="Temperature",
             color="#F66151",
         )
         self.ax.plot(
-            range(len(self.data["TargetTemperature"])),
+            self.data["Time"],
             self.data["TargetTemperature"],
             label="TargetTemperature",
             color="#F8E45C",
