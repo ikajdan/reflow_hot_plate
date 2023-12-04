@@ -12,6 +12,7 @@ from gi.repository import Gtk, GLib
 import sys
 import serial
 import json
+from csv import writer
 import matplotlib.pyplot as plt
 import matplotlib.style as mpl_style
 from matplotlib.ticker import MaxNLocator
@@ -54,7 +55,7 @@ class NavigationBar(Gtk.Box):
         buttons_info = [
             ("Profile", "on_profile_clicked"),
             ("Start", "on_start_clicked"),
-            ("Save Log", "on_export_clicked"),
+            ("Save Log", "on_save_clicked"),
             ("About", "on_about_clicked"),
         ]
 
@@ -160,7 +161,32 @@ class MainWindow(Gtk.Window):
         pass
 
     def on_save_clicked(self, widget):
-        pass
+        dialog = Gtk.FileChooserDialog(
+            "Save Data to CSV",
+            self,
+            Gtk.FileChooserAction.SAVE,
+            (
+                Gtk.STOCK_CANCEL,
+                Gtk.ResponseType.CANCEL,
+                Gtk.STOCK_SAVE,
+                Gtk.ResponseType.OK,
+            ),
+        )
+
+        dialog.set_current_name("reflow_log.csv")
+        dialog.set_do_overwrite_confirmation(True)
+
+        filter_text = Gtk.FileFilter()
+        filter_text.set_name("CSV files")
+        filter_text.add_mime_type("text/csv")
+        dialog.add_filter(filter_text)
+
+        response = dialog.run()
+        if response == Gtk.ResponseType.OK:
+            filename = dialog.get_filename()
+            self.write_data_to_csv(filename)
+
+        dialog.destroy()
 
     def on_about_clicked(self, widget):
         dialog = Gtk.MessageDialog(
@@ -168,11 +194,18 @@ class MainWindow(Gtk.Window):
             0,
             Gtk.MessageType.INFO,
             Gtk.ButtonsType.OK,
-            "About",
+            "Reflow Hot Plot",
         )
-        dialog.format_secondary_text("Created by: Ignacy Kajdan\n" "License: MIT")
+        dialog.format_secondary_text("Created by: Ignacy Kajdan\nLicense: MIT")
         dialog.run()
         dialog.destroy()
+
+    def write_data_to_csv(self, filename):
+        with open(filename, "w", newline="") as csvfile:
+            csv_writer = writer(csvfile)
+            csv_writer.writerow(self.data.keys())
+            zip_data = zip(*self.data.values())
+            csv_writer.writerows(zip_data)
 
 
 if __name__ == "__main__":

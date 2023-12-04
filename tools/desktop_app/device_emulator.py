@@ -50,7 +50,7 @@ try:
                 stage = j + 1
             else:
                 break
-        message = f'{{"Time":{i}, "Temperature":{temperature},"TargetTemperature":{target_temperature[i]},"State":{stage}}}'
+        message = f'{{"Time":{i},"Temperature":{temperature},"TargetTemperature":{target_temperature[i]},"State":{stage}}}'
         serial_port.write(message.encode("utf-8"))
         print("Sent:", message)
         time.sleep(1)
