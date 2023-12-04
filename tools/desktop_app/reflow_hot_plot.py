@@ -29,55 +29,86 @@ settings = Gtk.Settings.get_default()
 settings.set_property("gtk-theme-name", "adw-gtk3-dark")
 settings.set_property("gtk-application-prefer-dark-theme", True)
 
+# Set the matplotlib style
+native_theme_dark = {
+    "text.color": "#807A7A",
+    "xtick.color": "#807A7A",
+    "ytick.color": "#807A7A",
+    "grid.color": "#454242",
+    "axes.facecolor": "#242424",
+    "axes.edgecolor": "#242424",
+    "axes.labelcolor": "#807A7A",
+    "figure.facecolor": "#242424",
+    "figure.edgecolor": "#242424",
+    "grid.linestyle": "--",
+}
+mpl_style.use(native_theme_dark)
 
-class ReflowHotPlot(Gtk.Window):
+
+class NavigationBar(Gtk.Box):
+    def __init__(self, callback_dict):
+        Gtk.Box.__init__(self, orientation=Gtk.Orientation.HORIZONTAL, spacing=16)
+
+        self.callback_dict = callback_dict
+
+        buttons_info = [
+            ("Profile", "on_profile_clicked"),
+            ("Start", "on_start_clicked"),
+            ("Save Log", "on_export_clicked"),
+            ("About", "on_about_clicked"),
+        ]
+
+        for label, callback_name in buttons_info:
+            button = Gtk.Button(label=label)
+            button.connect("clicked", self.on_button_clicked, callback_name)
+            self.pack_start(button, True, True, 0)
+
+    def on_button_clicked(self, widget, callback_name):
+        callback = self.callback_dict.get(callback_name)
+        if callback:
+            callback(widget)
+
+
+class MainWindow(Gtk.Window):
     def __init__(self):
         Gtk.Window.__init__(self, title="Reflow Hot Plot")
         self.set_default_size(800, 600)
         self.set_border_width(16)
 
-        native_theme = {
-            "text.color": "#1A1A19",
-            "xtick.color": "#1A1A19",
-            "ytick.color": "#1A1A19",
-            "grid.color": "#999997",
-            "axes.facecolor": "#F6F5F4",
-            "axes.edgecolor": "#F6F5F4",
-            "axes.labelcolor": "#1A1A19",
-            "figure.facecolor": "#F6F5F4",
-            "figure.edgecolor": "#F6F5F4",
-            "grid.linestyle": "--",
+        self.callback_dict = {
+            "on_profile_clicked": self.on_profile_clicked,
+            "on_start_clicked": self.on_start_clicked,
+            "on_save_clicked": self.on_save_clicked,
+            "on_about_clicked": self.on_about_clicked,
         }
 
-        native_theme_dark = {
-            "text.color": "#807A7A",
-            "xtick.color": "#807A7A",
-            "ytick.color": "#807A7A",
-            "grid.color": "#454242",
-            "axes.facecolor": "#242424",
-            "axes.edgecolor": "#242424",
-            "axes.labelcolor": "#807A7A",
-            "figure.facecolor": "#242424",
-            "figure.edgecolor": "#242424",
-            "grid.linestyle": "--",
-        }
-
-        mpl_style.use(native_theme_dark)
+        self.navigation_bar = NavigationBar(self.callback_dict)
 
         self.data = {"Time": [], "Temperature": [], "TargetTemperature": []}
         self.fig, self.ax = plt.subplots()
         self.canvas = FigureCanvas(self.fig)
-        self.add(self.canvas)
 
-        GLib.timeout_add(100, self.read_data)
+        self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=48)
+        self.box.set_margin_start(8)
+        self.box.set_margin_end(8)
+        self.box.pack_start(self.navigation_bar, False, False, 0)
+        self.box.pack_start(self.canvas, True, True, 0)
 
-    def read_data(self):
+        self.add(self.box)
+
+        GLib.timeout_add(100, self.parse_data)
+
+    def parse_data(self):
         received_data = self.read_serial_data()
         if received_data:
             print("Received:", received_data)
             try:
                 payload = json.loads(received_data)
-                self.update_plot(payload)
+                for key, value in payload.items():
+                    if key in self.data:
+                        self.data[key].append(value)
+                self.update_title(payload["State"])
+                self.update_plot()
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
         return True
@@ -87,11 +118,7 @@ class ReflowHotPlot(Gtk.Window):
             return serial_port.readline().decode("utf-8").strip()
         return None
 
-    def update_plot(self, payload):
-        for key, value in payload.items():
-            if key in self.data:
-                self.data[key].append(value)
-
+    def update_plot(self):
         self.ax.clear()
         self.ax.grid(axis="y")
         self.ax.set_xlabel("Time [s]", labelpad=16)
@@ -112,11 +139,44 @@ class ReflowHotPlot(Gtk.Window):
             color="#F8E45C",
         )
 
+        plt.tight_layout(pad=1)
         self.canvas.draw()
+
+    def update_title(self, state):
+        state_mapping = {
+            0: "Idle",
+            1: "Preheat",
+            2: "Reflow",
+            3: "Cooldown",
+        }
+
+        state_name = state_mapping.get(state, "Idle")
+        self.set_title(f"Reflow Hot Plot — {state_name}")
+
+    def on_profile_clicked(self, widget):
+        pass
+
+    def on_start_clicked(self, widget):
+        pass
+
+    def on_save_clicked(self, widget):
+        pass
+
+    def on_about_clicked(self, widget):
+        dialog = Gtk.MessageDialog(
+            self,
+            0,
+            Gtk.MessageType.INFO,
+            Gtk.ButtonsType.OK,
+            "About",
+        )
+        dialog.format_secondary_text("Created by: Ignacy Kajdan\n" "License: MIT")
+        dialog.run()
+        dialog.destroy()
 
 
 if __name__ == "__main__":
-    window = ReflowHotPlot()
+    window = MainWindow()
     window.connect("destroy", Gtk.main_quit)
     window.show_all()
     Gtk.main()
