@@ -192,12 +192,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         uint32_t process_time_seconds = process_time / 1000;
         int process_stage = 0;
         float output = 0;
+        float temperature = 0;
+        int target_temperature = 0;
 
         // Get the output from the PID controller
         if(process_time_seconds < DSP_863_SIZE) {
-            float temperature = RTD_GetTemperature();
-            float targret_temperature = dsp_863[process_time_seconds];
-            output = PID_GetOutput(temperature, targret_temperature);
+            temperature = RTD_GetTemperature();
+            target_temperature = dsp_863[process_time_seconds];
+            output = PID_GetOutput(temperature, target_temperature);
         }
 
         PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, output);
@@ -212,6 +214,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         }
 
         LED_SetState(process_stage);
+
+        if(process_time % 1000 == 0) {
+            char buffer[128];
+            sprintf(buffer, "{\"Duration\":%lu,\"Temperature\":%d,\"TargetTemperature\":%d,\"State\":%d}\n",
+                    process_time_seconds, (int)temperature, target_temperature, process_stage);
+
+            COM_Send(buffer);
+        }
 
         process_time += 100;
     } else if(htim == &htim2) {

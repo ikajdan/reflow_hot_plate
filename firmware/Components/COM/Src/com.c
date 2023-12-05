@@ -33,9 +33,7 @@ int __io_putchar(int ch)
     return ch;
 }
 
-int COM_Send(int ch)
+uint8_t COM_Send(const char *buffer)
 {
-    ITM_SendChar(ch);
-    CDC_Transmit_FS((uint8_t*)&ch, 1);
-    return ch;
+    return CDC_Transmit_FS((uint8_t*)buffer, strlen(buffer));
 }

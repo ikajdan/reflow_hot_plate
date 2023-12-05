@@ -21,17 +21,17 @@
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief  Transmit a character via the ITM channel
+ * @brief  Transmits a character via the ITM channel
  * @param  ch: The character to be transmitted
- * @return The transmitted character
+ * @retval The transmitted character
  */
 int __io_putchar(int ch);
 
 /**
- * @brief  Transmit a character over the CDC interface
- * @param  ch: The character to be transmitted
- * @return The transmitted character
+ * @brief  Transmits the data over the USB CDC interface
+ * @param  buffer: The data to be sent
+ * @retval Result of all the operations
  */
-int COM_Send(int ch);
+uint8_t COM_Send(const char *buffer);
 
 #endif /* __COM_H__ */
