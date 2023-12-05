@@ -117,6 +117,10 @@ class MainWindow(Gtk.Window):
     def parse_data(self):
         received_data = self.read_serial_data()
         if received_data:
+            # Filter out data coming from us
+            if received_data == "0" or received_data == "1":
+                return True
+
             print("Received:", received_data)
             try:
                 payload = json.loads(received_data)
@@ -125,13 +129,12 @@ class MainWindow(Gtk.Window):
                         self.data[key].append(value)
                 self.state = payload["State"]
             except json.JSONDecodeError as e:
-                print(f"Error decoding JSON: {e}")
-                return False
-
-            self.update_running()
-            self.update_title()
-            self.update_button_states()
-            self.update_plot()
+                print(f"Error decoding JSON: {e}", file=sys.stderr)
+            else:
+                self.update_running()
+                self.update_title()
+                self.update_button_states()
+                self.update_plot()
         return True
 
     def read_serial_data(self):
@@ -177,7 +180,7 @@ class MainWindow(Gtk.Window):
         self.set_title(f"Reflow Hot Plot — {state_name}")
 
     def on_start_clicked(self, widget):
-        self.data = {"Time": [], "Temperature": [], "TargetTemperature": []}
+        self.data = {"Duration": [], "Temperature": [], "TargetTemperature": []}
         self.update_plot()
         serial_port.write("1".encode("utf-8"))
         self.running = True
