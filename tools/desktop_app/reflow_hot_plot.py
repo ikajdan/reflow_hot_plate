@@ -96,7 +96,7 @@ class MainWindow(Gtk.Window):
             3: "Reflow",
             4: "Cooldown",
         }
-        self.data = {"Time": [], "Temperature": [], "TargetTemperature": []}
+        self.data = {"Duration": [], "Temperature": [], "TargetTemperature": []}
         self.fig, self.ax = plt.subplots()
         self.canvas = FigureCanvas(self.fig)
 
@@ -109,8 +109,8 @@ class MainWindow(Gtk.Window):
 
         # Draw an empty plot
         self.update_plot()
-        custom_ticks = [0, 2, 4, 6, 8, 10]
-        plt.xticks(custom_ticks)
+        placeholder_ticks = [0, 2, 4, 6, 8, 10]
+        plt.xticks(placeholder_ticks)
 
         GLib.timeout_add(100, self.parse_data)
 
@@ -123,11 +123,13 @@ class MainWindow(Gtk.Window):
                 for key, value in payload.items():
                     if key in self.data:
                         self.data[key].append(value)
+                self.state = payload["State"]
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
                 return False
 
-            self.update_state(payload["State"])
+            self.update_running()
+            self.update_title()
             self.update_button_states()
             self.update_plot()
         return True
@@ -138,24 +140,24 @@ class MainWindow(Gtk.Window):
         return None
 
     def update_plot(self):
-        if not self.data["Time"]:
+        if not self.data["Duration"]:
             return
 
         self.ax.clear()
         self.ax.grid(axis="y")
-        self.ax.set_xlabel("Time [s]", labelpad=16)
+        self.ax.set_xlabel("Duration [s]", labelpad=16)
         self.ax.set_ylabel("Temperature [°C]", labelpad=16)
         self.ax.set_ylim(-1, 251)
         # Show only integer values
         self.ax.xaxis.set_major_locator(MaxNLocator(integer=True))
         self.ax.plot(
-            self.data["Time"],
+            self.data["Duration"],
             self.data["Temperature"],
             label="Temperature",
             color="#F66151",
         )
         self.ax.plot(
-            self.data["Time"],
+            self.data["Duration"],
             self.data["TargetTemperature"],
             label="TargetTemperature",
             color="#F8E45C",
@@ -164,13 +166,15 @@ class MainWindow(Gtk.Window):
         plt.tight_layout(pad=1)
         self.canvas.draw()
 
-    def update_state(self, state):
-        state_name = self.states.get(state, "Idle")
-        self.set_title(f"Reflow Hot Plot — {state_name}")
-        if state_name != "Idle":
+    def update_running(self):
+        if self.state != 0:
             self.running = True
         else:
             self.running = False
+
+    def update_title(self):
+        state_name = self.states.get(self.state, "Idle")
+        self.set_title(f"Reflow Hot Plot — {state_name}")
 
     def on_start_clicked(self, widget):
         self.data = {"Time": [], "Temperature": [], "TargetTemperature": []}
@@ -203,13 +207,12 @@ class MainWindow(Gtk.Window):
             ),
         )
 
-        dialog.set_current_name("reflow_log.csv")
-        dialog.set_do_overwrite_confirmation(True)
-
         filter_text = Gtk.FileFilter()
         filter_text.set_name("CSV files")
         filter_text.add_mime_type("text/csv")
         dialog.add_filter(filter_text)
+        dialog.set_current_name("reflow_log.csv")
+        dialog.set_do_overwrite_confirmation(True)
 
         response = dialog.run()
         if response == Gtk.ResponseType.OK:

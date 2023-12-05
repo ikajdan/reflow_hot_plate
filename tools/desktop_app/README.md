@@ -29,18 +29,18 @@ Data that can be send to the device.
 
 Data received from the device.
 
-- Time - time in seconds since the start of the soldering procedure `[int]`.
+- Duration - time in seconds since the start of the soldering procedure `[int]`.
 - Temperature - measured temperature in degrees Celsius `[int]`.
 - TargetTemperature - reference temperature in degrees Celsius `[int]`.
-- State - device state (0=idle, 1=preheat, 2=reflow, 3=cooldown) `[int]`.
+- State - device state (0=idle, 1=preheat, 2=soak, 3=reflow, 4=cooldown) `[int]`.
 
 Example message:
 
 ```
 {
-  "Time": 240,
+  "Duration": 240,
   "Temperature": 120,
   "TargetTemperature": 118,
-  "State": 2
+  "State": 3
 }
 ```
