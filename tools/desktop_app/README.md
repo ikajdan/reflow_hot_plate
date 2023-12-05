@@ -18,6 +18,13 @@ python reflow_hot_plot.py <serial_port>
 
 The API specification for communication between a dedicated desktop application and the device via the USB CDC interface.
 
+### Send
+
+Data that can be send to the device.
+
+- 1 - starts the soldering procedure `[char]`.
+- 0 - stops the soldering procedure `[char]`.
+
 ### Receive
 
 Data received from the device.
@@ -35,21 +42,5 @@ Example message:
   "Temperature": 120,
   "TargetTemperature": 118,
   "State": 2
-}
-```
-
-### Send
-
-Data send to the device.
-
-- Run - starts or stops the soldering procedure `[bool]`.
-- Profile - sets an active reflow temperature profile (0=dsp_863) `[int]`.
-
-Example message:
-
-```
-{
-  "Run": true
-  "Profile": 0,
 }
 ```

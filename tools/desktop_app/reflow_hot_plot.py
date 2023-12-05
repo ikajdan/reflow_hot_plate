@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Data logger and visualizer for the reflow hot plate.
+Data logger and visualizer for a reflow hot plate.
 """
 
 import gi
@@ -53,8 +53,8 @@ class NavigationBar(Gtk.Box):
         self.callback_dict = callback_dict
 
         buttons_info = [
-            ("Profile", "on_profile_clicked"),
             ("Start", "on_start_clicked"),
+            ("Stop", "on_stop_clicked"),
             ("Save Log", "on_save_clicked"),
             ("About", "on_about_clicked"),
         ]
@@ -63,6 +63,10 @@ class NavigationBar(Gtk.Box):
             button = Gtk.Button(label=label)
             button.connect("clicked", self.on_button_clicked, callback_name)
             self.pack_start(button, True, True, 0)
+
+        # Disable the stop and save buttons by default
+        self.get_children()[1].set_sensitive(False)
+        self.get_children()[2].set_sensitive(False)
 
     def on_button_clicked(self, widget, callback_name):
         callback = self.callback_dict.get(callback_name)
@@ -77,14 +81,21 @@ class MainWindow(Gtk.Window):
         self.set_border_width(16)
 
         self.callback_dict = {
-            "on_profile_clicked": self.on_profile_clicked,
             "on_start_clicked": self.on_start_clicked,
+            "on_stop_clicked": self.on_stop_clicked,
             "on_save_clicked": self.on_save_clicked,
             "on_about_clicked": self.on_about_clicked,
         }
-
         self.navigation_bar = NavigationBar(self.callback_dict)
 
+        self.running = False
+        self.states = {
+            0: "Idle",
+            1: "Preheat",
+            2: "Soak",
+            3: "Reflow",
+            4: "Cooldown",
+        }
         self.data = {"Time": [], "Temperature": [], "TargetTemperature": []}
         self.fig, self.ax = plt.subplots()
         self.canvas = FigureCanvas(self.fig)
@@ -94,8 +105,12 @@ class MainWindow(Gtk.Window):
         self.box.set_margin_end(8)
         self.box.pack_start(self.navigation_bar, False, False, 0)
         self.box.pack_start(self.canvas, True, True, 0)
-
         self.add(self.box)
+
+        # Draw an empty plot
+        self.update_plot()
+        custom_ticks = [0, 2, 4, 6, 8, 10]
+        plt.xticks(custom_ticks)
 
         GLib.timeout_add(100, self.parse_data)
 
@@ -108,10 +123,13 @@ class MainWindow(Gtk.Window):
                 for key, value in payload.items():
                     if key in self.data:
                         self.data[key].append(value)
-                self.update_title(payload["State"])
-                self.update_plot()
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}")
+                return False
+
+            self.update_state(payload["State"])
+            self.update_button_states()
+            self.update_plot()
         return True
 
     def read_serial_data(self):
@@ -120,6 +138,9 @@ class MainWindow(Gtk.Window):
         return None
 
     def update_plot(self):
+        if not self.data["Time"]:
+            return
+
         self.ax.clear()
         self.ax.grid(axis="y")
         self.ax.set_xlabel("Time [s]", labelpad=16)
@@ -143,22 +164,31 @@ class MainWindow(Gtk.Window):
         plt.tight_layout(pad=1)
         self.canvas.draw()
 
-    def update_title(self, state):
-        state_mapping = {
-            0: "Idle",
-            1: "Preheat",
-            2: "Reflow",
-            3: "Cooldown",
-        }
-
-        state_name = state_mapping.get(state, "Idle")
+    def update_state(self, state):
+        state_name = self.states.get(state, "Idle")
         self.set_title(f"Reflow Hot Plot — {state_name}")
-
-    def on_profile_clicked(self, widget):
-        pass
+        if state_name != "Idle":
+            self.running = True
+        else:
+            self.running = False
 
     def on_start_clicked(self, widget):
-        pass
+        self.data = {"Time": [], "Temperature": [], "TargetTemperature": []}
+        self.update_plot()
+        serial_port.write("1".encode("utf-8"))
+        self.running = True
+        self.update_button_states()
+
+    def on_stop_clicked(self, widget):
+        serial_port.write("0".encode("utf-8"))
+        self.running = False
+        self.update_button_states()
+
+    def update_button_states(self):
+        buttons = self.navigation_bar.get_children()
+        buttons[0].set_sensitive(not self.running)
+        buttons[1].set_sensitive(self.running)
+        buttons[2].set_sensitive(not self.running)
 
     def on_save_clicked(self, widget):
         dialog = Gtk.FileChooserDialog(
@@ -188,6 +218,13 @@ class MainWindow(Gtk.Window):
 
         dialog.destroy()
 
+    def write_data_to_csv(self, filename):
+        with open(filename, "w", newline="") as csvfile:
+            csv_writer = writer(csvfile)
+            csv_writer.writerow(self.data.keys())
+            zip_data = zip(*self.data.values())
+            csv_writer.writerows(zip_data)
+
     def on_about_clicked(self, widget):
         dialog = Gtk.MessageDialog(
             self,
@@ -196,16 +233,11 @@ class MainWindow(Gtk.Window):
             Gtk.ButtonsType.OK,
             "Reflow Hot Plot",
         )
-        dialog.format_secondary_text("Created by: Ignacy Kajdan\nLicense: MIT")
+        dialog.format_secondary_text(
+            "A data logger and visualizer for a reflow hot plate.\nCopyright © 2023 Ignacy Kajdan"
+        )
         dialog.run()
         dialog.destroy()
-
-    def write_data_to_csv(self, filename):
-        with open(filename, "w", newline="") as csvfile:
-            csv_writer = writer(csvfile)
-            csv_writer.writerow(self.data.keys())
-            zip_data = zip(*self.data.values())
-            csv_writer.writerows(zip_data)
 
 
 if __name__ == "__main__":
