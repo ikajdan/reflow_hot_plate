@@ -37,3 +37,11 @@ uint8_t COM_Send(const char *buffer)
 {
     return CDC_Transmit_FS((uint8_t*)buffer, strlen(buffer));
 }
+
+uint8_t COM_Msg_Send(const FSM_Handle_TypeDef *hfsm)
+{
+    char buffer[128]; // TODO: Move out of the function?
+    sprintf(buffer, "{\"Duration\":%lu,\"Temperature\":%f,\"TargetTemperature\":%d,\"State\":%d}\n",
+            hfsm1.duration / 1000, hfsm1.temperature, hfsm1.target_temperature, hfsm1.state);
+    return COM_Send(buffer);
+}
