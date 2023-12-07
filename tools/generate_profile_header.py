@@ -60,8 +60,8 @@ header_file_content = f"""#ifndef __{profile_name.upper()}_HEADER_H__
 
 #define {profile_name.upper()}_SIZE {y_data.size}
 
-int {profile_name}_stages[] = {{{', '.join(map(str, stages))}}};
-int {profile_name}[] = {{{', '.join(map(str, y_data))}}};
+uint16_t {profile_name}_stages[] = {{{', '.join(map(str, stages))}}};
+uint8_t {profile_name}[] = {{{', '.join(map(str, y_data))}}};
 
 #endif /* __{profile_name.upper()}_HEADER_H__ */
 """
