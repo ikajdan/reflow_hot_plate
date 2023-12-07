@@ -50,15 +50,13 @@ y_plot = polynomial(x_plot)
 
 # Extract stages
 stages = [0]
-for num in range(2, 5):
+for num in range(1, 4):
     found_stage = np.where(stage_data == num)[0]
     stages.append(time_data[found_stage[0]])
 
 # Generate the header file
 header_file_content = f"""#ifndef __{profile_name.upper()}_HEADER_H__
 #define __{profile_name.upper()}_HEADER_H__
-
-#define {profile_name.upper()}_SIZE {y_data.size}
 
 uint16_t {profile_name}_stages[] = {{{', '.join(map(str, stages))}}};
 uint8_t {profile_name}[] = {{{', '.join(map(str, y_data))}}};

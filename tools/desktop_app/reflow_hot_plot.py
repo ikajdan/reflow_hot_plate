@@ -90,11 +90,11 @@ class MainWindow(Gtk.Window):
 
         self.running = False
         self.states = {
-            0: "Idle",
-            1: "Preheat",
-            2: "Soak",
-            3: "Reflow",
-            4: "Cooldown",
+            0: "Preheat",
+            1: "Soak",
+            2: "Reflow",
+            3: "Cooldown",
+            4: "Idle",
         }
         self.data = {"Duration": [], "Temperature": [], "TargetTemperature": []}
         self.fig, self.ax = plt.subplots()
@@ -139,7 +139,12 @@ class MainWindow(Gtk.Window):
 
     def read_serial_data(self):
         if serial_port.in_waiting > 0:
-            return serial_port.readline().decode("utf-8").strip()
+            try:
+                data = serial_port.readline().decode("utf-8").strip()
+                return data
+            except UnicodeDecodeError as e:
+                print(f"Error decoding data from serial port: {e}", file=sys.stderr)
+                return None
         return None
 
     def update_plot(self):

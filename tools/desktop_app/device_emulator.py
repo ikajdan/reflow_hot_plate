@@ -43,11 +43,11 @@ serial_port = serial.Serial(serial_path, baudrate=9600, timeout=1)
 try:
     for i in range(len(target_temperature)):
         # Add some noise to the temperature
-        temperature = target_temperature[i] + random.randint(-3, 3)
+        temperature = target_temperature[i] + random.uniform(-5, 5)
         # Determine the process stage based on the current time
         for j in range(len(stages)):
             if i >= stages[j]:
-                stage = j + 1
+                stage = j
             else:
                 break
         message = f'{{"Duration":{i},"Temperature":{temperature},"TargetTemperature":{target_temperature[i]},"State":{stage}}}'
