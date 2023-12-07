@@ -27,7 +27,7 @@
 /* Private functions ---------------------------------------------------------*/
 
 /* Public functions ----------------------------------------------------------*/
-void LED_SetState(const uint32_t state) {
+void LED_SetState(const LED_State state) {
     switch(state) {
         case LED_PRE:
             HAL_GPIO_WritePin(LED_PREHEAT_GPIO_Port, LED_PREHEAT_Pin, GPIO_PIN_SET);
