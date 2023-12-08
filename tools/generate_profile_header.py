@@ -58,8 +58,9 @@ for num in range(1, 4):
 header_file_content = f"""#ifndef __{profile_name.upper()}_HEADER_H__
 #define __{profile_name.upper()}_HEADER_H__
 
-uint16_t {profile_name}_stages[] = {{{', '.join(map(str, stages))}}};
-uint8_t {profile_name}[] = {{{', '.join(map(str, y_data))}}};
+const char {profile_name}_name[] = "{profile_name}";
+const uint16_t {profile_name}_stages[] = {{{', '.join(map(str, stages))}}};
+const uint8_t {profile_name}_profile[] = {{{', '.join(map(str, y_data))}}};
 
 #endif /* __{profile_name.upper()}_HEADER_H__ */
 """
