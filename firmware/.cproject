@@ -152,6 +152,7 @@
 									<listOptionValue builtIn="false" value="../Components/RTD/Inc"/>
 									<listOptionValue builtIn="false" value="../Components/PROFILES/Inc"/>
 									<listOptionValue builtIn="false" value="../Components/LED/Inc"/>
+									<listOptionValue builtIn="false" value="../Components/FSM/Inc"/>
 								</option>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.extra.963702696" name="Enable extra warning flags (-Wextra)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.extra" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.conversion.2061204468" name="Warn for implicit conversions (-Wconversion)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.conversion" useByScannerDiscovery="false" value="true" valueType="boolean"/>
