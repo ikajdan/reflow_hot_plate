@@ -28,17 +28,17 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
-#include <stdbool.h>
-#include "com.h"
-#include "led.h"
-#include "pwm.h"
-#include "pid.h"
+#include "fsm.h"
+#include "dsp_863.h"
 #include "ssd1306.h"
 #include "max6675.h"
 #include "rtd.h"
-#include "dsp_863.h"
-#include "fsm.h"
+#include "pid.h"
+#include "pwm.h"
+#include "led.h"
+#include "com.h"
+#include <stdbool.h>
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

@@ -10,8 +10,8 @@
 #define __RTD_H__
 
 /* Public includes -----------------------------------------------------------*/
-#include "stm32f1xx_hal.h"
 #include "rtd_conf.h"
+#include "stm32f1xx_hal.h"
 
 /* Public typedefs -----------------------------------------------------------*/
 

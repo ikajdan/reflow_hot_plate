@@ -10,9 +10,10 @@
 #define __FSM_H__
 
 /* Public includes -----------------------------------------------------------*/
-#include <stdbool.h>
-#include <stdint.h>
 #include "fsm_conf.h"
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
 /* Public typedefs -----------------------------------------------------------*/
 enum FSM_Device_State {

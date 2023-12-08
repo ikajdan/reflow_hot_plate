@@ -11,6 +11,7 @@
 
 /* Public includes -----------------------------------------------------------*/
 #include "max6675_conf.h"
+#include "stm32f1xx_hal.h"
 
 /* Public typedefs -----------------------------------------------------------*/
 extern SPI_HandleTypeDef MAX6675_SPI_PORT;
