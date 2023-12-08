@@ -89,6 +89,7 @@ class MainWindow(Gtk.Window):
         self.navigation_bar = NavigationBar(self.callback_dict)
 
         self.running = False
+        self.schedule_data_clear = False
         self.states = {
             0: "Preheat",
             1: "Soak",
@@ -127,10 +128,21 @@ class MainWindow(Gtk.Window):
                 for key, value in payload.items():
                     if key in self.data:
                         self.data[key].append(value)
-                self.state = payload["State"]
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}", file=sys.stderr)
             else:
+                self.state = payload["State"]
+
+                if self.schedule_data_clear:
+                    if len(self.data["Duration"]) > 1:
+                        if self.data["Duration"][-1] < self.data["Duration"][-2]:
+                            self.data = {
+                                "Duration": [],
+                                "Temperature": [],
+                                "TargetTemperature": [],
+                            }
+                            self.schedule_data_clear = False
+
                 self.update_running()
                 self.update_title()
                 self.update_button_states()
@@ -185,8 +197,7 @@ class MainWindow(Gtk.Window):
         self.set_title(f"Reflow Hot Plot — {state_name}")
 
     def on_start_clicked(self, widget):
-        self.data = {"Duration": [], "Temperature": [], "TargetTemperature": []}
-        self.update_plot()
+        self.schedule_data_clear = True
         serial_port.write("1".encode("utf-8"))
         self.running = True
         self.update_button_states()
