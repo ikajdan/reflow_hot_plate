@@ -38,6 +38,7 @@
 #include "max6675.h"
 #include "rtd.h"
 #include "dsp_863.h"
+#include "fsm.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -121,6 +122,9 @@ int main(void)
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (1 kHz) Heatbed driver
 
     LED_SetState(LED_ON);
+
+    static const size_t profile_size = sizeof(dsp_863) / sizeof(dsp_863[0]);
+    FSM_Init(&hfsm1, profile_size, dsp_863, dsp_863_stages);
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -188,47 +192,53 @@ void SystemClock_Config(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
-        static uint32_t process_time = 0; // Process time in ms
-        uint32_t process_time_seconds = process_time / 1000;
-        int process_stage = 0;
-        float output = 0;
-        float temperature = 0;
-        int target_temperature = 0;
-
-        // Get the output from the PID controller
-        if(process_time_seconds < DSP_863_SIZE) {
-            temperature = RTD_GetTemperature();
-            target_temperature = dsp_863[process_time_seconds];
-            output = PID_GetOutput(temperature, target_temperature);
-        }
-
-        PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, output);
-
-        // Determine the process stage based on the current time
-        for(int i = 0; i < 4; i++) {
-            if(process_time_seconds >= dsp_863_stages[i]) {
-                process_stage = i + 1;
-            } else {
-                break;
+        // Check if a message has been received
+        if(USB_DATA_RECEIVED_FLAG) {
+            USB_DATA_RECEIVED_FLAG = false;
+            if(USB_BUFFER_RX[0] == '1') {
+                hfsm1.enabled = true;
+                hfsm1.duration = 0;
+            } else if(USB_BUFFER_RX[0] == '0') {
+                hfsm1.enabled = false;
+                hfsm1.target_temperature = 0;
             }
         }
 
-        LED_SetState(process_stage);
+        uint32_t duration_seconds = hfsm1.duration / 1000;
+        hfsm1.temperature = RTD_GetTemperature();
+        hfsm1.output = 0;
+        hfsm1.state = FSM_IDLE;
 
-        if(process_time % 1000 == 0) {
-            char buffer[128];
-            sprintf(buffer, "{\"Duration\":%lu,\"Temperature\":%d,\"TargetTemperature\":%d,\"State\":%d}\n",
-                    process_time_seconds, (int)temperature, target_temperature, process_stage);
+        if(hfsm1.enabled) {
+            if(duration_seconds < hfsm1.profile_duration) {
+                hfsm1.target_temperature = dsp_863[duration_seconds];
+                hfsm1.output = PID_GetOutput(hfsm1.temperature, hfsm1.target_temperature);
 
-            COM_Send(buffer);
+                // Determine the process stage based on the current time
+                for(int i = 0; i < 4; i++) {
+                    if(duration_seconds >= hfsm1.stages[i]) {
+                        hfsm1.state = i;
+                    } else {
+                        break;
+                    }
+                }
+            }
         }
 
-        process_time += 100;
+        PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, hfsm1.output);
+
+        if(hfsm1.duration % 1000 == 0) {
+            COM_Msg_Send(&hfsm1);
+        }
+
+        hfsm1.duration += 100;
     } else if(htim == &htim2) {
-        // Turn off LEDs after the startup
-        if(STARTUP == true && HAL_GetTick() > 2000) {
-            LED_SetState(LED_OFF);
-            STARTUP = false;
+        if(!STARTUP) {
+            LED_SetState(hfsm1.state);
+        } else {
+            if(HAL_GetTick() > 2000) {
+                STARTUP = false;
+            }
         }
     } else if(htim == &htim4) {
         DEBOUNCING = false;
@@ -255,10 +265,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
             // Stub
             break;
         case BUTTON_LEFT_Pin:
-            // Stub
+            hfsm1.enabled = false;
             break;
         case BUTTON_RIGHT_Pin:
-            // Stub
+            hfsm1.enabled = true;
+            hfsm1.duration = 0;
             break;
         default:
             break;
@@ -294,7 +305,7 @@ void Error_Handler(void)
 void assert_failed(uint8_t *file, uint32_t line)
 {
     /* USER CODE BEGIN 6 */
-    // printf("Wrong parameters value: file %s on line %lu\r\n", file, line);
+    printf("Wrong parameters value: file %s on line %lu\r\n", file, line);
     /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

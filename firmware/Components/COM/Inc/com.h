@@ -11,6 +11,7 @@
 
 /* Public includes -----------------------------------------------------------*/
 #include "fsm.h"
+#include "usbd_cdc_if.h"
 
 /* Public typedefs -----------------------------------------------------------*/
 
@@ -19,6 +20,8 @@
 /* Public macros -------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
+extern uint8_t USB_BUFFER_RX[APP_RX_DATA_SIZE];
+extern bool USB_DATA_RECEIVED_FLAG;
 
 /* Public function prototypes ------------------------------------------------*/
 /**

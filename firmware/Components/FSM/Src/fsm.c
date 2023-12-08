@@ -1,14 +1,14 @@
 /**
  ******************************************************************************
- * @file           : com.c
- * @brief          : Communication library
+ * @file           : fsm.c
+ * @brief          : Finite-state machine library
  *
  ******************************************************************************
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "usbd_cdc_if.h"
-#include "com.h"
+#include <stddef.h>
+#include "fsm.h"
 
 /* Typedefs ------------------------------------------------------------------*/
 
@@ -19,8 +19,17 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-uint8_t USB_BUFFER_RX[APP_RX_DATA_SIZE];
-bool USB_DATA_RECEIVED_FLAG = false;
+FSM_Handle_TypeDef hfsm1 = {
+        .enabled = false,
+        .duration = 0,
+        .profile_duration = 0,
+        .temperature = 0.0f,
+        .target_temperature = 0,
+        .output = 0.0f,
+        .state = FSM_IDLE,
+        .profile = NULL,
+        .stages = NULL
+};
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -29,21 +38,9 @@ bool USB_DATA_RECEIVED_FLAG = false;
 /* Private functions ---------------------------------------------------------*/
 
 /* Public functions ----------------------------------------------------------*/
-int __io_putchar(int ch)
+void FSM_Init(FSM_Handle_TypeDef *hfsm, size_t profile_duration, uint8_t *profile, uint16_t *stages)
 {
-    ITM_SendChar(ch);
-    return ch;
-}
-
-uint8_t COM_Send(const char *buffer)
-{
-    return CDC_Transmit_FS((uint8_t*)buffer, strlen(buffer));
-}
-
-uint8_t COM_Msg_Send(const FSM_Handle_TypeDef *hfsm)
-{
-    char buffer[128]; // TODO: Move out of the function?
-    sprintf(buffer, "{\"Duration\":%lu,\"Temperature\":%f,\"TargetTemperature\":%d,\"State\":%d}\n",
-            hfsm1.duration / 1000, hfsm1.temperature, hfsm1.target_temperature, hfsm1.state);
-    return COM_Send(buffer);
+    hfsm->profile_duration = profile_duration;
+    hfsm->profile = profile;
+    hfsm->stages = stages;
 }
