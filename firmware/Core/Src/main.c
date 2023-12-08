@@ -203,14 +203,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
                 hfsm1.duration = 0;
             } else if(USB_BUFFER_RX[0] == '0') {
                 hfsm1.enabled = false;
-                hfsm1.target_temperature = 0;
             }
         }
 
         uint32_t duration_seconds = hfsm1.duration / 1000;
         hfsm1.temperature = RTD_GetTemperature();
-        hfsm1.output = 0;
-        hfsm1.state = FSM_IDLE;
 
         if(hfsm1.enabled) {
             if(duration_seconds < hfsm1.profile_duration) {
@@ -225,18 +222,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
                         break;
                     }
                 }
+            } else {
+                hfsm1.state = FSM_IDLE;
             }
+        } else {
+            hfsm1.target_temperature = 0;
+            hfsm1.output = 0;
+            hfsm1.state = FSM_IDLE;
         }
 
         PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, hfsm1.output);
-
-        if(hfsm1.duration % 1000 == 0) {
-            COM_Msg_Send(&hfsm1);
-        }
+        COM_Msg_Send(&hfsm1);
+        HAL_IWDG_Refresh(&hiwdg); // 200 ms window
 
         hfsm1.duration += 100;
-
-        HAL_IWDG_Refresh(&hiwdg); // 200 ms window
     } else if(htim == &htim2) {
         if(!STARTUP) {
             LED_SetState(hfsm1.state);
