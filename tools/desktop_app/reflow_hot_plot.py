@@ -175,7 +175,7 @@ class MainWindow(Gtk.Window):
         self.canvas.draw()
 
     def update_running(self):
-        if self.state != 0:
+        if self.state != 4:
             self.running = True
         else:
             self.running = False
@@ -238,11 +238,11 @@ class MainWindow(Gtk.Window):
 
     def on_about_clicked(self, widget):
         dialog = Gtk.MessageDialog(
-            self,
-            0,
-            Gtk.MessageType.INFO,
-            Gtk.ButtonsType.OK,
-            "Reflow Hot Plot",
+            parent=self,
+            flags=0,
+            message_type=Gtk.MessageType.INFO,
+            buttons=Gtk.ButtonsType.OK,
+            text="Reflow Hot Plot",
         )
         dialog.format_secondary_text(
             "A data logger and visualizer for a reflow hot plate.\nCopyright © 2023 Ignacy Kajdan"
