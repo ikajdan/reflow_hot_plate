@@ -1242,7 +1242,7 @@
   )
 
   (symbol (lib_id "Switch:SW_SPST") (at 99.06 59.69 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 0dabda5b-c0b7-4613-8c18-32eb8a55c616)
     (property "Reference" "SW2" (at 99.06 53.34 0)
       (effects (font (size 1.27 1.27)))
