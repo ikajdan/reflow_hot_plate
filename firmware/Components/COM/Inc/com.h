@@ -36,13 +36,13 @@ int __io_putchar(int ch);
  * @param  buffer: The data to be sent
  * @retval Result of all the operations
  */
-uint8_t COM_Data_Send(const char *buffer);
+uint8_t COM_Data_Send(const char *const buffer);
 
 /**
  * @brief  Sends a JSON message with the current state of the FSM
  * @param  hfsm: The FSM handle
  * @retval Result of all the operations
  */
-uint8_t COM_Msg_Send(const FSM_Handle_TypeDef *hfsm);
+uint8_t COM_Msg_Send(const FSM_Handle_TypeDef *const hfsm);
 
 #endif /* __COM_H__ */
