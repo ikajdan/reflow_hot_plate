@@ -31,6 +31,7 @@
 /* USER CODE BEGIN Includes */
 #include "fsm.h"
 #include "dsp_863.h"
+#include "lcd.h"
 #include "ssd1306.h"
 #include "max6675.h"
 #include "rtd.h"
@@ -123,15 +124,30 @@ int main(void)
     HAL_TIM_Base_Start_IT(&htim2); // (10 Hz) GUI update
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (1 kHz) Heatbed driver
 
+    ssd1306_Init();
+    LCD_ShowWelcome();
+
     LED_SetState(LED_ON);
 
-    static const size_t profile_size = sizeof(dsp_863) / sizeof(dsp_863[0]);
-    FSM_Init(&hfsm1, profile_size, dsp_863, dsp_863_stages);
+    static const size_t profile_size = sizeof(dsp_863_profile) / sizeof(dsp_863_profile[0]);
+    FSM_Init(&hfsm1, dsp_863_name, dsp_863_stages, profile_size, dsp_863_profile);
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while(1) {
+        if(LCD_REDRAW) {
+            LCD_REDRAW = false;
+
+            ssd1306_Fill(Black);
+
+            if(hfsm1.running) {
+                LCD_ShowProgresBar();
+            }
+            LCD_ShowProcessInfo();
+
+            ssd1306_UpdateScreen();
+        }
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
@@ -199,19 +215,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
         if(USB_DATA_RECEIVED_FLAG) {
             USB_DATA_RECEIVED_FLAG = false;
             if(USB_BUFFER_RX[0] == '1') {
-                hfsm1.enabled = true;
+                hfsm1.running = true;
                 hfsm1.duration = 0;
             } else if(USB_BUFFER_RX[0] == '0') {
-                hfsm1.enabled = false;
+                hfsm1.running = false;
             }
         }
 
         uint32_t duration_seconds = hfsm1.duration / 1000;
         hfsm1.temperature = RTD_GetTemperature();
 
-        if(hfsm1.enabled) {
+        if(hfsm1.running) {
             if(duration_seconds < hfsm1.profile_duration) {
-                hfsm1.target_temperature = dsp_863[duration_seconds];
+                hfsm1.target_temperature = hfsm1.profile[duration_seconds];
                 hfsm1.output = PID_GetOutput(hfsm1.temperature, hfsm1.target_temperature);
 
                 // Determine the process stage based on the current time
@@ -239,6 +255,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     } else if(htim == &htim2) {
         if(!STARTUP) {
             LED_SetState(hfsm1.state);
+            LCD_ScheduleRedraw();
         } else {
             if(HAL_GetTick() > 2000) {
                 STARTUP = false;
@@ -269,10 +286,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
             // Stub
             break;
         case BUTTON_LEFT_Pin:
-            hfsm1.enabled = false;
+            hfsm1.running = false;
             break;
         case BUTTON_RIGHT_Pin:
-            hfsm1.enabled = true;
+            hfsm1.running = true;
             hfsm1.duration = 0;
             break;
         default:
