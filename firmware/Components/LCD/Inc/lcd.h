@@ -13,6 +13,12 @@
 #include <stdbool.h>
 
 /* Public typedefs -----------------------------------------------------------*/
+typedef enum {
+    LCD_DONE,
+    LCD_ABORTED,
+    LCD_ERROR,
+    LCD_WAITING,
+} LCD_Prompt_Type;
 
 /* Public defines ------------------------------------------------------------*/
 
@@ -23,22 +29,28 @@ extern bool LCD_REDRAW;
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief Show the welcome screen
+ * @brief Draw the welcome screen
  * @retval None
  */
-void LCD_ShowWelcome(void);
+void LCD_DrawWelcome(void);
 
 /**
- * @brief Show the progress bar
+ * @brief Draw the menu screen
  * @retval None
  */
-void LCD_ShowProgresBar(void);
+void LCD_DrawMenu(void);
 
 /**
- * @brief Show the process info
+ * @brief Draw the process info screen
  * @retval None
  */
-void LCD_ShowProcessInfo(void);
+void LCD_DrawProcessInfo(void);
+
+/**
+ * @brief Draw the prompt screen
+ * @retval None
+ */
+void LCD_DrawPrompt(LCD_Prompt_Type type);
 
 /**
  * @brief Schedule the LCD redraw

@@ -61,6 +61,7 @@
 									<listOptionValue builtIn="false" value="../Components/LED/Inc"/>
 									<listOptionValue builtIn="false" value="../Components/LCD/Inc"/>
 									<listOptionValue builtIn="false" value="../Components/FSM/Inc"/>
+									<listOptionValue builtIn="false" value="../Components/MENU/Inc"/>
 								</option>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.languagestandard.970771684" name="Language standard" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.languagestandard" useByScannerDiscovery="true" value="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.languagestandard.value.gnu18" valueType="enumerated"/>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.extra.1291863188" name="Enable extra warning flags (-Wextra)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.extra" useByScannerDiscovery="false" value="false" valueType="boolean"/>
@@ -155,6 +156,7 @@
 									<listOptionValue builtIn="false" value="../Components/LED/Inc"/>
 									<listOptionValue builtIn="false" value="../Components/LCD/Inc"/>
 									<listOptionValue builtIn="false" value="../Components/FSM/Inc"/>
+									<listOptionValue builtIn="false" value="../Components/MENU/Inc"/>
 								</option>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.extra.963702696" name="Enable extra warning flags (-Wextra)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.extra" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.conversion.2061204468" name="Warn for implicit conversions (-Wconversion)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.warnings.conversion" useByScannerDiscovery="false" value="true" valueType="boolean"/>

@@ -22,6 +22,7 @@
 /* Public variables ----------------------------------------------------------*/
 extern uint8_t USB_BUFFER_RX[APP_RX_DATA_SIZE];
 extern bool USB_DATA_RECEIVED;
+extern bool COM_MSG_SEND;
 
 /* Public function prototypes ------------------------------------------------*/
 /**
@@ -44,5 +45,11 @@ uint8_t COM_Data_Send(const char *const buffer);
  * @retval Result of all the operations
  */
 uint8_t COM_Msg_Send(const FSM_Handle_TypeDef *const hfsm);
+
+/**
+ * @brief Schedule a send of the message
+ * @retval None
+ */
+void COM_ScheduleMsgSend(void);
 
 #endif /* __COM_H__ */

@@ -1,14 +1,13 @@
 /**
  ******************************************************************************
- * @file           : fsm.c
- * @brief          : Finite-state machine library
+ * @file           : menu.c
+ * @brief          : Menu library
  *
  ******************************************************************************
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "fsm.h"
-#include <stddef.h>
+#include "menu.h"
 
 /* Typedefs ------------------------------------------------------------------*/
 
@@ -19,17 +18,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-FSM_Handle_TypeDef hfsm1 = {
-        .state = FSM_WELCOME,
-        .stage = FSM_HEATING_PRE,
-        .duration = 0,
-        .profile_duration = 0,
-        .temperature = 0.0f,
-        .target_temperature = 0,
-        .output = 0.0f,
-        .name = NULL,
-        .stages = NULL,
-        .profile = NULL,
+MENU_Handle_TypeDef hmenu1 = {
+        .debouncing = false,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -39,11 +29,3 @@ FSM_Handle_TypeDef hfsm1 = {
 /* Private functions ---------------------------------------------------------*/
 
 /* Public functions ----------------------------------------------------------*/
-void FSM_Init(FSM_Handle_TypeDef *hfsm, char *const name, uint16_t *const stages,
-        const size_t profile_duration, uint8_t *const profile)
-{
-    hfsm->name = name;
-    hfsm->stages = stages;
-    hfsm->profile_duration = profile_duration;
-    hfsm->profile = profile;
-}

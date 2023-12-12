@@ -1,43 +1,29 @@
 /**
  ******************************************************************************
- * @file           : fsm_conf.h
- * @brief          : Finite-state machine library configuration
+ * @file           : menu.h
+ * @brief          : Menu library
  *
  ******************************************************************************
  */
 
-#ifndef __FSM_CONFIG_H__
-#define __FSM_CONFIG_H__
+#ifndef __MENU_H__
+#define __MENU_H__
 
 /* Public includes -----------------------------------------------------------*/
+#include <stdbool.h>
 
 /* Public typedefs -----------------------------------------------------------*/
+typedef struct {
+    bool debouncing;
+} MENU_Handle_TypeDef;
 
 /* Public defines ------------------------------------------------------------*/
-/**
- * @brief Firmware version
- */
-#define FIRMWARE_VERSION "v0.1.0"
-
-/**
- * @brief Startup delay in miliseconds
- */
-#define STARTUP_DELAY 2000
-
-/**
- * @brief Minimum allowed temperature
- */
-#define TEMPERATURE_MIN 10
-
-/**
- * @brief Maximum allowed temperature
- */
-#define TEMPERATURE_MAX 270
 
 /* Public macros -------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
+extern MENU_Handle_TypeDef hmenu1;
 
 /* Public function prototypes ------------------------------------------------*/
 
-#endif /* __FSM_CONFIG_H__ */
+#endif /* __MENU_H__ */

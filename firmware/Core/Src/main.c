@@ -29,6 +29,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "menu.h"
 #include "fsm.h"
 #include "dsp_863.h"
 #include "lcd.h"
@@ -72,8 +73,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static bool STARTUP = true;
-static bool DEBOUNCING = false;
+
 /* USER CODE END 0 */
 
 /**
@@ -124,10 +124,9 @@ int main(void)
     HAL_TIM_Base_Start_IT(&htim2); // (10 Hz) GUI update
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (1 kHz) Heatbed driver
 
-    ssd1306_Init();
-    LCD_ShowWelcome();
-
     LED_SetState(LED_ON);
+
+    ssd1306_Init();
 
     static const size_t profile_size = sizeof(dsp_863_profile) / sizeof(dsp_863_profile[0]);
     FSM_Init(&hfsm1, dsp_863_name, dsp_863_stages, profile_size, dsp_863_profile);
@@ -136,17 +135,51 @@ int main(void)
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
     while(1) {
+        // Redraw the screen
         if(LCD_REDRAW) {
             LCD_REDRAW = false;
-
             ssd1306_Fill(Black);
 
-            if(hfsm1.running) {
-                LCD_ShowProgresBar();
+            switch(hfsm1.state) {
+                case FSM_WELCOME:
+                    LCD_DrawWelcome();
+                    break;
+
+                case FSM_MENU:
+                    LCD_DrawMenu();
+                    break;
+
+                case FSM_PRECHECK:
+                    LCD_DrawPrompt(LCD_WAITING);
+                    break;
+
+                case FSM_HEATING:
+                    LCD_DrawProcessInfo();
+                    break;
+
+                case FSM_DONE:
+                    LCD_DrawPrompt(LCD_DONE);
+                    break;
+
+                case FSM_ABORTED:
+                    LCD_DrawPrompt(LCD_ABORTED);
+                    break;
+
+                case FSM_ERROR:
+                    LCD_DrawPrompt(LCD_ERROR);
+                    break;
+
+                default:
+                    break;
             }
-            LCD_ShowProcessInfo();
 
             ssd1306_UpdateScreen();
+        }
+
+        // Send a message
+        if(COM_MSG_SEND) {
+            COM_MSG_SEND = false;
+            COM_Msg_Send(&hfsm1);
         }
         /* USER CODE END WHILE */
 
@@ -211,58 +244,75 @@ void SystemClock_Config(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
-        // Check if a message has been received
-        if(USB_DATA_RECEIVED) {
-            USB_DATA_RECEIVED = false;
-            if(USB_BUFFER_RX[0] == '1') {
-                hfsm1.running = true;
-                hfsm1.duration = 0;
-            } else if(USB_BUFFER_RX[0] == '0') {
-                hfsm1.running = false;
-            }
-        }
-
-        uint32_t duration_seconds = hfsm1.duration / 1000;
         hfsm1.temperature = RTD_GetTemperature();
 
-        if(hfsm1.running) {
-            if(duration_seconds < hfsm1.profile_duration) {
-                hfsm1.target_temperature = hfsm1.profile[duration_seconds];
-                hfsm1.output = PID_GetOutput(hfsm1.temperature, hfsm1.target_temperature);
+        switch(hfsm1.state) {
+            case FSM_PRECHECK:
+                if(hfsm1.temperature < hfsm1.profile[0] * 2) {
+                    hfsm1.state = FSM_HEATING;
+                    hfsm1.duration = 0;
+                }
+                break;
 
-                // Determine the process stage based on the current time
-                for(int i = 0; i < 4; i++) {
-                    if(duration_seconds >= hfsm1.stages[i]) {
-                        hfsm1.state = i;
-                    } else {
-                        break;
+            case FSM_HEATING:
+                uint32_t duration_seconds = hfsm1.duration / 1000;
+
+                if(duration_seconds > hfsm1.profile_duration) {
+                    hfsm1.state = FSM_DONE;
+                } else {
+                    hfsm1.target_temperature = hfsm1.profile[duration_seconds];
+                    hfsm1.output = PID_GetOutput(hfsm1.temperature, hfsm1.target_temperature);
+
+                    // Determine the process stage based on the current time
+                    for(int i = 0; i < 4; i++) {
+                        if(duration_seconds >= hfsm1.stages[i]) {
+                            hfsm1.stage = i;
+                        } else {
+                            break;
+                        }
                     }
                 }
-            } else {
-                hfsm1.state = FSM_IDLE;
-            }
-        } else {
-            hfsm1.target_temperature = 0;
-            hfsm1.output = 0;
-            hfsm1.state = FSM_IDLE;
+                break;
+
+            default:
+                hfsm1.target_temperature = 0;
+                hfsm1.output = 0;
+                break;
         }
 
         PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, hfsm1.output);
-        COM_Msg_Send(&hfsm1);
         HAL_IWDG_Refresh(&hiwdg); // 200 ms window
 
         hfsm1.duration += 100;
     } else if(htim == &htim2) {
-        if(!STARTUP) {
-            LED_SetState(hfsm1.state);
-            LCD_ScheduleRedraw();
+        LCD_ScheduleRedraw();
+
+        if(hfsm1.state != FSM_WELCOME) {
+            // Check if a message has been received
+            if(USB_DATA_RECEIVED) {
+                USB_DATA_RECEIVED = false;
+
+                if(USB_BUFFER_RX[0] == '1') {
+                    hfsm1.state = FSM_PRECHECK;
+                } else if(USB_BUFFER_RX[0] == '0') {
+                    hfsm1.state = FSM_ABORTED;
+                }
+            }
+
+            if(hfsm1.state == FSM_HEATING) {
+                LED_SetState(hfsm1.stage);
+            } else {
+                LED_SetState(LED_OFF);
+            }
+
+            COM_ScheduleMsgSend();
         } else {
-            if(HAL_GetTick() > 2000) {
-                STARTUP = false;
+            if(HAL_GetTick() > STARTUP_DELAY) {
+                hfsm1.state = FSM_MENU;
             }
         }
     } else if(htim == &htim4) {
-        DEBOUNCING = false;
+        hmenu1.debouncing = false;
         HAL_TIM_Base_Stop_IT(&htim4);
     }
 }
@@ -274,30 +324,56 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     // Check if buttons are being debounced
-    if(DEBOUNCING) {
+    if(hmenu1.debouncing) {
         return;
+    }
+
+    // Ignore button callbacks
+    hmenu1.debouncing = true;
+    HAL_TIM_Base_Start_IT(&htim4); // 25 ms
+
+    switch(hfsm1.state) {
+        case FSM_WELCOME:
+            hfsm1.state = FSM_MENU;
+            return;
+
+        case FSM_PRECHECK:
+            hfsm1.state = FSM_ABORTED;
+            return;
+
+        case FSM_HEATING:
+            hfsm1.state = FSM_ABORTED;
+            return;
+
+        case FSM_DONE:
+            hfsm1.state = FSM_MENU;
+            return;
+
+        default:
+            break;
     }
 
     switch(GPIO_Pin) {
         case BUTTON_UP_Pin:
             // Stub
             break;
+
         case BUTTON_DOWN_Pin:
             // Stub
             break;
+
         case BUTTON_LEFT_Pin:
-            hfsm1.running = false;
+            // Stub
             break;
+
         case BUTTON_RIGHT_Pin:
-            hfsm1.running = true;
-            hfsm1.duration = 0;
+            // Stub
+            hfsm1.state = FSM_PRECHECK;
             break;
+
         default:
             break;
     }
-
-    DEBOUNCING = true;
-    HAL_TIM_Base_Start_IT(&htim4); // (25 ms) SW debouncing
 }
 
 /* USER CODE END 4 */

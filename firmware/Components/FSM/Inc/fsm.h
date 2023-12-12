@@ -17,21 +17,30 @@
 
 /* Public typedefs -----------------------------------------------------------*/
 typedef enum {
-    FSM_PRE,
-    FSM_SOAK,
-    FSM_REF,
-    FSM_COOL,
-    FSM_IDLE
+    FSM_WELCOME,
+    FSM_MENU,
+    FSM_PRECHECK,
+    FSM_HEATING,
+    FSM_DONE,
+    FSM_ABORTED,
+    FSM_ERROR,
 } FSM_Device_State;
 
+typedef enum {
+    FSM_HEATING_PRE,
+    FSM_HEATING_SOAK,
+    FSM_HEATING_REF,
+    FSM_HEATING_COOL,
+} FSM_Heating_Stage;
+
 typedef struct {
-    bool running;
+    FSM_Device_State state;
+    FSM_Heating_Stage stage;
     uint32_t duration;
     uint32_t profile_duration;
     float temperature;
     uint8_t target_temperature;
     float output;
-    FSM_Device_State state;
     char *name;
     uint16_t *stages;
     uint8_t *profile;
