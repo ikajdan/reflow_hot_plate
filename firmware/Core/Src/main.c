@@ -212,8 +212,8 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
         // Check if a message has been received
-        if(USB_DATA_RECEIVED_FLAG) {
-            USB_DATA_RECEIVED_FLAG = false;
+        if(USB_DATA_RECEIVED) {
+            USB_DATA_RECEIVED = false;
             if(USB_BUFFER_RX[0] == '1') {
                 hfsm1.running = true;
                 hfsm1.duration = 0;

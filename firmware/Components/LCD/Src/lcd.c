@@ -65,14 +65,14 @@ void LCD_ShowProcessInfo() {
     // State
     sprintf(buffer, "%s", state_names[hfsm1.state]);
     x = SSD1306_WIDTH / 2 - strlen(buffer) * 7 / 2;
-    y = 5;
+    y = 7;
     ssd1306_SetCursor(x, y);
     ssd1306_WriteString(buffer, Font_7x10, White);
 
     // Temperature
     sprintf(buffer, "%.1f ~C", hfsm1.temperature);
     x = SSD1306_WIDTH / 2 - strlen(buffer) * 11 / 2;
-    y = (SSD1306_HEIGHT + 2) / 2 - 18 / 2;
+    y = (SSD1306_HEIGHT + 4) / 2 - 18 / 2;
     ssd1306_SetCursor(x, y);
     ssd1306_WriteString(buffer, Font_11x18, White);
 

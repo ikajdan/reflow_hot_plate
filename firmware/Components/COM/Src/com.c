@@ -20,7 +20,7 @@
 
 /* Public variables ----------------------------------------------------------*/
 uint8_t USB_BUFFER_RX[APP_RX_DATA_SIZE];
-bool USB_DATA_RECEIVED_FLAG = false;
+bool USB_DATA_RECEIVED = false;
 
 /* Private function prototypes -----------------------------------------------*/
 

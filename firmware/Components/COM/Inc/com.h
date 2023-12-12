@@ -21,7 +21,7 @@
 
 /* Public variables ----------------------------------------------------------*/
 extern uint8_t USB_BUFFER_RX[APP_RX_DATA_SIZE];
-extern bool USB_DATA_RECEIVED_FLAG;
+extern bool USB_DATA_RECEIVED;
 
 /* Public function prototypes ------------------------------------------------*/
 /**
