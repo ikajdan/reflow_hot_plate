@@ -38,6 +38,7 @@ typedef struct {
     FSM_Heating_Stage stage;
     uint32_t duration;
     uint32_t profile_duration;
+    uint8_t error_duration;
     float temperature;
     uint8_t target_temperature;
     float output;

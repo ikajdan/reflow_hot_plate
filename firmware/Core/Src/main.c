@@ -246,9 +246,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
         hfsm1.temperature = RTD_GetTemperature();
 
+        // Check if the temperature is inside of the allowed range
+        if(hfsm1.temperature < TEMPERATURE_MIN || hfsm1.temperature > TEMPERATURE_MAX) {
+            if(hfsm1.error_duration > MAXIMUM_CYCLES) {
+                hfsm1.state = FSM_ERROR;
+                hfsm1.error_duration = 0;
+            }
+            hfsm1.error_duration += 1;
+        } else {
+            hfsm1.error_duration = 0;
+        }
+
         switch(hfsm1.state) {
             case FSM_PRECHECK:
-                if(hfsm1.temperature < hfsm1.profile[0] * 2) {
+                if(hfsm1.temperature < hfsm1.profile[0] * 4) {
                     hfsm1.state = FSM_HEATING;
                     hfsm1.duration = 0;
                 }
@@ -337,15 +348,19 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
             hfsm1.state = FSM_MENU;
             return;
 
-        case FSM_PRECHECK:
-            hfsm1.state = FSM_ABORTED;
-            return;
-
         case FSM_HEATING:
             hfsm1.state = FSM_ABORTED;
             return;
 
         case FSM_DONE:
+            hfsm1.state = FSM_MENU;
+            return;
+
+        case FSM_ABORTED:
+            hfsm1.state = FSM_MENU;
+            return;
+
+        case FSM_ERROR:
             hfsm1.state = FSM_MENU;
             return;
 

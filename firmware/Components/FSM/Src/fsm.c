@@ -24,6 +24,7 @@ FSM_Handle_TypeDef hfsm1 = {
         .stage = FSM_HEATING_PRE,
         .duration = 0,
         .profile_duration = 0,
+        .error_duration = 0,
         .temperature = 0.0f,
         .target_temperature = 0,
         .output = 0.0f,
