@@ -40,11 +40,10 @@ FSM_Handle_TypeDef hfsm = {
 /* Private functions ---------------------------------------------------------*/
 
 /* Public functions ----------------------------------------------------------*/
-void FSM_Init(FSM_Handle_TypeDef *hfsm, const char *name, const uint16_t *stages,
-        const size_t profile_duration, const uint8_t *profile)
+void FSM_SetActiveProfile(MENU_Handle_TypeDef *hmenu, FSM_Handle_TypeDef *hfsm)
 {
-    hfsm->name = name;
-    hfsm->stages = stages;
-    hfsm->profile_duration = profile_duration;
-    hfsm->profile = profile;
+    hfsm->name = hmenu->current_item->profile_name;
+    hfsm->stages = hmenu->current_item->profile_stages;
+    hfsm->profile_duration = hmenu->current_item->profile_duration;
+    hfsm->profile = hmenu->current_item->profile;
 }

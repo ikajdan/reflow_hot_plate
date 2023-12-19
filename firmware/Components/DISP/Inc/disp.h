@@ -10,6 +10,7 @@
 #define __LCD_H__
 
 /* Public includes -----------------------------------------------------------*/
+#include "menu.h"
 #include <stdbool.h>
 
 /* Public typedefs -----------------------------------------------------------*/
@@ -36,9 +37,10 @@ void LCD_DrawWelcome(void);
 
 /**
  * @brief Draw the menu screen
+ * @param hmenu Menu handle
  * @retval None
  */
-void LCD_DrawMenu(void);
+void LCD_DrawMenu(const MENU_Handle_TypeDef *const hmenu);
 
 /**
  * @brief Draw the process info screen

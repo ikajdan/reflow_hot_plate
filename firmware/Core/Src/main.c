@@ -31,7 +31,6 @@
 /* USER CODE BEGIN Includes */
 #include "menu.h"
 #include "fsm.h"
-#include "dsp_863.h"
 #include "disp.h"
 #include "ssd1306.h"
 #include "max6675.h"
@@ -128,8 +127,7 @@ int main(void)
 
     ssd1306_Init();
 
-    static const size_t profile_size = sizeof(dsp_863_profile) / sizeof(dsp_863_profile[0]);
-    FSM_Init(&hfsm, dsp_863_name, dsp_863_stages, profile_size, dsp_863_profile);
+    MENU_Init(&hmenu);
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -146,7 +144,7 @@ int main(void)
                     break;
 
                 case FSM_MENU:
-                    LCD_DrawMenu();
+                    LCD_DrawMenu(&hmenu);
                     break;
 
                 case FSM_PRECHECK:
@@ -259,7 +257,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
         switch(hfsm.state) {
             case FSM_PRECHECK:
-                if(hfsm.temperature < hfsm.profile[0] * 4) {
+                // Start the process only if the temperature is within the desired range
+                if(hfsm.temperature < hfsm.profile[0] * 2) {
                     hfsm.state = FSM_HEATING;
                     hfsm.duration = 0;
                 }
@@ -319,7 +318,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             COM_ScheduleMsgSend();
         } else {
             if(HAL_GetTick() > STARTUP_DELAY) {
-                hfsm.state = FSM_MENU;
+                if(hfsm.state == FSM_WELCOME) {
+                    hfsm.state = FSM_MENU;
+                }
             }
         }
     } else if(htim == &htim4) {
@@ -343,13 +344,10 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     hmenu.debouncing = true;
     HAL_TIM_Base_Start_IT(&htim4); // 25 ms
 
+    // TODO: Results in a click being registered
     switch(hfsm.state) {
         case FSM_WELCOME:
             hfsm.state = FSM_MENU;
-            return;
-
-        case FSM_HEATING:
-            hfsm.state = FSM_ABORTED;
             return;
 
         case FSM_DONE:
@@ -370,19 +368,21 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
     switch(GPIO_Pin) {
         case BUTTON_UP_Pin:
-            // Stub
+            hmenu.current_item = hmenu.current_item->prev;
             break;
 
         case BUTTON_DOWN_Pin:
-            // Stub
+            hmenu.current_item = hmenu.current_item->next;
             break;
 
         case BUTTON_LEFT_Pin:
-            // Stub
+            if(hfsm.state == FSM_HEATING) {
+                hfsm.state = FSM_ABORTED;
+            }
             break;
 
         case BUTTON_RIGHT_Pin:
-            // Stub
+            FSM_SetActiveProfile(&hmenu, &hfsm);
             hfsm.state = FSM_PRECHECK;
             break;
 

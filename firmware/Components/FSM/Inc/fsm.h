@@ -11,6 +11,7 @@
 
 /* Public includes -----------------------------------------------------------*/
 #include "fsm_conf.h"
+#include "menu.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -56,15 +57,11 @@ extern FSM_Handle_TypeDef hfsm;
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief  Initialize the finite-state machine
+ * @brief  Set the active profile
+ * @param  hmenu: Pointer to the menu handle
  * @param  hfsm: Pointer to the finite-state machine handle
- * @param  name: Pointer to the profile name array
- * @param  stages: Pointer to the stages array
- * @param  profile_duration: The duration of the profile
- * @param  profile: Pointer to the profile array
  * @retval None
  */
-void FSM_Init(FSM_Handle_TypeDef *hfsm, const char *name, const uint16_t *stages,
-        const size_t profile_duration, const uint8_t *profile);
+void FSM_SetActiveProfile(MENU_Handle_TypeDef *hmenu, FSM_Handle_TypeDef *hfsm);
 
 #endif /* __FSM_H__ */
