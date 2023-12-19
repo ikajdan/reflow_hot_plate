@@ -22,7 +22,7 @@ typedef struct {
 /* Public macros -------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-extern MENU_Handle_TypeDef hmenu1;
+extern MENU_Handle_TypeDef hmenu;
 
 /* Public function prototypes ------------------------------------------------*/
 

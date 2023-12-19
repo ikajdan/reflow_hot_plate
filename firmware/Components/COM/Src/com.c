@@ -46,7 +46,7 @@ uint8_t COM_Msg_Send(const FSM_Handle_TypeDef *const hfsm)
 {
     static char buffer[APP_TX_DATA_SIZE];
     sprintf(buffer, "{\"Duration\":%lu,\"Temperature\":%f,\"TargetTemperature\":%d,\"State\":%d}\n",
-            hfsm1.duration / 1000, hfsm1.temperature, hfsm1.target_temperature, hfsm1.state);
+            hfsm->duration / 1000, hfsm->temperature, hfsm->target_temperature, hfsm->state);
     return COM_Send(buffer);
 }
 

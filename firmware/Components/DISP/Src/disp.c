@@ -1,13 +1,13 @@
 /**
  ******************************************************************************
- * @file           : lcd.c
- * @brief          : LCD library
+ * @file           : disp.c
+ * @brief          : Display library
  *
  ******************************************************************************
  */
 
 /* Includes ------------------------------------------------------------------*/
-#include "lcd.h"
+#include "disp.h"
 #include "ssd1306.h"
 #include "fsm.h"
 #include <string.h>
@@ -93,7 +93,7 @@ void LCD_DrawPrompt(LCD_Prompt_Type type) {
 
 void LCD_DrawProcessInfo() {
     // Progres bar
-    int width = SSD1306_WIDTH * hfsm1.duration / hfsm1.profile_duration / 1000;
+    int width = SSD1306_WIDTH * hfsm.duration / hfsm.profile_duration / 1000;
     ssd1306_SetCursor(0, 0);
     ssd1306_FillRectangle(0, 0, width, 3, White);
 
@@ -102,21 +102,21 @@ void LCD_DrawProcessInfo() {
     static int y = 0;
 
     // State
-    sprintf(buffer, "%s", state_names[hfsm1.stage]);
+    sprintf(buffer, "%s", state_names[hfsm.stage]);
     x = SSD1306_WIDTH / 2 - strlen(buffer) * 7 / 2;
     y = 7;
     ssd1306_SetCursor(x, y);
     ssd1306_WriteString(buffer, Font_7x10, White);
 
     // Temperature
-    sprintf(buffer, "%.1f ~C", hfsm1.temperature);
+    sprintf(buffer, "%.1f ~C", hfsm.temperature);
     x = SSD1306_WIDTH / 2 - strlen(buffer) * 11 / 2;
     y = (SSD1306_HEIGHT + 4) / 2 - 18 / 2;
     ssd1306_SetCursor(x, y);
     ssd1306_WriteString(buffer, Font_11x18, White);
 
     // Profile name
-    sprintf(buffer, "%s", hfsm1.name);
+    sprintf(buffer, "%s", hfsm.name);
     x = SSD1306_WIDTH / 2 - strlen(buffer) * 7 / 2;
     y = SSD1306_HEIGHT - 10;
     ssd1306_SetCursor(x, y);

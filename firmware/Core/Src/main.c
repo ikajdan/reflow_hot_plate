@@ -32,7 +32,7 @@
 #include "menu.h"
 #include "fsm.h"
 #include "dsp_863.h"
-#include "lcd.h"
+#include "disp.h"
 #include "ssd1306.h"
 #include "max6675.h"
 #include "rtd.h"
@@ -129,7 +129,7 @@ int main(void)
     ssd1306_Init();
 
     static const size_t profile_size = sizeof(dsp_863_profile) / sizeof(dsp_863_profile[0]);
-    FSM_Init(&hfsm1, dsp_863_name, dsp_863_stages, profile_size, dsp_863_profile);
+    FSM_Init(&hfsm, dsp_863_name, dsp_863_stages, profile_size, dsp_863_profile);
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -140,7 +140,7 @@ int main(void)
             LCD_REDRAW = false;
             ssd1306_Fill(Black);
 
-            switch(hfsm1.state) {
+            switch(hfsm.state) {
                 case FSM_WELCOME:
                     LCD_DrawWelcome();
                     break;
@@ -179,7 +179,7 @@ int main(void)
         // Send a message
         if(COM_MSG_SEND) {
             COM_MSG_SEND = false;
-            COM_Msg_Send(&hfsm1);
+            COM_Msg_Send(&hfsm);
         }
         /* USER CODE END WHILE */
 
@@ -244,40 +244,40 @@ void SystemClock_Config(void)
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     if(htim == &htim1) {
-        hfsm1.temperature = RTD_GetTemperature();
+        hfsm.temperature = RTD_GetTemperature();
 
         // Check if the temperature is inside of the allowed range
-        if(hfsm1.temperature < TEMPERATURE_MIN || hfsm1.temperature > TEMPERATURE_MAX) {
-            if(hfsm1.error_duration > MAXIMUM_CYCLES) {
-                hfsm1.state = FSM_ERROR;
-                hfsm1.error_duration = 0;
+        if(hfsm.temperature < TEMPERATURE_MIN || hfsm.temperature > TEMPERATURE_MAX) {
+            if(hfsm.error_duration > MAXIMUM_CYCLES) {
+                hfsm.state = FSM_ERROR;
+                hfsm.error_duration = 0;
             }
-            hfsm1.error_duration += 1;
+            hfsm.error_duration += 1;
         } else {
-            hfsm1.error_duration = 0;
+            hfsm.error_duration = 0;
         }
 
-        switch(hfsm1.state) {
+        switch(hfsm.state) {
             case FSM_PRECHECK:
-                if(hfsm1.temperature < hfsm1.profile[0] * 4) {
-                    hfsm1.state = FSM_HEATING;
-                    hfsm1.duration = 0;
+                if(hfsm.temperature < hfsm.profile[0] * 4) {
+                    hfsm.state = FSM_HEATING;
+                    hfsm.duration = 0;
                 }
                 break;
 
             case FSM_HEATING:
-                uint32_t duration_seconds = hfsm1.duration / 1000;
+                uint32_t duration_seconds = hfsm.duration / 1000;
 
-                if(duration_seconds > hfsm1.profile_duration) {
-                    hfsm1.state = FSM_DONE;
+                if(duration_seconds > hfsm.profile_duration) {
+                    hfsm.state = FSM_DONE;
                 } else {
-                    hfsm1.target_temperature = hfsm1.profile[duration_seconds];
-                    hfsm1.output = PID_GetOutput(hfsm1.temperature, hfsm1.target_temperature);
+                    hfsm.target_temperature = hfsm.profile[duration_seconds];
+                    hfsm.output = PID_GetOutput(hfsm.temperature, hfsm.target_temperature);
 
                     // Determine the process stage based on the current time
                     for(int i = 0; i < 4; i++) {
-                        if(duration_seconds >= hfsm1.stages[i]) {
-                            hfsm1.stage = i;
+                        if(duration_seconds >= hfsm.stages[i]) {
+                            hfsm.stage = i;
                         } else {
                             break;
                         }
@@ -286,32 +286,32 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
                 break;
 
             default:
-                hfsm1.target_temperature = 0;
-                hfsm1.output = 0;
+                hfsm.target_temperature = 0;
+                hfsm.output = 0;
                 break;
         }
 
-        PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, hfsm1.output);
+        PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, hfsm.output);
         HAL_IWDG_Refresh(&hiwdg); // 200 ms window
 
-        hfsm1.duration += 100;
+        hfsm.duration += 100;
     } else if(htim == &htim2) {
         LCD_ScheduleRedraw();
 
-        if(hfsm1.state != FSM_WELCOME) {
+        if(hfsm.state != FSM_WELCOME) {
             // Check if a message has been received
             if(USB_DATA_RECEIVED) {
                 USB_DATA_RECEIVED = false;
 
                 if(USB_BUFFER_RX[0] == '1') {
-                    hfsm1.state = FSM_PRECHECK;
+                    hfsm.state = FSM_PRECHECK;
                 } else if(USB_BUFFER_RX[0] == '0') {
-                    hfsm1.state = FSM_ABORTED;
+                    hfsm.state = FSM_ABORTED;
                 }
             }
 
-            if(hfsm1.state == FSM_HEATING) {
-                LED_SetState(hfsm1.stage);
+            if(hfsm.state == FSM_HEATING) {
+                LED_SetState(hfsm.stage);
             } else {
                 LED_SetState(LED_OFF);
             }
@@ -319,11 +319,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             COM_ScheduleMsgSend();
         } else {
             if(HAL_GetTick() > STARTUP_DELAY) {
-                hfsm1.state = FSM_MENU;
+                hfsm.state = FSM_MENU;
             }
         }
     } else if(htim == &htim4) {
-        hmenu1.debouncing = false;
+        hmenu.debouncing = false;
         HAL_TIM_Base_Stop_IT(&htim4);
     }
 }
@@ -335,33 +335,33 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     // Check if buttons are being debounced
-    if(hmenu1.debouncing) {
+    if(hmenu.debouncing) {
         return;
     }
 
     // Ignore button callbacks
-    hmenu1.debouncing = true;
+    hmenu.debouncing = true;
     HAL_TIM_Base_Start_IT(&htim4); // 25 ms
 
-    switch(hfsm1.state) {
+    switch(hfsm.state) {
         case FSM_WELCOME:
-            hfsm1.state = FSM_MENU;
+            hfsm.state = FSM_MENU;
             return;
 
         case FSM_HEATING:
-            hfsm1.state = FSM_ABORTED;
+            hfsm.state = FSM_ABORTED;
             return;
 
         case FSM_DONE:
-            hfsm1.state = FSM_MENU;
+            hfsm.state = FSM_MENU;
             return;
 
         case FSM_ABORTED:
-            hfsm1.state = FSM_MENU;
+            hfsm.state = FSM_MENU;
             return;
 
         case FSM_ERROR:
-            hfsm1.state = FSM_MENU;
+            hfsm.state = FSM_MENU;
             return;
 
         default:
@@ -383,7 +383,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         case BUTTON_RIGHT_Pin:
             // Stub
-            hfsm1.state = FSM_PRECHECK;
+            hfsm.state = FSM_PRECHECK;
             break;
 
         default:

@@ -52,7 +52,7 @@ typedef struct {
 /* Public macros -------------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-extern FSM_Handle_TypeDef hfsm1;
+extern FSM_Handle_TypeDef hfsm;
 
 /* Public function prototypes ------------------------------------------------*/
 /**
@@ -64,7 +64,7 @@ extern FSM_Handle_TypeDef hfsm1;
  * @param  profile: Pointer to the profile array
  * @retval None
  */
-void FSM_Init(FSM_Handle_TypeDef *hfsm, char *const name, uint16_t *const stages,
-        const size_t profile_duration, uint8_t *const profile);
+void FSM_Init(FSM_Handle_TypeDef *hfsm, const char *name, const uint16_t *stages,
+        const size_t profile_duration, const uint8_t *profile);
 
 #endif /* __FSM_H__ */

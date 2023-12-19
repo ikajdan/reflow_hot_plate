@@ -18,7 +18,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* Public variables ----------------------------------------------------------*/
-MENU_Handle_TypeDef hmenu1 = {
+MENU_Handle_TypeDef hmenu = {
         .debouncing = false,
 };
 
