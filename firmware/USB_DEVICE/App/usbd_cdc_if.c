@@ -22,6 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
+#include "com.h"
 #include <stdbool.h>
 /* USER CODE END INCLUDE */
 
@@ -258,11 +259,8 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 6 */
-    extern uint8_t USB_BUFFER_RX[APP_RX_DATA_SIZE];
-    extern bool USB_DATA_RECEIVED;
-
-    strlcpy((char*)USB_BUFFER_RX, (const char*)Buf, (*Len) + 1);
-    USB_DATA_RECEIVED = true;
+    strlcpy((char*)hcom.buffer, (const char*)Buf, (*Len) + 1);
+    hcom.data_received = true;
 
     USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
     USBD_CDC_ReceivePacket(&hUsbDeviceFS);

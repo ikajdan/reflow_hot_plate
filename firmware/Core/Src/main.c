@@ -175,9 +175,9 @@ int main(void)
         }
 
         // Send a message
-        if(COM_MSG_SEND) {
-            COM_MSG_SEND = false;
-            COM_Msg_Send(&hfsm);
+        if(hcom.send_message) {
+            hcom.send_message = false;
+            COM_SendMsg(&hfsm);
         }
         /* USER CODE END WHILE */
 
@@ -299,12 +299,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
         if(hfsm.state != FSM_WELCOME) {
             // Check if a message has been received
-            if(USB_DATA_RECEIVED) {
-                USB_DATA_RECEIVED = false;
+            if(hcom.data_received) {
+                hcom.data_received = false;
 
-                if(USB_BUFFER_RX[0] == '1') {
+                if(hcom.buffer[0] == '1') {
                     hfsm.state = FSM_PRECHECK;
-                } else if(USB_BUFFER_RX[0] == '0') {
+                } else if(hcom.buffer[0] == '0') {
                     hfsm.state = FSM_ABORTED;
                 }
             }
@@ -315,7 +315,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
                 LED_SetState(LED_OFF);
             }
 
-            COM_ScheduleMsgSend();
+            COM_ScheduleSend();
         } else {
             if(HAL_GetTick() > STARTUP_DELAY) {
                 if(hfsm.state == FSM_WELCOME) {
