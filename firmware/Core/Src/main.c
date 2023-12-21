@@ -342,9 +342,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
     // Ignore button callbacks
     hmenu.debouncing = true;
-    HAL_TIM_Base_Start_IT(&htim4); // 25 ms
+    HAL_TIM_Base_Start_IT(&htim4); // 50 ms
 
-    // TODO: Results in a click being registered
     switch(hfsm.state) {
         case FSM_WELCOME:
             hfsm.state = FSM_MENU;
@@ -368,11 +367,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
     switch(GPIO_Pin) {
         case BUTTON_UP_Pin:
-            hmenu.current_item = hmenu.current_item->prev;
+            MENU_Prev(&hmenu);
             break;
 
         case BUTTON_DOWN_Pin:
-            hmenu.current_item = hmenu.current_item->next;
+            MENU_Next(&hmenu);
             break;
 
         case BUTTON_LEFT_Pin:
@@ -389,6 +388,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         default:
             break;
     }
+
+    printf("Profile: %s\n", hmenu.selected_item->profile_name);
 }
 
 /* USER CODE END 4 */

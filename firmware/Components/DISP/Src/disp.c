@@ -57,18 +57,36 @@ void LCD_DrawMenu(const MENU_Handle_TypeDef *const hmenu) {
     ssd1306_Line(0, 16, 128, 16, White);
 
     // Cursor
-    ssd1306_SetCursor(2, 21);
-    ssd1306_WriteChar('>', Font_7x10, White);
+    switch(hmenu->index) {
+        case 0:
+            ssd1306_SetCursor(2, 22);
+            ssd1306_WriteChar('>', Font_7x10, White);
+            break;
+        case 1:
+            ssd1306_SetCursor(2, 32);
+            ssd1306_WriteChar('>', Font_7x10, White);
+            break;
+        case 2:
+            ssd1306_SetCursor(2, 42);
+            ssd1306_WriteChar('>', Font_7x10, White);
+            break;
+        case 3:
+            ssd1306_SetCursor(2, 52);
+            ssd1306_WriteChar('>', Font_7x10, White);
+            break;
+        default:
+            break;
+    }
 
     // Item list
     ssd1306_SetCursor(10, 22);
-    ssd1306_WriteString(hmenu->current_item->profile_name, Font_7x10, White);
+    ssd1306_WriteString(hmenu->root_item->profile_name, Font_7x10, White);
     ssd1306_SetCursor(10, 32);
-    ssd1306_WriteString(hmenu->current_item->next->profile_name, Font_7x10, White);
+    ssd1306_WriteString(hmenu->root_item->next->profile_name, Font_7x10, White);
     ssd1306_SetCursor(10, 42);
-    ssd1306_WriteString(hmenu->current_item->next->next->profile_name, Font_7x10, White);
+    ssd1306_WriteString(hmenu->root_item->next->next->profile_name, Font_7x10, White);
     ssd1306_SetCursor(10, 52);
-    ssd1306_WriteString(hmenu->current_item->next->next->next->profile_name, Font_7x10, White);
+    ssd1306_WriteString(hmenu->root_item->next->next->next->profile_name, Font_7x10, White);
 }
 
 void LCD_DrawPrompt(LCD_Prompt_Type type) {

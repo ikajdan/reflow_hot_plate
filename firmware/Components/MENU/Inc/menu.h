@@ -27,7 +27,9 @@ struct MENU_MenuItem {
 };
 
 typedef struct {
-    MENU_MenuItem_TypeDef *current_item;
+    uint8_t index;
+    MENU_MenuItem_TypeDef *root_item;
+    MENU_MenuItem_TypeDef *selected_item;
     bool debouncing;
 } MENU_Handle_TypeDef;
 
@@ -39,6 +41,25 @@ typedef struct {
 extern MENU_Handle_TypeDef hmenu;
 
 /* Public function prototypes ------------------------------------------------*/
+/**
+ * @brief  Initialize menu
+ * @param  hmenu: Pointer to the menu handle
+ * @retval None
+ */
 void MENU_Init(MENU_Handle_TypeDef *hmenu);
+
+/**
+ * @brief  Select next item
+ * @param  hmenu: Pointer to the menu handle
+ * @retval None
+ */
+void MENU_Next(MENU_Handle_TypeDef *hmenu);
+
+/**
+ * @brief  Select previous item
+ * @param  hmenu: Pointer to the menu handle
+ * @retval None
+ */
+void MENU_Prev(MENU_Handle_TypeDef *hmenu);
 
 #endif /* __MENU_H__ */

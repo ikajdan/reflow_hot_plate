@@ -42,8 +42,8 @@ FSM_Handle_TypeDef hfsm = {
 /* Public functions ----------------------------------------------------------*/
 void FSM_SetActiveProfile(MENU_Handle_TypeDef *hmenu, FSM_Handle_TypeDef *hfsm)
 {
-    hfsm->name = hmenu->current_item->profile_name;
-    hfsm->stages = hmenu->current_item->profile_stages;
-    hfsm->profile_duration = hmenu->current_item->profile_duration;
-    hfsm->profile = hmenu->current_item->profile;
+    hfsm->name = hmenu->selected_item->profile_name;
+    hfsm->stages = hmenu->selected_item->profile_stages;
+    hfsm->profile_duration = hmenu->selected_item->profile_duration;
+    hfsm->profile = hmenu->selected_item->profile;
 }
