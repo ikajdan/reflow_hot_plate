@@ -69,21 +69,21 @@ void MENU_Init(MENU_Handle_TypeDef *hmenu) {
 }
 
 void MENU_Next(MENU_Handle_TypeDef *hmenu) {
-    hmenu->selected_item = hmenu->selected_item->next;
-
     if(hmenu->index == MENU_SIZE - 1) {
         hmenu->root_item = hmenu->root_item->next;
     } else {
         hmenu->index++;
     }
+
+    hmenu->selected_item = hmenu->selected_item->next;
 }
 
 void MENU_Prev(MENU_Handle_TypeDef *hmenu) {
-    hmenu->selected_item = hmenu->selected_item->prev;
-
     if(hmenu->index == 0) {
         hmenu->root_item = hmenu->root_item->prev;
     } else {
         hmenu->index--;
     }
+
+    hmenu->selected_item = hmenu->selected_item->prev;
 }
