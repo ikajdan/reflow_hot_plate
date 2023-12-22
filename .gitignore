@@ -1,3 +1,6 @@
+# Doxygen
+/documentation/doxygen/
+
 # STM32CubeIDE
 /firmware/.settings/
 /firmware/Release/
