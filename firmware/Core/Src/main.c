@@ -337,26 +337,20 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     // Check if buttons are being debounced
     if(hmenu.debouncing) {
+        printf("Button callback ignored\n");
         return;
     }
 
-    // Ignore button callbacks
+    // Ignore button callbacks for some time
     hmenu.debouncing = true;
-    HAL_TIM_Base_Start_IT(&htim4); // 50 ms
+    HAL_TIM_Base_Start_IT(&htim4); // 100 ms
 
+    // Handle button events based on the current state
+// @formatter:off
     switch(hfsm.state) {
         case FSM_WELCOME:
-            hfsm.state = FSM_MENU;
-            return;
-
         case FSM_DONE:
-            hfsm.state = FSM_MENU;
-            return;
-
         case FSM_ABORTED:
-            hfsm.state = FSM_MENU;
-            return;
-
         case FSM_ERROR:
             hfsm.state = FSM_MENU;
             return;
@@ -364,32 +358,31 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         default:
             break;
     }
+// @formatter:on
 
-    switch(GPIO_Pin) {
-        case BUTTON_UP_Pin:
-            MENU_Prev(&hmenu);
-            break;
-
-        case BUTTON_DOWN_Pin:
-            MENU_Next(&hmenu);
-            break;
-
-        case BUTTON_LEFT_Pin:
-            if(hfsm.state == FSM_HEATING) {
-                hfsm.state = FSM_ABORTED;
+    switch(hfsm.state) {
+        case FSM_MENU:
+            if(GPIO_Pin == BUTTON_UP_Pin) {
+                MENU_Prev(&hmenu);
+            } else if(GPIO_Pin == BUTTON_DOWN_Pin) {
+                MENU_Next(&hmenu);
+            } else if(GPIO_Pin == BUTTON_RIGHT_Pin) {
+                FSM_SetActiveProfile(&hmenu, &hfsm);
+                hfsm.state = FSM_PRECHECK;
             }
             break;
 
-        case BUTTON_RIGHT_Pin:
-            FSM_SetActiveProfile(&hmenu, &hfsm);
-            hfsm.state = FSM_PRECHECK;
+        case FSM_HEATING:
+            if(GPIO_Pin == BUTTON_LEFT_Pin) {
+                hfsm.state = FSM_ABORTED;
+            }
             break;
 
         default:
             break;
     }
 
-    printf("Profile: %s\n", hmenu.selected_item->profile_name);
+    printf("Profile selected: %s\n", hmenu.selected_item->profile_name);
 }
 
 /* USER CODE END 4 */
