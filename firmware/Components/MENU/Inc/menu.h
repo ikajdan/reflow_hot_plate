@@ -10,6 +10,7 @@
 #define __MENU_H__
 
 /* Public includes -----------------------------------------------------------*/
+#include "menu_conf.h"
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>

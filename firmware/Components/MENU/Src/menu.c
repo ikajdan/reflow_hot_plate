@@ -11,12 +11,17 @@
 #include "DSP863.h"
 #include "SMDLTLFP.h"
 #include "TS991AX35T4.h"
+#include "LITTLE_INFERNO.h"
 
 /* Typedefs ------------------------------------------------------------------*/
 
 /* Defines -------------------------------------------------------------------*/
 
 /* Macros --------------------------------------------------------------------*/
+#define MENU_ITEM(name, stages, profile)                                    \
+{                                                                           \
+    name, stages, sizeof(profile) / sizeof(profile[0]), profile, NULL, NULL \
+}
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -28,59 +33,13 @@ MENU_Handle_TypeDef hmenu = {
         .debouncing = false,
 };
 
-MENU_MenuItem_TypeDef item1 = {
-        DSP863_name,
-        DSP863_stages,
-        sizeof(DSP863_profile) / sizeof(DSP863_profile[0]),
-        DSP863_profile,
-        NULL,
-        NULL,
-};
-
-MENU_MenuItem_TypeDef item2 = {
-        SMDLTLFP_name,
-        SMDLTLFP_stages,
-        sizeof(SMDLTLFP_profile) / sizeof(SMDLTLFP_profile[0]),
-        SMDLTLFP_profile,
-        NULL,
-        NULL,
-};
-
-MENU_MenuItem_TypeDef item3 = {
-        TS991AX35T4_name,
-        TS991AX35T4_stages,
-        sizeof(TS991AX35T4_profile) / sizeof(TS991AX35T4_profile[0]),
-        TS991AX35T4_profile,
-        NULL,
-        NULL,
-};
-
-MENU_MenuItem_TypeDef item4 = {
-        "Dummy 1",
-        TS991AX35T4_stages,
-        sizeof(TS991AX35T4_profile) / sizeof(TS991AX35T4_profile[0]),
-        TS991AX35T4_profile,
-        NULL,
-        NULL,
-};
-
-MENU_MenuItem_TypeDef item5 = {
-        "Dummy 2",
-        TS991AX35T4_stages,
-        sizeof(TS991AX35T4_profile) / sizeof(TS991AX35T4_profile[0]),
-        TS991AX35T4_profile,
-        NULL,
-        NULL,
-};
-
-MENU_MenuItem_TypeDef item6 = {
-        "Dummy 3",
-        TS991AX35T4_stages,
-        sizeof(TS991AX35T4_profile) / sizeof(TS991AX35T4_profile[0]),
-        TS991AX35T4_profile,
-        NULL,
-        NULL,
-};
+MENU_MenuItem_TypeDef item1 = MENU_ITEM(DSP863_name, DSP863_stages, DSP863_profile);
+MENU_MenuItem_TypeDef item2 = MENU_ITEM(SMDLTLFP_name, SMDLTLFP_stages, SMDLTLFP_profile);
+MENU_MenuItem_TypeDef item3 = MENU_ITEM(TS991AX35T4_name, TS991AX35T4_stages, TS991AX35T4_profile);
+MENU_MenuItem_TypeDef item4 = MENU_ITEM(LITTLE_INFERNO_name, LITTLE_INFERNO_stages, LITTLE_INFERNO_profile);
+MENU_MenuItem_TypeDef item5 = MENU_ITEM("Dummy 1", DSP863_stages, DSP863_profile);
+MENU_MenuItem_TypeDef item6 = MENU_ITEM("Dummy 2", DSP863_stages, DSP863_profile);
+MENU_MenuItem_TypeDef item7 = MENU_ITEM("Dummy 3", DSP863_stages, DSP863_profile);
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -103,24 +62,28 @@ void MENU_Init(MENU_Handle_TypeDef *hmenu) {
     item4.prev = &item3;
     item5.next = &item6;
     item5.prev = &item4;
-    item6.next = &item1;
+    item6.next = &item7;
     item6.prev = &item5;
+    item7.next = &item1;
+    item7.prev = &item6;
 }
 
 void MENU_Next(MENU_Handle_TypeDef *hmenu) {
-    if(hmenu->index == 3) {
+    hmenu->selected_item = hmenu->selected_item->next;
+
+    if(hmenu->index == MENU_SIZE - 1) {
         hmenu->root_item = hmenu->root_item->next;
     } else {
         hmenu->index++;
     }
-    hmenu->selected_item = hmenu->selected_item->next;
 }
 
 void MENU_Prev(MENU_Handle_TypeDef *hmenu) {
+    hmenu->selected_item = hmenu->selected_item->prev;
+
     if(hmenu->index == 0) {
         hmenu->root_item = hmenu->root_item->prev;
     } else {
         hmenu->index--;
     }
-    hmenu->selected_item = hmenu->selected_item->prev;
 }
