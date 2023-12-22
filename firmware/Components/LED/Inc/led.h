@@ -14,16 +14,14 @@
 /* Public typedefs -----------------------------------------------------------*/
 
 /* Public defines ------------------------------------------------------------*/
-enum LED_State {
+typedef enum LED_State {
     LED_PRE,
     LED_SOAK,
     LED_REF,
     LED_COOL,
     LED_OFF,
     LED_ON
-};
-
-typedef enum LED_State LED_State;
+} LED_State;
 
 /* Public macros -------------------------------------------------------------*/
 

@@ -381,10 +381,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
         default:
             break;
     }
-
-    printf("Profile selected: %s\n", hmenu.selected_item->profile_name);
 }
-
 /* USER CODE END 4 */
 
 /**
