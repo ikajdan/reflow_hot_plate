@@ -53,7 +53,7 @@ void MENU_Init(MENU_Handle_TypeDef *hmenu) {
     hmenu->selected_item = hmenu->root_item;
 
     item1.next = &item2;
-    item1.prev = &item6;
+    item1.prev = &item7;
     item2.next = &item3;
     item2.prev = &item1;
     item3.next = &item4;
@@ -69,21 +69,21 @@ void MENU_Init(MENU_Handle_TypeDef *hmenu) {
 }
 
 void MENU_Next(MENU_Handle_TypeDef *hmenu) {
+    hmenu->selected_item = hmenu->selected_item->next;
+
     if(hmenu->index == MENU_SIZE - 1) {
         hmenu->root_item = hmenu->root_item->next;
     } else {
         hmenu->index++;
     }
-
-    hmenu->selected_item = hmenu->selected_item->next;
 }
 
 void MENU_Prev(MENU_Handle_TypeDef *hmenu) {
+    hmenu->selected_item = hmenu->selected_item->prev;
+
     if(hmenu->index == 0) {
         hmenu->root_item = hmenu->root_item->prev;
     } else {
         hmenu->index--;
     }
-
-    hmenu->selected_item = hmenu->selected_item->prev;
 }
