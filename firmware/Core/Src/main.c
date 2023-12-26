@@ -324,8 +324,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
             }
         }
     } else if(htim == &htim4) {
-        hmenu.debouncing = false;
+        printf("Stopping TIM4: %lu\n\n", HAL_GetTick());
         HAL_TIM_Base_Stop_IT(&htim4);
+        hmenu.debouncing = false;
     }
 }
 
@@ -337,13 +338,23 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
     // Check if buttons are being debounced
     if(hmenu.debouncing) {
-        printf("Button callback ignored\n");
-        return;
-    }
+        uint32_t counter_value = __HAL_TIM_GET_COUNTER(&htim4);
+        uint32_t timer_frequency = HAL_RCC_GetHCLKFreq() / (htim4.Init.Prescaler + 1);
+        uint32_t time = (counter_value * 1000) / timer_frequency;
+        printf("Debouncing: %lu\n", time);
 
-    // Ignore button callbacks for some time
-    hmenu.debouncing = true;
-    HAL_TIM_Base_Start_IT(&htim4); // 100 ms
+        return;
+    } else {
+        // Ignore button callbacks from now on
+        printf("Starting TIM4: %lu\n", HAL_GetTick());
+        hmenu.debouncing = true;
+
+        // Clear the interrupt flag, otherwise the update callback will be called
+        __HAL_TIM_CLEAR_IT(&htim4, TIM_IT_UPDATE);
+        __HAL_TIM_SET_COUNTER(&htim4, 0);
+
+        HAL_TIM_Base_Start_IT(&htim4); // 100 ms
+    }
 
     // Handle button events based on the current state
 // @formatter:off
