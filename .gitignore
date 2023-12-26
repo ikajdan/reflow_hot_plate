@@ -24,3 +24,5 @@
 # Round Tracks
 /hardware/*/*.round-tracks-config
 
+# FreeCAD
+/hardware/mechanical_parts/*.FCBak
