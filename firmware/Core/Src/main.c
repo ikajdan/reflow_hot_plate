@@ -128,11 +128,14 @@ int main(void)
     ssd1306_Init();
 
     MENU_Init(&hmenu);
+
+    HAL_GPIO_WritePin(MAX6675_CS_PORT, MAX6675_CS_PIN, GPIO_PIN_SET);
     /* USER CODE END 2 */
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
-    while(1) {
+    while(1)
+    {
         // Redraw the screen
         if(LCD_REDRAW) {
             LCD_REDRAW = false;
@@ -174,11 +177,15 @@ int main(void)
             ssd1306_UpdateScreen();
         }
 
-        // Send a message
+        // Receive data from the MAX6675
+        MAX6675_ReceiveData();
+
+        // Send a message over the USB CDC
         if(hcom.send_message) {
             hcom.send_message = false;
             COM_SendMsg(&hfsm);
         }
+
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
@@ -240,7 +247,8 @@ void SystemClock_Config(void)
  * @param  htim: TIM handle
  * @retval None
  */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
     if(htim == &htim1) {
         hfsm.temperature = RTD_GetTemperature();
 
@@ -335,7 +343,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
  * @param  GPIO_Pin: Specifies the pins connected EXTI line
  * @retval None
  */
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
     // Check if buttons are being debounced
     if(hmenu.debouncing) {
         uint32_t counter_value = __HAL_TIM_GET_COUNTER(&htim4);
@@ -391,6 +400,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
         default:
             break;
+    }
+}
+
+/**
+ * @brief  SPI RX transfer callback
+ * @param  hspi: SPI handle
+ * @retval None
+ */
+void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+    if(hspi == &hspi1) {
+        MAX6675_CalculateTemperature();
     }
 }
 /* USER CODE END 4 */

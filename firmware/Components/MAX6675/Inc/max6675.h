@@ -25,9 +25,20 @@ extern SPI_HandleTypeDef MAX6675_SPI_PORT;
 
 /* Public function prototypes ------------------------------------------------*/
 /**
+ * @brief Read the data from the IC
+ * @retval None
+ */
+void MAX6675_ReceiveData(void);
+
+/**
+ * @brief Calculate the temperature from the received data
+ * @retval None
+ */
+void MAX6675_CalculateTemperature(void);
+
+/**
  * @brief Read the temperature from the thermocouple sensor
  * @retval The temperature reading in degrees Celsius
  */
 float MAX6675_GetTemperature(void);
-
 #endif /* __MAX6675_H__ */
