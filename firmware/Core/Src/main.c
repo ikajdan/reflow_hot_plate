@@ -185,7 +185,6 @@ int main(void)
             hcom.send_message = false;
             COM_SendMsg(&hfsm);
         }
-
         /* USER CODE END WHILE */
 
         /* USER CODE BEGIN 3 */
@@ -250,14 +249,25 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim == &htim1) {
-        float tc_temperature = MAX6675_GetTemperature();
-        float rtd_temperature = RTD_GetTemperature();
-        hfsm.temperature = tc_temperature;
-        printf("TC: %f\nRTD: %f\n\n", tc_temperature, rtd_temperature);
+        int16_t tc_temperature = MAX6675_GetTemperature();
+        int16_t rtd_temperature = RTD_GetTemperature();
+        printf("TC: %d\nRTD: %d\n", tc_temperature, rtd_temperature);
 
-        // Safety checks
-        if(hfsm.temperature < TEMPERATURE_MIN | hfsm.temperature > TEMPERATURE_MAX
-                | tc_temperature == MAX6675_TC_OPEN | rtd_temperature == RTD_PROBE_OPEN) {
+        // Check for open circuit
+        if(tc_temperature == MAX6675_TC_OPEN || rtd_temperature == RTD_PROBE_OPEN) {
+            hfsm.error_duration += 1;
+        } else {
+            hfsm.error_duration = 0;
+        }
+
+        // Get the highest temperature
+        float temperature_f = (tc_temperature > rtd_temperature) ? tc_temperature : rtd_temperature;
+
+        // Convert to Celsius
+        temperature_f = temperature_f / 100;
+
+        // Check for temperature out of the range
+        if(temperature_f < TEMPERATURE_MIN || temperature_f > TEMPERATURE_MAX) {
             hfsm.error_duration += 1;
         } else {
             hfsm.error_duration = 0;
@@ -267,6 +277,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
             hfsm.state = FSM_ERROR;
             hfsm.error_duration = 0;
         }
+
+        hfsm.temperature = temperature_f / 100;
 
         switch(hfsm.state) {
             case FSM_PRECHECK:

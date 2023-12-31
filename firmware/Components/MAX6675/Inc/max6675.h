@@ -38,7 +38,7 @@ void MAX6675_CalculateTemperature(void);
 
 /**
  * @brief Read the temperature from the thermocouple sensor
- * @retval The temperature reading in degrees Celsius
+ * @retval The temperature reading in degrees Celsius * 100
  */
-float MAX6675_GetTemperature(void);
+int16_t MAX6675_GetTemperature(void);
 #endif /* __MAX6675_H__ */

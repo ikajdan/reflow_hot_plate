@@ -20,8 +20,8 @@
 
 /* Public variables ----------------------------------------------------------*/
 static uint32_t conversion_time = 0;
-volatile static uint16_t data = 0;
-static float temperature = 0;
+static volatile uint16_t data = 0;
+static int16_t temperature = 0;
 /* Private function prototypes -----------------------------------------------*/
 
 /* Public function prototypes ------------------------------------------------*/
@@ -46,10 +46,11 @@ void MAX6675_CalculateTemperature(void) {
     if(data & 0x4) {
         temperature = MAX6675_TC_OPEN;
     } else {
-        temperature = (data >> 3) * 0.25f;
+        temperature = (int16_t)((data >> 3) * 25);
+        temperature += MAX6675_OFFSET * 100;
     }
 }
 
-float MAX6675_GetTemperature(void) {
-    return temperature + MAX6675_OFFSET;
+int16_t MAX6675_GetTemperature(void) {
+    return temperature;
 }

@@ -46,7 +46,7 @@ static float RTD_CalculateResistance(void) {
 }
 
 /* Public functions ----------------------------------------------------------*/
-float RTD_GetTemperature(void) {
+int16_t RTD_GetTemperature(void) {
     float resistance = RTD_CalculateResistance();
     float discriminant = A * A - 4 * B * (1 - resistance / RTD_R0);
 
@@ -64,5 +64,5 @@ float RTD_GetTemperature(void) {
         temperature += RTD_OFFSET;
     }
 
-    return temperature;
+    return (int16_t)(temperature * 100);
 }
