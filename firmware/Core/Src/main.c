@@ -250,16 +250,21 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim == &htim1) {
-        hfsm.temperature = RTD_GetTemperature();
+        float tc_temperature = MAX6675_GetTemperature();
+        float rtd_temperature = RTD_GetTemperature();
+        hfsm.temperature = tc_temperature;
+        printf("TC: %f\nRTD: %f\n\n", tc_temperature, rtd_temperature);
 
-        // Check if the temperature is inside of the allowed range
-        if(hfsm.temperature < TEMPERATURE_MIN || hfsm.temperature > TEMPERATURE_MAX) {
-            if(hfsm.error_duration > MAXIMUM_CYCLES) {
-                hfsm.state = FSM_ERROR;
-                hfsm.error_duration = 0;
-            }
+        // Safety checks
+        if(hfsm.temperature < TEMPERATURE_MIN | hfsm.temperature > TEMPERATURE_MAX
+                | tc_temperature == MAX6675_TC_OPEN | rtd_temperature == RTD_PROBE_OPEN) {
             hfsm.error_duration += 1;
         } else {
+            hfsm.error_duration = 0;
+        }
+
+        if(hfsm.error_duration > MAXIMUM_CYCLES) {
+            hfsm.state = FSM_ERROR;
             hfsm.error_duration = 0;
         }
 
