@@ -56,5 +56,13 @@ float RTD_GetTemperature(void) {
     }
 
     float temperature = (-A + sqrt(discriminant)) / (2 * B);
-    return temperature + RTD_OFFSET;
+
+    // Check if the input is open
+    if(temperature < 1) {
+        temperature = RTD_PROBE_OPEN;
+    } else {
+        temperature += RTD_OFFSET;
+    }
+
+    return temperature;
 }
