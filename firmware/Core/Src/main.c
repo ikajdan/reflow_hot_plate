@@ -225,14 +225,14 @@ void SystemClock_Config(void)
     RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
     RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+    RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
     if(HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
             {
         Error_Handler();
     }
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC | RCC_PERIPHCLK_USB;
-    PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+    PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
     PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV1_5;
     if(HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
             {
@@ -278,7 +278,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
             hfsm.error_duration = 0;
         }
 
-        hfsm.temperature = temperature_f / 100;
+        hfsm.temperature = temperature_f;
 
         switch(hfsm.state) {
             case FSM_PRECHECK:
