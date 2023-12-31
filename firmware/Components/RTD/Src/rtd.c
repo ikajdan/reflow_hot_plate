@@ -61,8 +61,8 @@ int16_t RTD_GetTemperature(void) {
     if(temperature < 1) {
         temperature = RTD_PROBE_OPEN;
     } else {
-        temperature += RTD_OFFSET;
+        temperature = (temperature + RTD_OFFSET) * 100;
     }
 
-    return (int16_t)(temperature * 100);
+    return (int16_t)temperature;
 }
