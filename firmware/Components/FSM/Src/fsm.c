@@ -30,9 +30,9 @@ FSM_Handle_TypeDef hfsm = {
         .temperature = 0,
         .target_temperature = 0,
         .output = 0.0f,
-        .name = NULL,
-        .stages = NULL,
-        .profile = NULL,
+        .name = "None",
+        .stages = { 0 },
+        .profile = { 0 },
 };
 
 /* Private function prototypes -----------------------------------------------*/

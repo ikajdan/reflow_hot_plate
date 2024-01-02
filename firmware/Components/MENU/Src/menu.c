@@ -69,20 +69,28 @@ void MENU_Init(MENU_Handle_TypeDef *hmenu) {
 }
 
 void MENU_Next(MENU_Handle_TypeDef *hmenu) {
-    hmenu->selected_item = hmenu->selected_item->next;
+    if(hmenu->selected_item->next != NULL) {
+        hmenu->selected_item = hmenu->selected_item->next;
+    }
 
     if(hmenu->index == MENU_SIZE - 1) {
-        hmenu->root_item = hmenu->root_item->next;
+        if(hmenu->root_item->next != NULL) {
+            hmenu->root_item = hmenu->root_item->next;
+        }
     } else {
         hmenu->index++;
     }
 }
 
 void MENU_Prev(MENU_Handle_TypeDef *hmenu) {
-    hmenu->selected_item = hmenu->selected_item->prev;
+    if(hmenu->selected_item->prev != NULL) {
+        hmenu->selected_item = hmenu->selected_item->prev;
+    }
 
     if(hmenu->index == 0) {
-        hmenu->root_item = hmenu->root_item->prev;
+        if(hmenu->root_item->prev != NULL) {
+            hmenu->root_item = hmenu->root_item->prev;
+        }
     } else {
         hmenu->index--;
     }
