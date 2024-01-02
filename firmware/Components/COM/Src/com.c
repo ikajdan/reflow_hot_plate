@@ -45,13 +45,15 @@ uint8_t COM_SendData(const char *const buffer)
 uint8_t COM_SendMsg(const FSM_Handle_TypeDef *const hfsm)
 {
     static char buffer[APP_TX_DATA_SIZE];
-    sprintf(buffer, "{\"Duration\":%lu,\"TC\":%d,\"RTD\":%d,\"Temperature\":%d,\"TargetTemperature\":%d,\"Stage\":%d}\n",
+    sprintf(buffer, "{\"Duration\":%lu,\"TC\":%d,\"RTD\":%d,\"Temperature\":%d,\"TargetTemperature\":%d,\"Name\":\"%s\",\"Stage\":%d,\"State\":%d}\n",
             hfsm->duration / 1000,
             hfsm->tc_temperature,
             hfsm->rtd_temperature,
             hfsm->temperature,
             hfsm->target_temperature,
-            hfsm->stage);
+            hfsm->name,
+            hfsm->stage,
+            hfsm->state);
     return COM_SendData(buffer);
 }
 
