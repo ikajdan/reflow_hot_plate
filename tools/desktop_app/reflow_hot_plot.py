@@ -88,14 +88,22 @@ class MainWindow(Gtk.Window):
         }
         self.navigation_bar = NavigationBar(self.callback_dict)
 
-        self.running = False
         self.schedule_data_clear = False
-        self.states = {
+        self.stages = {
             0: "Preheat",
             1: "Soak",
             2: "Reflow",
             3: "Cooldown",
             4: "Idle",
+        }
+        self.states = {
+            0: "Welcome",
+            1: "Menu",
+            2: "Precheck",
+            3: "Heating",
+            4: "Done",
+            5: "Aborted",
+            6: "Error",
         }
         self.data = {"Duration": [], "Temperature": [], "TargetTemperature": []}
         self.fig, self.ax = plt.subplots()
@@ -127,10 +135,14 @@ class MainWindow(Gtk.Window):
                 payload = json.loads(received_data)
                 for key, value in payload.items():
                     if key in self.data:
+                        if key == "Temperature":
+                            value = value / 100
                         self.data[key].append(value)
             except json.JSONDecodeError as e:
                 print(f"Error decoding JSON: {e}", file=sys.stderr)
             else:
+                self.name = payload["Name"]
+                self.stage = payload["Stage"]
                 self.state = payload["State"]
 
                 if self.schedule_data_clear:
@@ -143,7 +155,6 @@ class MainWindow(Gtk.Window):
                             }
                             self.schedule_data_clear = False
 
-                self.update_running()
                 self.update_title()
                 self.update_button_states()
                 self.update_plot()
@@ -186,32 +197,34 @@ class MainWindow(Gtk.Window):
         plt.tight_layout(pad=1)
         self.canvas.draw()
 
-    def update_running(self):
-        if self.state != 4:
-            self.running = True
-        else:
-            self.running = False
+    def get_running(self):
+        if self.state == 2 or self.state == 3:
+            if self.stage != 4:
+                return True
+        return False
 
     def update_title(self):
-        state_name = self.states.get(self.state, "Idle")
-        self.set_title(f"Reflow Hot Plot — {state_name}")
+        if self.state == 3:
+            subtitle = f"{self.name} ({self.stages.get(self.stage, "Error")})"
+        else:
+            subtitle = self.states.get(self.state, "Error")
+        self.set_title(f"Reflow Hot Plot — {subtitle}")
 
     def on_start_clicked(self, widget):
         self.schedule_data_clear = True
         serial_port.write("1".encode("utf-8"))
-        self.running = True
         self.update_button_states()
 
     def on_stop_clicked(self, widget):
         serial_port.write("0".encode("utf-8"))
-        self.running = False
         self.update_button_states()
 
     def update_button_states(self):
         buttons = self.navigation_bar.get_children()
-        buttons[0].set_sensitive(not self.running)
-        buttons[1].set_sensitive(self.running)
-        buttons[2].set_sensitive(not self.running)
+        running = self.get_running()
+        buttons[0].set_sensitive(not running)
+        buttons[1].set_sensitive(running)
+        buttons[2].set_sensitive(not running)
 
     def on_save_clicked(self, widget):
         dialog = Gtk.FileChooserDialog(

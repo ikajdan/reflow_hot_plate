@@ -1,6 +1,6 @@
 # Reflow Hot Plot
 
-Allows to visualize and control the reflow soldering process.
+Allows visualizing the temperature profile of a reflow soldering process.
 
 ### Usage
 
@@ -20,7 +20,7 @@ The API specification for communication between a dedicated desktop application 
 
 ### Send
 
-Data that can be send to the device.
+Commands for controlling the device.
 
 - 1 - starts the soldering procedure `[char]`.
 - 0 - stops the soldering procedure `[char]`.
@@ -34,17 +34,21 @@ Data received from the device.
 - RTD - RTD temperature in centigrade `[int]`.
 - Temperature - measured temperature in centigrade `[int]`.
 - TargetTemperature - reference temperature in degrees Celsius `[int]`.
+- Name - profile name `[string]`.
 - Stage - heating stage (0=preheat, 1=soak, 2=reflow, 3=cooldown, 4=idle) `[int]`.
+- State - device state (0=welcome, 1=menu, 2=precheck, 3=heating, 4=done, 5=aborted, 6=error) `[int]`.
 
 Example message:
 
 ```json
 {
-  "Duration":1098,
-  "TC":2350,
-  "RTD":2101,
-  "Temperature":2350,
-  "TargetTemperature":0,
-  "Stage":6
+  "Duration": 1098,
+  "TC": 2350,
+  "RTD": 2101,
+  "Temperature": 2350,
+  "TargetTemperature": 0,
+  "Name": "DSP863",
+  "Stage": 6,
+  "State": 3
 }
 ```
