@@ -40,7 +40,9 @@ typedef struct {
     uint32_t duration;
     uint32_t profile_duration;
     uint8_t error_duration;
-    float temperature;
+    int16_t tc_temperature;
+    int16_t rtd_temperature;
+    int16_t temperature;
     uint8_t target_temperature;
     float output;
     char *name;

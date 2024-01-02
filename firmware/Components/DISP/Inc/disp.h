@@ -11,6 +11,7 @@
 
 /* Public includes -----------------------------------------------------------*/
 #include "menu.h"
+#include "fsm.h"
 #include <stdbool.h>
 
 /* Public typedefs -----------------------------------------------------------*/
@@ -30,32 +31,33 @@ extern bool LCD_REDRAW;
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief Draw the welcome screen
+ * @brief  Draw the welcome screen
  * @retval None
  */
 void LCD_DrawWelcome(void);
 
 /**
- * @brief Draw the menu screen
- * @param hmenu Menu handle
+ * @brief  Draw the menu screen
+ * @param  hmenu Menu handle
  * @retval None
  */
 void LCD_DrawMenu(const MENU_Handle_TypeDef *const hmenu);
 
 /**
- * @brief Draw the process info screen
+ * @brief  Draw the process info screen
+ * @param  hfsm: The FSM handle
  * @retval None
  */
-void LCD_DrawProcessInfo(void);
+void LCD_DrawProcessInfo(const FSM_Handle_TypeDef *const hfsm);
 
 /**
- * @brief Draw the prompt screen
+ * @brief  Draw the prompt screen
  * @retval None
  */
-void LCD_DrawPrompt(LCD_Prompt_Type type);
+void LCD_DrawPrompt(const LCD_Prompt_Type type);
 
 /**
- * @brief Schedule the LCD redraw
+ * @brief  Schedule the LCD redraw
  * @retval None
  */
 void LCD_ScheduleRedraw(void);

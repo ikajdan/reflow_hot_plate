@@ -30,17 +30,21 @@ Data that can be send to the device.
 Data received from the device.
 
 - Duration - time in seconds since the start of the soldering procedure `[int]`.
-- Temperature - measured temperature in degrees Celsius `[float]`.
+- TC - thermocouple temperature in centigrade `[int]`.
+- RTD - RTD temperature in centigrade `[int]`.
+- Temperature - measured temperature in centigrade `[int]`.
 - TargetTemperature - reference temperature in degrees Celsius `[int]`.
-- State - device state (0=preheat, 1=soak, 2=reflow, 3=cooldown, 4=idle) `[int]`.
+- Stage - heating stage (0=preheat, 1=soak, 2=reflow, 3=cooldown, 4=idle) `[int]`.
 
 Example message:
 
-```
+```json
 {
-  "Duration": 240,
-  "Temperature": 120.5,
-  "TargetTemperature": 118,
-  "State": 3
+  "Duration":1098,
+  "TC":2350,
+  "RTD":2101,
+  "Temperature":2350,
+  "TargetTemperature":0,
+  "Stage":6
 }
 ```

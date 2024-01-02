@@ -25,6 +25,11 @@
 #define STARTUP_DELAY 2000
 
 /**
+ * @brief Maximum allowable positive temperature deviation on startup
+ */
+#define PRECHECK_DEVIATION 30
+
+/**
  * @brief Minimum allowable temperature
  */
 #define TEMPERATURE_MIN 10
@@ -33,6 +38,11 @@
  * @brief Maximum allowable temperature
  */
 #define TEMPERATURE_MAX 270
+
+/**
+ * @brief Maximum allowable implausibility between sensors
+ */
+#define TEMPERATURE_IMPL 20
 
 /**
  * @brief Maximum allowable number of cycles for the deviation

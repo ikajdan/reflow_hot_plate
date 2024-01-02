@@ -25,8 +25,8 @@ extern volatile uint16_t RTD_ADC_REGISTER[RTD_SAMPLES];
 
 /* Public function prototypes ------------------------------------------------*/
 /**
- * @brief Read the temperature reading from the RTD sensor
- * @retval The temperature reading in degrees Celsius * 100
+ * @brief  Read the temperature reading from the RTD sensor
+ * @retval The temperature reading in centigrades
  */
 int16_t RTD_GetTemperature(void);
 

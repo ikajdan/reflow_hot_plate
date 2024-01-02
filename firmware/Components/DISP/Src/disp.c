@@ -89,7 +89,39 @@ void LCD_DrawMenu(const MENU_Handle_TypeDef *const hmenu) {
     ssd1306_WriteString(hmenu->root_item->next->next->next->profile_name, Font_7x10, White);
 }
 
-void LCD_DrawPrompt(LCD_Prompt_Type type) {
+void LCD_DrawProcessInfo(const FSM_Handle_TypeDef *const hfsm) {
+    // Progres bar
+    int width = SSD1306_WIDTH * hfsm->duration / hfsm->profile_duration / 1000;
+    ssd1306_SetCursor(0, 0);
+    ssd1306_FillRectangle(0, 0, width, 3, White);
+
+    static char buffer[32];
+    static int x = 0;
+    static int y = 0;
+
+    // State
+    sprintf(buffer, "%s", state_names[hfsm->stage]);
+    x = SSD1306_WIDTH / 2 - strlen(buffer) * 7 / 2;
+    y = 7;
+    ssd1306_SetCursor(x, y);
+    ssd1306_WriteString(buffer, Font_7x10, White);
+
+    // Temperature
+    sprintf(buffer, "%.1f ~C", hfsm->temperature / 100.0f);
+    x = SSD1306_WIDTH / 2 - strlen(buffer) * 11 / 2;
+    y = (SSD1306_HEIGHT + 4) / 2 - 18 / 2;
+    ssd1306_SetCursor(x, y);
+    ssd1306_WriteString(buffer, Font_11x18, White);
+
+    // Profile name
+    sprintf(buffer, "%s", hfsm->name);
+    x = SSD1306_WIDTH / 2 - strlen(buffer) * 7 / 2;
+    y = SSD1306_HEIGHT - 10;
+    ssd1306_SetCursor(x, y);
+    ssd1306_WriteString(buffer, Font_7x10, White);
+}
+
+void LCD_DrawPrompt(const LCD_Prompt_Type type) {
     // Loading bar
     static uint32_t shift = 0;
     if(shift <= 40) {
@@ -122,38 +154,6 @@ void LCD_DrawPrompt(LCD_Prompt_Type type) {
         ssd1306_SetCursor(25, 54);
         ssd1306_WriteString("Please wait", Font_7x10, White);
     }
-}
-
-void LCD_DrawProcessInfo() {
-    // Progres bar
-    int width = SSD1306_WIDTH * hfsm.duration / hfsm.profile_duration / 1000;
-    ssd1306_SetCursor(0, 0);
-    ssd1306_FillRectangle(0, 0, width, 3, White);
-
-    static char buffer[32];
-    static int x = 0;
-    static int y = 0;
-
-    // State
-    sprintf(buffer, "%s", state_names[hfsm.stage]);
-    x = SSD1306_WIDTH / 2 - strlen(buffer) * 7 / 2;
-    y = 7;
-    ssd1306_SetCursor(x, y);
-    ssd1306_WriteString(buffer, Font_7x10, White);
-
-    // Temperature
-    sprintf(buffer, "%.1f ~C", hfsm.temperature);
-    x = SSD1306_WIDTH / 2 - strlen(buffer) * 11 / 2;
-    y = (SSD1306_HEIGHT + 4) / 2 - 18 / 2;
-    ssd1306_SetCursor(x, y);
-    ssd1306_WriteString(buffer, Font_11x18, White);
-
-    // Profile name
-    sprintf(buffer, "%s", hfsm.name);
-    x = SSD1306_WIDTH / 2 - strlen(buffer) * 7 / 2;
-    y = SSD1306_HEIGHT - 10;
-    ssd1306_SetCursor(x, y);
-    ssd1306_WriteString(buffer, Font_7x10, White);
 }
 
 void LCD_ScheduleRedraw() {

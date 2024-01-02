@@ -134,8 +134,7 @@ int main(void)
 
     /* Infinite loop */
     /* USER CODE BEGIN WHILE */
-    while(1)
-    {
+    while(1) {
         // Redraw the screen
         if(LCD_REDRAW) {
             LCD_REDRAW = false;
@@ -155,7 +154,7 @@ int main(void)
                     break;
 
                 case FSM_HEATING:
-                    LCD_DrawProcessInfo();
+                    LCD_DrawProcessInfo(&hfsm);
                     break;
 
                 case FSM_DONE:
@@ -249,41 +248,45 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim == &htim1) {
-        int16_t tc_temperature = MAX6675_GetTemperature();
-        int16_t rtd_temperature = RTD_GetTemperature();
-        printf("TC: %d\nRTD: %d\n", tc_temperature, rtd_temperature);
+        // Get readings from both sensors (in centigrades)
+        hfsm.tc_temperature = MAX6675_GetTemperature();
+        hfsm.rtd_temperature = RTD_GetTemperature();
+
+        // Use the higher temperature reading
+        hfsm.temperature = (hfsm.tc_temperature > hfsm.rtd_temperature) ? hfsm.tc_temperature : hfsm.rtd_temperature;
+
+        bool error = false;
 
         // Check for open circuit
-        if(tc_temperature == MAX6675_TC_OPEN || rtd_temperature == RTD_PROBE_OPEN) {
-            hfsm.error_duration += 1;
-        } else {
-            hfsm.error_duration = 0;
+        if(hfsm.tc_temperature == MAX6675_TC_OPEN || hfsm.rtd_temperature == RTD_PROBE_OPEN) {
+            error = true;
         }
 
-        // Get the highest temperature
-        float temperature_f = (tc_temperature > rtd_temperature) ? tc_temperature : rtd_temperature;
-
-        // Convert to Celsius
-        temperature_f = temperature_f / 100;
+        // Check implasibility of sensor readings
+        if(abs(hfsm.tc_temperature - hfsm.rtd_temperature) > TEMPERATURE_IMPL * 100) {
+            error = true;
+        }
 
         // Check for temperature out of the range
-        if(temperature_f < TEMPERATURE_MIN || temperature_f > TEMPERATURE_MAX) {
+        if(hfsm.temperature < TEMPERATURE_MIN * 100 || hfsm.temperature > TEMPERATURE_MAX * 100) {
+            error = true;
+        }
+
+        // Enter an error state if the error flag remains raised for long enough
+        if(error) {
             hfsm.error_duration += 1;
+            if(hfsm.error_duration > MAXIMUM_CYCLES) {
+                hfsm.state = FSM_ERROR;
+                hfsm.error_duration = 0;
+            }
         } else {
             hfsm.error_duration = 0;
         }
-
-        if(hfsm.error_duration > MAXIMUM_CYCLES) {
-            hfsm.state = FSM_ERROR;
-            hfsm.error_duration = 0;
-        }
-
-        hfsm.temperature = temperature_f;
 
         switch(hfsm.state) {
             case FSM_PRECHECK:
                 // Start the process only if the temperature is within the desired range
-                if(hfsm.temperature < hfsm.profile[0] * 2) {
+                if(hfsm.temperature < hfsm.profile[0] * 100 + PRECHECK_DEVIATION * 100) {
                     hfsm.state = FSM_HEATING;
                     hfsm.duration = 0;
                 }
@@ -296,7 +299,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
                     hfsm.state = FSM_DONE;
                 } else {
                     hfsm.target_temperature = hfsm.profile[duration_seconds];
-                    hfsm.output = PID_GetOutput(hfsm.temperature, hfsm.target_temperature);
+                    hfsm.output = PID_GetOutput(hfsm.temperature / 100.0f, hfsm.target_temperature);
 
                     // Determine the process stage based on the current time
                     for(int i = 0; i < 4; i++) {

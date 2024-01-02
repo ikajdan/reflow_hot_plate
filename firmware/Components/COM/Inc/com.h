@@ -50,7 +50,7 @@ uint8_t COM_SendData(const char *const buffer);
 uint8_t COM_SendMsg(const FSM_Handle_TypeDef *const hfsm);
 
 /**
- * @brief Schedule a send of the message
+ * @brief  Schedule the send of the message
  * @retval None
  */
 void COM_ScheduleSend(void);
