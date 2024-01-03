@@ -48,7 +48,7 @@ Example message:
   "Temperature": 2350,
   "TargetTemperature": 0,
   "Name": "DSP863",
-  "Stage": 6,
+  "Stage": 0,
   "State": 3
 }
 ```

@@ -43,14 +43,23 @@ serial_port = serial.Serial(serial_path, baudrate=9600, timeout=1)
 try:
     for i in range(len(target_temperature)):
         # Add some noise to the temperature
-        temperature = target_temperature[i] + random.uniform(-5, 5)
+        tc_temperature = (target_temperature[i] + random.randint(-5, 5))  * 100
+        rtd_temperature = (target_temperature[i] + random.randint(-5, 5))  * 100
+        temperature = max(tc_temperature, rtd_temperature)
         # Determine the process stage based on the current time
         for j in range(len(stages)):
             if i >= stages[j]:
                 stage = j
             else:
                 break
-        message = f'{{"Duration":{i},"Temperature":{temperature},"TargetTemperature":{target_temperature[i]},"State":{stage},"Stage":3}}'
+        message = '{{"Duration":{},"TC":{},"RTD":{},"Temperature":{},"TargetTemperature":{},"Name":"DSP863","Stage":{},"State":3}}'.format(
+            i,
+            tc_temperature,
+            rtd_temperature,
+            temperature,
+            target_temperature[i],
+            stage
+        )
         serial_port.write(message.encode("utf-8"))
         print("Sent:", message)
         time.sleep(1)
