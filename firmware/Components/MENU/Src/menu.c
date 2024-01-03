@@ -8,10 +8,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "menu.h"
-#include "DSP863.h"
-#include "SMDLTLFP.h"
-#include "TS991AX35T4.h"
 #include "LITTLE_INFERNO.h"
+#include "OLIMEX_SAC305.h"
+#include "QUALITEK_DSP863.h"
+#include "SMD291SNL.h"
+#include "SMDLTLFP.h"
+#include "TS1LT500C.h"
+#include "TS991AX35T4.h"
 
 /* Typedefs ------------------------------------------------------------------*/
 
@@ -33,13 +36,13 @@ MENU_Handle_TypeDef hmenu = {
         .debouncing = false,
 };
 
-MENU_MenuItem_TypeDef item1 = MENU_ITEM(DSP863_name, DSP863_stages, DSP863_profile);
-MENU_MenuItem_TypeDef item2 = MENU_ITEM(SMDLTLFP_name, SMDLTLFP_stages, SMDLTLFP_profile);
-MENU_MenuItem_TypeDef item3 = MENU_ITEM(TS991AX35T4_name, TS991AX35T4_stages, TS991AX35T4_profile);
-MENU_MenuItem_TypeDef item4 = MENU_ITEM(LITTLE_INFERNO_name, LITTLE_INFERNO_stages, LITTLE_INFERNO_profile);
-MENU_MenuItem_TypeDef item5 = MENU_ITEM("Dummy 1", DSP863_stages, DSP863_profile);
-MENU_MenuItem_TypeDef item6 = MENU_ITEM("Dummy 2", DSP863_stages, DSP863_profile);
-MENU_MenuItem_TypeDef item7 = MENU_ITEM("Dummy 3", DSP863_stages, DSP863_profile);
+MENU_MenuItem_TypeDef item1 = MENU_ITEM(QUALITEK_DSP863_name, QUALITEK_DSP863_stages, QUALITEK_DSP863_profile);
+MENU_MenuItem_TypeDef item2 = MENU_ITEM(OLIMEX_SAC305_name, OLIMEX_SAC305_stages, OLIMEX_SAC305_profile);
+MENU_MenuItem_TypeDef item3 = MENU_ITEM(SMDLTLFP_name, SMDLTLFP_stages, SMDLTLFP_profile);
+MENU_MenuItem_TypeDef item4 = MENU_ITEM(SMD291SNL_name, SMD291SNL_stages, SMD291SNL_profile);
+MENU_MenuItem_TypeDef item5 = MENU_ITEM(TS991AX35T4_name, TS991AX35T4_stages, TS991AX35T4_profile);
+MENU_MenuItem_TypeDef item6 = MENU_ITEM(TS1LT500C_name, TS1LT500C_stages, TS1LT500C_profile);
+MENU_MenuItem_TypeDef item7 = MENU_ITEM(LITTLE_INFERNO_name, LITTLE_INFERNO_stages, LITTLE_INFERNO_profile);
 
 /* Private function prototypes -----------------------------------------------*/
 
