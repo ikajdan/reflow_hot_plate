@@ -10,14 +10,14 @@ import matplotlib.pyplot as plt
 from numpy.polynomial.polynomial import Polynomial
 
 if len(sys.argv) < 2:
-    print("Usage: python generate_profile_header.py <profile_name>")
+    print("Usage: python generate_profile_header.py <polyfit_degree> <profile_name>")
     sys.exit(1)
 
-# Profile name
-profile_name = sys.argv[1]
-
 # Degree of the polynomial to fit
-degree = 8
+degree = int(sys.argv[1])
+
+# Profile name
+profile_name = sys.argv[2]
 
 # Plot the polynomial
 plot_polynomial = False
@@ -69,9 +69,6 @@ with open(header_file, "w") as header_file:
     header_file.write(header_file_content)
 
 # Plot the data
-plt.scatter(
-    time_data, temperature_data, marker="x", label="Data Points", color="black", s=25
-)
 if plot_polynomial:
     plt.plot(
         x_plot,
@@ -86,9 +83,17 @@ if not plot_polynomial:
         x_data,
         y_data,
         marker=".",
-        label="Interpolated & quantized curve",
+        label="Interpolated and quantized curve",
         color="red",
         s=5,
+    )
+if not plot_polynomial:
+    plt.scatter(
+        time_data,
+        temperature_data,
+        marker="x",
+        label="Data Points",
+        color="black", s=25
     )
 plt.xlabel("Time (s)")
 plt.ylabel("Temperature (°C)")
