@@ -13,12 +13,12 @@
   )
 
   (lib_symbols
-    (symbol "Connector:USB_C_Receptacle_USB2.0" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
-      (property "Reference" "J" (at -10.16 19.05 0)
-        (effects (font (size 1.27 1.27)) (justify left))
+    (symbol "Connector:USB_C_Receptacle_USB2.0_16P" (pin_names (offset 1.016)) (in_bom yes) (on_board yes)
+      (property "Reference" "J" (at 0 22.225 0)
+        (effects (font (size 1.27 1.27)))
       )
-      (property "Value" "USB_C_Receptacle_USB2.0" (at 19.05 19.05 0)
-        (effects (font (size 1.27 1.27)) (justify right))
+      (property "Value" "USB_C_Receptacle_USB2.0_16P" (at 0 19.685 0)
+        (effects (font (size 1.27 1.27)))
       )
       (property "Footprint" "" (at 3.81 0 0)
         (effects (font (size 1.27 1.27)) hide)
@@ -29,13 +29,13 @@
       (property "ki_keywords" "usb universal serial bus type-C USB2.0" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (property "ki_description" "USB 2.0-only Type-C Receptacle connector" (at 0 0 0)
+      (property "ki_description" "USB 2.0-only 16P Type-C Receptacle connector" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
       (property "ki_fp_filters" "USB*C*Receptacle*" (at 0 0 0)
         (effects (font (size 1.27 1.27)) hide)
       )
-      (symbol "USB_C_Receptacle_USB2.0_0_0"
+      (symbol "USB_C_Receptacle_USB2.0_16P_0_0"
         (rectangle (start -0.254 -17.78) (end 0.254 -16.764)
           (stroke (width 0) (type default))
           (fill (type none))
@@ -77,7 +77,7 @@
           (fill (type none))
         )
       )
-      (symbol "USB_C_Receptacle_USB2.0_0_1"
+      (symbol "USB_C_Receptacle_USB2.0_16P_0_1"
         (rectangle (start -10.16 17.78) (end 10.16 -17.78)
           (stroke (width 0.254) (type default))
           (fill (type background))
@@ -175,7 +175,7 @@
           (fill (type outline))
         )
       )
-      (symbol "USB_C_Receptacle_USB2.0_1_1"
+      (symbol "USB_C_Receptacle_USB2.0_16P_1_1"
         (pin passive line (at 0 -22.86 90) (length 5.08)
           (name "GND" (effects (font (size 1.27 1.27))))
           (number "A1" (effects (font (size 1.27 1.27))))
@@ -1060,7 +1060,7 @@
   (symbol (lib_id "power:GND") (at 172.72 92.71 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 32cafd4d-1650-4a03-8d28-07cf3fe192e8)
-    (property "Reference" "#PWR?" (at 172.72 99.06 0)
+    (property "Reference" "#PWR059" (at 172.72 99.06 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 172.72 97.79 0)
@@ -1075,12 +1075,6 @@
     (pin "1" (uuid 2ee8e233-3ba8-4eef-8304-5a5adc0718fb))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR?") (unit 1)
-        )
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "#PWR023") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "#PWR059") (unit 1)
         )
@@ -1091,7 +1085,7 @@
   (symbol (lib_id "power:GND") (at 204.47 125.73 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3cdec3bd-6af7-4e9e-b2de-4aedd0c3e0d4)
-    (property "Reference" "#PWR?" (at 204.47 132.08 0)
+    (property "Reference" "#PWR061" (at 204.47 132.08 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 204.47 130.81 0)
@@ -1106,12 +1100,6 @@
     (pin "1" (uuid ae6b8f4c-d449-4018-8090-d420b921b03c))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR?") (unit 1)
-        )
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "#PWR023") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "#PWR061") (unit 1)
         )
@@ -1122,7 +1110,7 @@
   (symbol (lib_id "Device:R_Small") (at 151.13 92.71 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 400761de-242a-48f6-8a51-c6417ff8f764)
-    (property "Reference" "R4" (at 152.4 91.44 0)
+    (property "Reference" "R23" (at 152.4 91.44 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "Value" "1k47" (at 152.4 93.98 0)
@@ -1138,9 +1126,6 @@
     (pin "2" (uuid 8a415df7-f594-4c18-b809-13117527bb04))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "R4") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "R23") (unit 1)
         )
@@ -1156,7 +1141,7 @@
   (symbol (lib_id "power:+5V") (at 184.15 74.93 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 43b8561a-f496-4071-8c4c-3e470e8dac50)
-    (property "Reference" "#PWR?" (at 184.15 78.74 0)
+    (property "Reference" "#PWR060" (at 184.15 78.74 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 184.15 69.85 0)
@@ -1171,12 +1156,6 @@
     (pin "1" (uuid 11288a1c-1552-49e3-a0d5-eb5c0bd12a4a))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR?") (unit 1)
-        )
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "#PWR022") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "#PWR060") (unit 1)
         )
@@ -1187,7 +1166,7 @@
   (symbol (lib_id "power:GND") (at 96.52 104.14 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 4ec08f71-7de8-461d-b9d8-41c54a682f9d)
-    (property "Reference" "#PWR?" (at 96.52 110.49 0)
+    (property "Reference" "#PWR056" (at 96.52 110.49 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 96.52 109.22 0)
@@ -1202,12 +1181,6 @@
     (pin "1" (uuid b73571a8-2acd-4013-aaa7-eb4f6d8f8422))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR?") (unit 1)
-        )
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "#PWR018") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "#PWR056") (unit 1)
         )
@@ -1270,7 +1243,7 @@
   (symbol (lib_id "Device:C_Small") (at 96.52 100.33 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 68cb9e88-dff6-4ffc-8318-8214ed020c33)
-    (property "Reference" "C2" (at 93.98 99.06 0)
+    (property "Reference" "C18" (at 93.98 99.06 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 93.98 101.6 0)
@@ -1286,9 +1259,6 @@
     (pin "2" (uuid c332484f-ce29-4d29-8dc1-653cdca76cd8))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "C2") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "C18") (unit 1)
         )
@@ -1299,7 +1269,7 @@
   (symbol (lib_id "power:VDD") (at 151.13 88.9 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 6ecee1c0-2330-4651-8f57-f1739ebaa7ae)
-    (property "Reference" "#PWR011" (at 151.13 92.71 0)
+    (property "Reference" "#PWR058" (at 151.13 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "VDD" (at 151.13 83.82 0)
@@ -1314,9 +1284,6 @@
     (pin "1" (uuid 863ee41a-cf6c-4a0d-9998-ec64ac8ffe01))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR011") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "#PWR058") (unit 1)
         )
@@ -1327,7 +1294,7 @@
   (symbol (lib_id "Device:FerriteBead_Small") (at 184.15 78.74 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9cb596ce-a313-4ccc-a4f3-54c9018c790d)
-    (property "Reference" "FB4" (at 181.61 76.2 0)
+    (property "Reference" "FB2" (at 181.61 76.2 0)
       (effects (font (size 1.27 1.27)) (justify right top))
     )
     (property "Value" "470R" (at 181.61 78.74 0)
@@ -1343,9 +1310,6 @@
     (pin "2" (uuid bff6cce5-ffc1-4382-b3eb-2db39ebc4842))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "FB4") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "FB2") (unit 1)
         )
@@ -1383,7 +1347,7 @@
     )
   )
 
-  (symbol (lib_id "Connector:USB_C_Receptacle_USB2.0") (at 200.66 99.06 0) (mirror y) (unit 1)
+  (symbol (lib_id "Connector:USB_C_Receptacle_USB2.0_16P") (at 200.66 99.06 0) (mirror y) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b15fb14a-6fb6-4df7-b739-51e86689d7e0)
     (property "Reference" "J5" (at 190.5 80.01 0)
@@ -1395,7 +1359,7 @@
     (property "Footprint" "Local_Library:USB4105-GF-A" (at 196.85 99.06 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Datasheet" "https://gct.co/files/drawings/usb4105.pdf" (at 196.85 99.06 0)
+    (property "Datasheet" "https://www.usb.org/sites/default/files/documents/usb_type-c.zip" (at 196.85 99.06 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Component" "USB4105-GF-A" (at 200.66 99.06 0)
@@ -1430,7 +1394,7 @@
   (symbol (lib_id "power:GND") (at 135.89 111.76 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ce6ff735-0478-4262-85e4-31a869ed7257)
-    (property "Reference" "#PWR?" (at 135.89 118.11 0)
+    (property "Reference" "#PWR057" (at 135.89 118.11 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 135.89 116.84 0)
@@ -1445,12 +1409,6 @@
     (pin "1" (uuid 5cdc858d-a4a3-4262-bad3-583bc157a53b))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR?") (unit 1)
-        )
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/02711725-e382-48ba-bf33-23fe46c66e66"
-          (reference "#PWR021") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/3d0d4351-20fe-44b0-a348-a3114badfe96"
           (reference "#PWR057") (unit 1)
         )

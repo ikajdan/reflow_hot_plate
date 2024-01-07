@@ -4432,7 +4432,7 @@
     (property "Component" "USB4105-GF-A")
     (property "Sheetfile" "usb_connector.kicad_sch")
     (property "Sheetname" "USB Connector")
-    (property "ki_description" "USB 2.0-only Type-C Receptacle connector")
+    (property "ki_description" "USB 2.0-only 16P Type-C Receptacle connector")
     (property "ki_keywords" "usb universal serial bus type-C USB2.0")
     (path "/3d0d4351-20fe-44b0-a348-a3114badfe96/b15fb14a-6fb6-4df7-b739-51e86689d7e0")
     (attr smd)

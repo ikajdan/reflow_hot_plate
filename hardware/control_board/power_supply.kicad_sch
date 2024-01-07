@@ -1793,7 +1793,7 @@
   (symbol (lib_id "power:+24V") (at 68.58 97.79 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b6c8aba4-126f-4bdc-9929-198d48e5ae3d)
-    (property "Reference" "#PWR02" (at 68.58 101.6 0)
+    (property "Reference" "#PWR027" (at 68.58 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+24V" (at 68.58 92.71 0)
@@ -1808,14 +1808,6 @@
     (pin "1" (uuid a8061f04-54fc-4627-a0b1-595b0ef37fb7))
     (instances
       (project "control_board"
-        (path "/82fde900-07e6-41de-9b57-509c777c8289"
-          (reference "#PWR02") (unit 1)
-        )
-      )
-      (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR04") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
           (reference "#PWR027") (unit 1)
         )
@@ -1932,7 +1924,7 @@
   (symbol (lib_id "power:+3.3V") (at 231.14 97.79 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c8cfa5ef-d412-42a7-9585-57c0f43c6db0)
-    (property "Reference" "#PWR010" (at 231.14 101.6 0)
+    (property "Reference" "#PWR044" (at 231.14 101.6 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3.3V" (at 231.14 92.964 0)
@@ -1947,9 +1939,6 @@
     (pin "1" (uuid a88c91d0-ca0e-4b2e-b670-2d6e371369c3))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR010") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
           (reference "#PWR044") (unit 1)
         )
@@ -2014,7 +2003,7 @@
   (symbol (lib_id "power:+24V") (at 111.76 58.42 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cbfb068e-bc82-4d27-b95a-b71c264a5617)
-    (property "Reference" "#PWR02" (at 111.76 62.23 0)
+    (property "Reference" "#PWR032" (at 111.76 62.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+24V" (at 111.76 53.34 0)
@@ -2029,14 +2018,6 @@
     (pin "1" (uuid c1c56092-4fb5-4f96-9705-e975339e840b))
     (instances
       (project "control_board"
-        (path "/82fde900-07e6-41de-9b57-509c777c8289"
-          (reference "#PWR02") (unit 1)
-        )
-      )
-      (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "#PWR04") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/6b868c6a-e629-4d3b-add8-74bb26b34401"
           (reference "#PWR032") (unit 1)
         )

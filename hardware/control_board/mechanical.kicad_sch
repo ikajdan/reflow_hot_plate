@@ -5,6 +5,7 @@
   (paper "A4")
 
   (title_block
+    (title "Mechanical Components")
     (date "2023-11-29")
     (rev "${REVISION}")
     (company "Author: I. Kajdan")
@@ -163,9 +164,6 @@
     )
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "H4") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/40a49d34-8d3e-4ffa-9e6c-b9f3c89d1a52"
           (reference "H4") (unit 1)
         )
@@ -190,9 +188,6 @@
     )
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "H3") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/40a49d34-8d3e-4ffa-9e6c-b9f3c89d1a52"
           (reference "H3") (unit 1)
         )
@@ -217,9 +212,6 @@
     )
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "H1") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/40a49d34-8d3e-4ffa-9e6c-b9f3c89d1a52"
           (reference "H1") (unit 1)
         )
@@ -246,9 +238,6 @@
     (pin "2" (uuid a9974057-9609-4c39-bb79-a686a65581b3))
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/d341d3a2-ea4e-4772-851c-7c5b5be32855"
-          (reference "HS1") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/40a49d34-8d3e-4ffa-9e6c-b9f3c89d1a52"
           (reference "HS1") (unit 1)
         )
@@ -297,9 +286,6 @@
     )
     (instances
       (project "control_board"
-        (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "H2") (unit 1)
-        )
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45/40a49d34-8d3e-4ffa-9e6c-b9f3c89d1a52"
           (reference "H2") (unit 1)
         )
