@@ -93,7 +93,8 @@ if not plot_polynomial:
         temperature_data,
         marker="x",
         label="Data Points",
-        color="black", s=25
+        color="black",
+        s=25,
     )
 plt.xlabel("Time (s)")
 plt.ylabel("Temperature (°C)")
@@ -101,4 +102,5 @@ plt.text(280, 27, f"MSE: {mse:.5f}", fontsize=10, color="gray")
 plt.legend()
 plt.tick_params(axis="both", which="both", direction="in", top=True, right=True)
 plt.grid(True, linestyle="dotted")
+plt.savefig(profile_name + ".png", dpi=(300), bbox_inches="tight")
 plt.show()
