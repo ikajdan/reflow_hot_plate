@@ -8,7 +8,7 @@
 <p align="center">
   <a href="#features">Features</a> •
   <a href="#hardware">Hardware</a> •
-  <a href="#software">Software</a> •
+  <a href="#firmware">Firmware</a> •
   <a href="#usage">Usage</a> •
   <a href="#gallery">Gallery</a> •
   <a href="#license">License</a>
@@ -46,16 +46,16 @@ These components are designed to be 3D printed and assembled together to create 
 
 For detailed hardware schematics, PCB layout and CAD models, please refer to the [Hardware](hardware/) directory.
 
-## Software
+## Firmware
 
-The software for the reflow hot plate is developed using the STM32CubeIDE. It includes:
+The firmware for the reflow hot plate is developed using the STM32CubeIDE. It includes:
 
 - Temperature control algorithm
 - User interface logic
 - Reflow profile management
 - Safety and emergency handling
 
-The Cube project can be found in the [Software](software/) directory.
+The Cube project can be found in the [Firmware](firmware/) directory.
 
 ## Usage
 
