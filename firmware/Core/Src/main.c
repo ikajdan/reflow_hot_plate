@@ -130,6 +130,7 @@ int main(void)
     MENU_Init(&hmenu);
 
     HAL_GPIO_WritePin(MAX6675_CS_PORT, MAX6675_CS_PIN, GPIO_PIN_SET);
+    HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_SET);
     /* USER CODE END 2 */
 
     /* Infinite loop */
@@ -295,9 +296,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
             case FSM_HEATING:
                 uint32_t duration_seconds = hfsm.duration / 1000;
 
-                if(duration_seconds > hfsm.profile_duration) {
-                    hfsm.state = FSM_DONE;
-                } else {
+                if(duration_seconds < hfsm.profile_duration) {
                     hfsm.target_temperature = hfsm.profile[duration_seconds];
                     hfsm.output = PID_GetOutput(hfsm.temperature / 100.0f, hfsm.target_temperature);
 
@@ -309,10 +308,19 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
                             break;
                         }
                     }
+                } else {
+                    hfsm.state = FSM_DONE;
                 }
                 break;
 
+            case FSM_DONE:
+                HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_SET);
+                hfsm.target_temperature = 0;
+                hfsm.output = 0;
+                break;
+
             default:
+                HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_RESET);
                 hfsm.target_temperature = 0;
                 hfsm.output = 0;
                 break;
@@ -392,6 +400,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
         case FSM_DONE:
         case FSM_ABORTED:
         case FSM_ERROR:
+        case FSM_PRECHECK:
+            HAL_GPIO_WritePin(BUZZER_GPIO_Port, BUZZER_Pin, GPIO_PIN_RESET);
             hfsm.state = FSM_MENU;
             return;
 
