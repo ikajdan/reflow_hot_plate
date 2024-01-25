@@ -546,7 +546,7 @@
       "step": "",
       "vrml": ""
     },
-    "page_layout_descr_file": "putm_frame.kicad_wks"
+    "page_layout_descr_file": "frame.kicad_wks"
   },
   "schematic": {
     "annotate_start_num": 0,
@@ -580,7 +580,7 @@
       "model_mode": 0,
       "workbook_filename": ""
     },
-    "page_layout_descr_file": "putm_frame.kicad_wks",
+    "page_layout_descr_file": "frame.kicad_wks",
     "plot_directory": "",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",

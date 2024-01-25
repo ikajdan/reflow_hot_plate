@@ -283,11 +283,6 @@
           (reference "J2") (unit 1)
         )
       )
-      (project "heatbed"
-        (path "/f6f1e229-f102-463e-b32b-76ca65db5faf"
-          (reference "J2") (unit 1)
-        )
-      )
     )
   )
 
@@ -334,11 +329,6 @@
     (instances
       (project "heatbed"
         (path "/b652b05a-4e3d-4ad1-b032-18886abe7d45"
-          (reference "J1") (unit 1)
-        )
-      )
-      (project "heatbed"
-        (path "/f6f1e229-f102-463e-b32b-76ca65db5faf"
           (reference "J1") (unit 1)
         )
       )
