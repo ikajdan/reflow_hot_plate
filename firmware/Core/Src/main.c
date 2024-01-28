@@ -121,7 +121,7 @@ int main(void)
 
     HAL_TIM_Base_Start_IT(&htim1); // (10 Hz) Control loop
     HAL_TIM_Base_Start_IT(&htim2); // (10 Hz) GUI update
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (1 kHz) Heatbed driver
+    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // (100 Hz) Heatbed driver
 
     LED_SetState(LED_ON);
 
@@ -327,7 +327,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
         }
 
         PWM_SetDutyCycle(&htim3, TIM_CHANNEL_1, hfsm.output);
-        HAL_IWDG_Refresh(&hiwdg); // 200 ms window
+        HAL_IWDG_Refresh(&hiwdg); // 200 ms timeout
 
         hfsm.duration += 100;
     } else if(htim == &htim2) {
