@@ -17,17 +17,17 @@
 /**
  * @brief Proportional gain for the PID controller
  */
-#define PID_KP 0.01f
+#define PID_KP 5.6f
 
 /**
  * @brief Integral gain for the PID controller
  */
-#define PID_KI 0.1f
+#define PID_KI 0.69f
 
 /**
  * @brief Derivative gain for the PID controller
  */
-#define PID_KD 0.01f
+#define PID_KD 0.05f
 
 /**
  * @brief Sampling time for the PID controller

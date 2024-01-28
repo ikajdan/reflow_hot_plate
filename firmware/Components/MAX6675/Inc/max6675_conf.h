@@ -32,7 +32,7 @@
 /**
  * @brief Temperature drift calibration offset
  */
-#define MAX6675_OFFSET 0.0f
+#define MAX6675_OFFSET -5.0f
 
 /* Public macros -------------------------------------------------------------*/
 

@@ -52,7 +52,7 @@
 /**
  * @brief Temperature drift calibration offset
  */
-#define RTD_OFFSET 0.0f
+#define RTD_OFFSET 5.0f
 
 /* Public macros -------------------------------------------------------------*/
 
